@@ -1,0 +1,132 @@
+
+.bodyFirst{
+    background-image: url('../images/sajad-baharvandi-T_1Fc04PehQ-unsplash.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+.navUtama{
+    background-image: url('../images/navBgg4.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 80px !important;
+    
+}
+
+
+.login:hover{
+    color: #43A836 !important;
+}
+
+
+.nvh:hover{
+    color: #00ab4e !important;
+}
+
+.helpInformation:hover{
+    color: #006029 !important;
+    
+}
+
+.btnLembaga:hover{
+    background-color: gainsboro !important;
+}
+
+.btnMenu{
+    border-radius: 20px !important;
+    
+    border-style: solid !important;
+    border: 3px;
+}
+
+.btnMenu:hover{
+    background-color: rgb(230, 234, 238) !important;
+}
+
+.btnKegiatan:hover{
+    background-color: rgb(230, 234, 238) !important;
+}
+
+.ftTopp{
+    display: flex !important;
+    justify-content: center !important;
+}
+.ftTop{
+    margin-top: 5px !important;
+    border: 0;
+    border-top: 1px !important;
+    border-color: whitesmoke !important;
+    border-style: solid !important;
+    display: flex !important;
+}
+
+footer{
+    background-image: url('../images/navBgg4.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.Cvisimis{
+    background-color: #1745a248 !important;
+}
+
+.Cdemografi{
+    background-color: #55b4358c !important;
+}
+
+.Cinformasi{
+    /* background-color: rgba(135, 207, 235, 0.63) !important; */
+    background-color: #47b5ff6b!important;
+}
+
+.Cpelayanan{
+    background-color: #ffb3009a !important;
+}
+
+input[type=radio]:checked+.Cvisimis{
+    background-color: #1746a2 !important;
+    color: whitesmoke !important;
+    font-weight: bold !important;
+    /* font-weight: 600 !important; */
+    /* color: #3565ff !important; */  
+}
+
+input[type=radio]:checked+.Cdemografi{
+    background-color: #54b435 !important;
+    color: whitesmoke !important;
+    font-weight: bold !important;
+    /* font-weight: 600 !important; */
+    /* color: #3565ff !important; */  
+}
+
+input[type=radio]:checked+.Cinformasi{
+    background-color: #47B5FF !important;
+    color: whitesmoke !important;
+    font-weight: bold !important;
+    /* font-weight: 600 !important; */
+    /* color: #3565ff !important; */  
+}
+
+input[type=radio]:checked+.Cpelayanan{
+    background-color: #FFB200 !important;
+    color: whitesmoke !important;
+    font-weight: bold !important;
+}
+
+#tab1:checked~.tbcontent>#visimisi{
+    display: block !important;
+}
+
+#tab2:checked~.tbcontent>#demografi{
+    display: block !important;
+}
+
+#tab3:checked~.tbcontent>#informasi{
+    display: block !important;
+}
+
+#tab4:checked~.tbcontent>#pelayanan{
+    display: block !important;
+}
+
