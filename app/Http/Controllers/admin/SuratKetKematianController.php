@@ -26,15 +26,15 @@ class SuratKetKematianController extends Controller
             return view('adminDashboard.SuratKetKematian', [
                 'title' => 'Data Suart Keterangan Kematian',
                 'profil' => ProfilDesa::firstWhere('id', 1),
-                'mati' => DataKematian::with('keluarga', 'pendu', 'ibu', 'ayah', 'saksi1', 'saksi2', 'pelapor')
-                    ->where('nik', 'like', "%" . $cari . "%")
+                'mati' => DataKematian::where('nik', 'like', "%" . $cari . "%")
                     ->orWhere('no_kk', 'like', "%" . $cari . "%")->paginate(10),
             ]);
         } else {
             return view('adminDashboard.SuratKetKematian', [
                 'title' => 'Data Data Suart Keterangan Kematian',
                 'profil' => ProfilDesa::firstWhere('id', 1),
-                'mati' => DataKematian::with('keluarga', 'pendu', 'ibu', 'ayah', 'saksi1', 'saksi2', 'pelapor')->paginate(10),
+                'mati' => DataKematian::with('keluarga', 'pendu', 'mom', 'dad', 'saksi1', 'saksi2', 'lapor')->paginate(10),
+                'pendu' => Penduduk::get()
             ]);
         }
     }
@@ -58,6 +58,7 @@ class SuratKetKematianController extends Controller
             'tgl_lahir' => 'required',
             'tempat_kelahiran' => 'required',
             'agama_mati' => 'required|max:255',
+            'pekerjaan_mati' => 'required|max:255',
             'alamat_mati' => 'required|max:255',
             'tgl_mati' => 'required',
             'pukul_mati' => 'required',
@@ -165,11 +166,11 @@ class SuratKetKematianController extends Controller
     public function pdf($nik_mati)
     {
         $data = [
-            'title' => 'Keterangan Beda Nama',
-            'profil' => ProfilDesa::firstWhere('id', 1),
-            'surat' => DataKematian::with('pend')->where('nik_mati', $nik_mati)->first(),
-            'pendu' => Penduduk::get()
+            'title' => 'Surat Keterangan Kematian',
+            'surat' => DataKematian::firstWhere('nik_mati', $nik_mati),
         ];
+
+        // dd($data);
 
         $customPaper = [0, 0, 567.00, 500.80];
         $pdf = PDF::loadView('adminDashboard.pdf.SuratKetMati', $data)->setPaper('customPaper', 'potrait');
@@ -179,10 +180,8 @@ class SuratKetKematianController extends Controller
     public function pdflurah($nik_mati)
     {
         $data = [
-            'title' => 'Keterangan Beda Nama',
-            'profil' => ProfilDesa::firstWhere('id', 1),
-            'surat' => DataKematian::with('pend')->where('nik_mati', $nik_mati)->first(),
-            'pendu' => Penduduk::get()
+            'title' => 'Surat Keterangan Kematian',
+            'surat' => DataKematian::firstWhere('nik_mati', $nik_mati),
         ];
 
         $customPaper = [0, 0, 567.00, 500.80];

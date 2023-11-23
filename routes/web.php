@@ -81,6 +81,8 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
             Route::post('/surat-keterangan-kematian/save', 'store')->name('surat-keterangan-kematian/save')->middleware('auth');
             Route::post('/surat-keterangan-kematian/{nik_mati}', 'update')->name('surat-keterangan-kematian')->middleware('auth');
             Route::delete('/surat-keterangan-kematian/{nik_mati}', 'destroy')->name('surat-keterangan-kematian')->middleware('auth');
+            Route::get('/surat-keterangan-kematian/pdf/{nik_mati}', 'pdf')->name('surat-keterangan-kematian/pdf')->middleware('auth');
+            Route::get('/surat-keterangan-kematian/pdflurah/{nik_mati}', 'pdflurah')->name('surat-keterangan-kematian/pdflurah')->middleware('auth');
         }
     );
 

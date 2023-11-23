@@ -27,12 +27,14 @@ class SuratKetKelahiranController extends Controller
                 'bayi' => SuratKetKelahiran::with('pend')
                     ->where('nik', 'like', "%" . $cari . "%")
                     ->orWhere('no_kk', 'like', "%" . $cari . "%")->paginate(10),
+                'pendu' => Penduduk::get()
             ]);
         } else {
             return view('adminDashboard.SuratKetKelahiran', [
                 'title' => 'Data Data Suart Keterangan Kelahiran',
                 'profil' => ProfilDesa::firstWhere('id', 1),
                 'bayi' => SuratKetKelahiran::with('ibu', 'ayah', 'saksi1', 'saksi2', 'pelapor')->paginate(10),
+                'pendu' => Penduduk::get()
             ]);
         }
     }
@@ -76,7 +78,6 @@ class SuratKetKelahiranController extends Controller
             'no_akta_nikah' => 'required|max:255',
             'tgl_akta_nikah' => 'required',
             'nik_pelapor' => 'required|max:255',
-            'nama_pelapor' => 'required|max:255',
             'nik_saksisatu' => 'required|max:255',
             'nik_saksidua' => 'required|max:255'
         ]);

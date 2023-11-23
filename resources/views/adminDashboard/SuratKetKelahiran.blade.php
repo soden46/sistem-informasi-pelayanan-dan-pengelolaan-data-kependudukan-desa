@@ -299,7 +299,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="nik_pelapor" class="form-label"><b>NIK Pelapor</b></label>
+                                    <nlabel for="nik_pelapor" class="form-label"><b>NIK Pelapor</b></nlabel>
 
                                     <input type="text" name="nik_pelapor" id="nik_pelapor" class="form-control @error('nik_pelapor') is-invalid @enderror" required value="{{ old('nik_pelapor') }}" autocomplete="off" placeholder="Input NIK Pelapor">
 
@@ -311,21 +311,9 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="nama_pelapor" class="form-label"><b>Nama Pelapor</b></label>
+                                    <nlabel for="nik_saksisatu" class="form-label"><b>NIK Saksi Satu</b></nlabel>
 
-                                    <input type="text" name="nama_pelapor" id="nama_pelapor" class="form-control @error('nama_pelapor') is-invalid @enderror" required value="{{ old('nama_pelapor') }}" autocomplete="off" placeholder="Input Nama Pelapor">
-
-                                    @error('nama_pelapor')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="nik_saksisatu" class="form-label"><b>NIK Saksi Satu</b></label>
-
-                                    <input type="text" name="nik_saksisatu" id="nik_saksisatu" class="form-control @error('nik_saksisatu') is-invalid @enderror" required value="{{ old('nik_saksisatu') }}" autocomplete="off" placeholder="Input NIK Ayah">
+                                    <input type="text" name="nik_saksisatu" id="nik_saksisatu" class="form-control @error('nik_saksisatu') is-invalid @enderror" required value="{{ old('nik_saksisatu') }}" autocomplete="off" placeholder="Input NIK Saksi Satu">
 
                                     @error('nik_saksisatu')
                                     <div class="invalid-feedback">
@@ -334,9 +322,9 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label for="nik_saksidua" class="form-label"><b>NIK Saksi Dua</b></label>
+                                    <nlabel for="nik_saksidua" class="form-label"><b>NIK Saksi Dua</b></nlabel>
 
-                                    <input type="text" name="nik_saksidua" id="nik_saksidua" class="form-control @error('nik_saksidua') is-invalid @enderror" required value="{{ old('nik_saksidua') }}" autocomplete="off" placeholder="Input NIK Ayah">
+                                    <input type="text" name="nik_saksidua" id="nik_saksidua" class="form-control @error('nik_saksidua') is-invalid @enderror" required value="{{ old('nik_saksidua') }}" autocomplete="off" placeholder="Input NIK Saksi Dua">
 
                                     @error('nik_saksidua')
                                     <div class="invalid-feedback">

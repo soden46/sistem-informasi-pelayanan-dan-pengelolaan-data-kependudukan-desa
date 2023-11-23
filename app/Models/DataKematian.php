@@ -21,11 +21,11 @@ class DataKematian extends Model
     {
         return $this->belongsTo(Penduduk::class, 'nik_mati', 'nik');
     }
-    public function ibu()
+    public function mom()
     {
         return $this->belongsTo(Penduduk::class, 'nik_ibu', 'nik');
     }
-    public function ayah()
+    public function dad()
     {
         return $this->belongsTo(Penduduk::class, 'nik_ayah', 'nik');
     }
@@ -37,7 +37,7 @@ class DataKematian extends Model
     {
         return $this->belongsTo(Penduduk::class, 'nik_saksidua', 'nik');
     }
-    public function pelapor()
+    public function lapor()
     {
         return $this->belongsTo(Penduduk::class, 'nik_pelapor', 'nik');
     }
