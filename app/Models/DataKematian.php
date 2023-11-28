@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Penduduk;
+use App\Models\DataKeluarga;
 
 class DataKematian extends Model
 {

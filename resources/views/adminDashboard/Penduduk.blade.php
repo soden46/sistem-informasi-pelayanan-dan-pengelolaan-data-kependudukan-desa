@@ -234,6 +234,17 @@
                                     </select>
                                 </div>
                                 <div class="mb-3">
+                                    <label for="kebangsaan" class="form-label"><b>Kebangsaan</b></label>
+
+                                    <input type="text" name="kebangsaan" id="kebangsaan" class="form-control @error('kebangsaan') is-invalid @enderror" required value="{{ old('kebangsaan') }}" autocomplete="off" placeholder="Input Kebangsaan">
+
+                                    @error('kebangsaan')
+                                    <div class="invalid-feedback">
+                                        <p style="text-align: left">{{ $message }}</p>
+                                    </div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
                                     <label for="agama" class="form-label"><b>Agama</b></label>
 
                                     <input type="text" name="agama" id="agama" class="form-control @error('agama') is-invalid @enderror" required value="{{ old('agama') }}" autocomplete="off" placeholder="Input agama">

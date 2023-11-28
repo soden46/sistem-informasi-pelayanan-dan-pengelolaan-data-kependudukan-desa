@@ -208,22 +208,22 @@
                 </tr>
                 <td width="200px">Nama Lengkap</td>
                 <td width="10px">:</td>
-                <td>{{$surat->nama_ayah}}</td>
+                <td>{{$surat->dad->nama}}</td>
                 </tr>
                 <tr>
                     <td width="200px">Tanggal Lahir</td>
                     <td width="10px">:</td>
-                    <td>{{date('d/m/Y',strtotime($surat->tgl_lh_ayah))}}</td>
+                    <td>{{date('d/m/Y',strtotime($surat->dad->tgl_lahir))}}</td>
                 </tr>
                 <tr>
                     <td width="200px">Pekerjaan</td>
                     <td width="10px">:</td>
-                    <td>{{$surat->pekerjaan_ayah}}</td>
+                    <td>{{$surat->dad->pekerjaan}}</td>
                 </tr>
                 <tr>
                     <td width="200px">Alamat</td>
                     <td width="10px">:</td>
-                    <td>{{$surat->alamat_ayah}}</td>
+                    <td>{{$surat->dad->nama_jalan}}, {{$surat->dad->desa}}, {{$surat->dad->rt}}, {{$surat->dad->rw}}, {{$surat->dad->kota}}, {{$surat->dad->prov}}</td>
                 </tr>
             </table>
             <p><b>Data IBU :</b></p>
@@ -235,22 +235,22 @@
                 </tr>
                 <td width="200px">Nama Lengkap</td>
                 <td width="10px">:</td>
-                <td>{{$surat->nama_ibu}}</td>
+                <td>{{$surat->mom->nama}}</td>
                 </tr>
                 <tr>
                     <td width="200px">Tanggal Lahir</td>
                     <td width="10px">:</td>
-                    <td>{{date('d/m/Y',strtotime($surat->tgl_lh_ibu))}}</td>
+                    <td>{{date('d/m/Y',strtotime($surat->mom->tgl_lahir))}}</td>
                 </tr>
                 <tr>
                     <td width="200px">Pekerjaan</td>
                     <td width="10px">:</td>
-                    <td>{{$surat->pekerjaan_ibu}}</td>
+                    <td>{{$surat->mom->pekerjaan}}</td>
                 </tr>
                 <tr>
                     <td width="200px">Alamat</td>
                     <td width="10px">:</td>
-                    <td>{{$surat->alamat_ibu}}</td>
+                    <td>{{$surat->mom->nama_jalan}}, {{$surat->mom->desa}}, {{$surat->mom->rt}}, {{$surat->mom->rw}}, {{$surat->mom->kota}}, {{$surat->mom->prov}}</td>
                 </tr>
             </table>
             <p><b>Data Pelapor :</b></p>
@@ -260,24 +260,20 @@
                     <td width="10px">:</td>
                     <td>{{$surat->nik_pelapor}}</td>
                 </tr>
-                <td width="200px">Nama Lengkap</td>
-                <td width="10px">:</td>
-                <td>{{$surat->nama_pelapor}}</td>
+                <tr>
+                    <td width="200px">Nama Lengkap</td>
+                    <td width="10px">:</td>
+                    <td>{{$surat->lapor->nama}}</td>
                 </tr>
                 <tr>
                     <td width="200px">Tanggal Lahir</td>
                     <td width="10px">:</td>
-                    <td>{{date('d/m/Y',strtotime($surat->tgl_lh_pelapor))}}</td>
-                </tr>
-                <tr>
-                    <td width="200px">Pekerjaan</td>
-                    <td width="10px">:</td>
-                    <td>{{$surat->pekerjaan_pelapor}}</td>
+                    <td>{{date('d/m/Y',strtotime($surat->lapor->tgl_lahir))}} Umur: {{$ageDad}} Tahun</td>
                 </tr>
                 <tr>
                     <td width="200px">Alamat</td>
                     <td width="10px">:</td>
-                    <td>{{$surat->alamat_pelapor}}</td>
+                    <td>{{$surat->lapor->nama_jalan}}, {{$surat->lapor->desa}}, {{$surat->lapor->rt}}, {{$surat->lapor->rw}}, {{$surat->lapor->kota}}, {{$surat->lapor->prov}}</td>
                 </tr>
             </table>
             <p><b>Data Saksi Satu :</b></p>
@@ -287,24 +283,20 @@
                     <td width="10px">:</td>
                     <td>{{$surat->nik_saksisatu}}</td>
                 </tr>
-                <td width="200px">Nama Lengkap</td>
-                <td width="10px">:</td>
-                <td>{{$surat->nama_saksisatu}}</td>
+                <tr>
+                    <td width="200px">Nama Lengkap</td>
+                    <td width="10px">:</td>
+                    <td>{{$surat->saksi1->nama}}</td>
                 </tr>
                 <tr>
                     <td width="200px">Tanggal Lahir</td>
                     <td width="10px">:</td>
-                    <td>{{date('d/m/Y',strtotime($surat->tgl_lh_saksisatu))}}</td>
-                </tr>
-                <tr>
-                    <td width="200px">Pekerjaan</td>
-                    <td width="10px">:</td>
-                    <td>{{$surat->pekerjaan_saksisatu}}</td>
+                    <td>{{date('d/m/Y',strtotime($surat->saksi1->tgl_lahir))}} Umur: {{$umsatu}} Tahun</td>
                 </tr>
                 <tr>
                     <td width="200px">Alamat</td>
                     <td width="10px">:</td>
-                    <td>{{$surat->alamat_saksisatu}}</td>
+                    <td>{{$surat->saksi1->nama_jalan}}, {{$surat->saksi1->desa}}, {{$surat->saksi1->rt}}, {{$surat->saksi1->rw}}, {{$surat->saksi1->kota}}, {{$surat->saksi1->prov}}</td>
                 </tr>
             </table>
             <p><b>Data Saksi Dua :</b></p>
@@ -314,24 +306,20 @@
                     <td width="10px">:</td>
                     <td>{{$surat->nik_saksidua}}</td>
                 </tr>
-                <td width="200px">Nama Lengkap</td>
-                <td width="10px">:</td>
-                <td>{{$surat->nama_saksidua}}</td>
+                <tr>
+                    <td width="200px">Nama Lengkap</td>
+                    <td width="10px">:</td>
+                    <td>{{$surat->saksi2->nama}}</td>
                 </tr>
                 <tr>
                     <td width="200px">Tanggal Lahir</td>
                     <td width="10px">:</td>
-                    <td>{{date('d/m/Y',strtotime($surat->tgl_lh_saksidua))}}</td>
-                </tr>
-                <tr>
-                    <td width="200px">Pekerjaan</td>
-                    <td width="10px">:</td>
-                    <td>{{$surat->pekerjaan_saksidua}}</td>
+                    <td>{{date('d/m/Y',strtotime($surat->saksi2->tgl_lahir))}} Umur: {{$umdua}} Tahun</td>
                 </tr>
                 <tr>
                     <td width="200px">Alamat</td>
                     <td width="10px">:</td>
-                    <td>{{$surat->alamat_saksidua}}</td>
+                    <td>{{$surat->saksi2->nama_jalan}}, {{$surat->saksi2->desa}}, {{$surat->saksi2->rt}}, {{$surat->saksi2->rw}}, {{$surat->saksi2->kota}}, {{$surat->saksi2->prov}}</td>
                 </tr>
             </table>
             <div class="tandatangan">

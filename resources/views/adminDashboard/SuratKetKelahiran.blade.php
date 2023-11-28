@@ -65,12 +65,12 @@
                             <h1 class="modal-title fs-5" id="cretaeDataMasyarakatLabel">Tambah Data Bayi</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="/surat-keterangan-kelahiran/store" method="POST">
+                        <form action="{{route('surat-keterangan-kelahiran/save')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="modal-body">
 
                                 <div class="mb-3">
-                                    <label for="tgl_regis" class="form-label"><b>TGL Regis Lahir</b></label>
+                                    <label for="tgl_regis_lahir" class="form-label"><b>TGL Regis Lahir</b></label>
 
                                     <input type="date" name="tgl_regis_lahir" id="tgl_regis_lahir" class="form-control @error('tgl_regis_lahir') is-invalid @enderror" required value="{{ old('tgl_regis_lahir') }}" autocomplete="off" placeholder="Input Tanggal Regis Lahir">
 
@@ -149,7 +149,7 @@
                                         <option name="tempat_dilahirkan" id="tempat_dilahirkan" value="Puskesmas">Puskesmas</option>
                                         <option name="tempat_dilahirkan" id="tempat_dilahirkan" value="Polindes">Polindes</option>
                                         <option name="tempat_dilahirkan" id="tempat_dilahirkan" value="Rumah">Rumah</option>
-                                        <option name="tempat_dilahirkan" id="tempat_dilahirkan" value="Lain_lain">Lain_lain</option>
+                                        <option name="tempat_dilahirkan" id="tempat_dilahirkan" value="Lain-Lain">Lain_lain</option>
                                     </select>
                                 </div>
 
@@ -196,8 +196,8 @@
                                         <option name="jenis_kelahiran" id="jenis_kelahiran" value="" selected>Silakan Pilih Jenis Kelahiran</option>
                                         <option name="jenis_kelahiran" id="jenis_kelahiran" value="Tunggal">Tunggal</option>
                                         <option name="jenis_kelahiran" id="jenis_kelahiran" value="Kembar 2">Kembar 2</option>
-                                        <option name="jenis_kelahiran" id="jenis_kelahiran" value="Kembar 2">Kembar 3</option>
-                                        <option name="jenis_kelahiran" id="jenis_kelahiran" value="Kembar 2">Kembar 4</option>
+                                        <option name="jenis_kelahiran" id="jenis_kelahiran" value="Kembar 3">Kembar 3</option>
+                                        <option name="jenis_kelahiran" id="jenis_kelahiran" value="Kembar 4">Kembar 4</option>
                                     </select>
                                 </div>
 
@@ -218,7 +218,7 @@
                                     <div class="col-sm-6">
                                         <label for="berat_bayi" class="form-label"><b>Berat Bayi</b></label>
 
-                                        <input type="text" name="berat_bayi" id="berat_bayi" class="form-control @error('berat_bayi') is-invalid @enderror" required value="{{ old('berat_bayi') }}" autocomplete="off" placeholder="Input Beray Badan Lahir">
+                                        <input type="number" step=".1" name="berat_bayi" id="berat_bayi" class="form-control @error('berat_bayi') is-invalid @enderror" required value="{{ old('berat_bayi') }}" autocomplete="off" placeholder="Input Berat Badan Bayi">
 
                                         @error('berat_bayi')
                                         <div class="invalid-feedback">
@@ -230,9 +230,20 @@
                                     <div class="col-sm-6">
                                         <label for="panjang_bayi" class="form-label"><b>Panjang Bayi</b></label>
 
-                                        <input type="text" name="panjang_bayi" id="panjang_bayi" class="form-control @error('panjang_bayi') is-invalid @enderror" required value="{{ old('panjang_bayi') }}" autocomplete="off" placeholder="Input Tinggi Badan Lahir">
+                                        <input type="number" name="panjang_bayi" id="panjang_bayi" class="form-control @error('panjang_bayi') is-invalid @enderror" required value="{{ old('panjang_bayi') }}" autocomplete="off" placeholder="Input Tinggi Badan Bayi">
 
                                         @error('panjang_bayi')
+                                        <div class="invalid-feedback">
+                                            <p style="text-align: left">{{ $message }}</p>
+                                        </div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="anak_ke" class="form-label"><b>Anak Ke</b></label>
+
+                                        <input type="number" name="anak_ke" id="anak_ke" class="form-control @error('anak_ke') is-invalid @enderror" required value="{{ old('anak_ke') }}" autocomplete="off" placeholder="Input Tinggi Badan Lahir">
+
+                                        @error('anak_ke')
                                         <div class="invalid-feedback">
                                             <p style="text-align: left">{{ $message }}</p>
                                         </div>
@@ -243,36 +254,31 @@
                                 <div class="mb-3">
                                     <label for="nik_ibu" class="form-label"><b>NIK Ibu</b></label>
 
-                                    <input type="text" name="nik_ibu" id="nik_ibu" class="form-control @error('nik_ibu') is-invalid @enderror" required value="{{ old('nik_ibu') }}" autocomplete="off" placeholder="Input NIK Ibu">
-
-                                    @error('nik_ibu')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
+                                    <select class="form-select" name="nik_ibu" id="nik_ibu">
+                                        <option name="nik_ibu" id="nik_ibu" value="" selected>Silakan Pilih NIK Ibu</option>
+                                        @foreach($pendu as $penduduk)
+                                        <option name="nik_ibu" id="nik_ibu" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="mb-3">
                                     <label for="nik_ayah" class="form-label"><b>NIK Ayah</b></label>
 
-                                    <input type="text" name="nik_ayah" id="nik_ayah" class="form-control @error('nik_ayah') is-invalid @enderror" required value="{{ old('nik_ayah') }}" autocomplete="off" placeholder="Input NIK Ayah">
-
-                                    @error('nik_ayah')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
+                                    <select class="form-select" name="nik_ayah" id="nik_ayah">
+                                        <option name="nik_ayah" id="nik_ayah" value="" selected>Silakan Pilih NIK Ayah</option>
+                                        @foreach($pendu as $penduduk)
+                                        <option name="nik_ayah" id="nik_ayah" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
-
                                 <div class="mb-3">
                                     <label for="tempat_kawin" class="form-label"><b>Tempat Kawin</b></label>
 
-                                    <input type="text" name="tempat_kawin" id="tempat_kawin" class="form-control @error('tempat_kawin') is-invalid @enderror" required value="{{ old('tempat_kawin') }}" autocomplete="off" placeholder="Input Tempat Kawin">
-
-                                    @error('tempat_kawin')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
+                                    <select class="form-select" name="tempat_kawin" id="tempat_kawin">
+                                        <option name="tempat_kawin" id="tempat_kawin" value="" selected>Silakan Pilih Tempat Kawin</option>
+                                        <option name="tempat_kawin" id="tempat_kawin" value="KUA">KUA</option>
+                                        <option name="tempat_kawin" id="tempat_kawin" value="Gereja">Gereja</option>
+                                    </select>
                                 </div>
 
                                 <div class="mb-3">
@@ -299,45 +305,41 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <nlabel for="nik_pelapor" class="form-label"><b>NIK Pelapor</b></nlabel>
+                                    <label for="nik_pelapor" class="form-label"><b>NIK Pelapor</b></label>
 
-                                    <input type="text" name="nik_pelapor" id="nik_pelapor" class="form-control @error('nik_pelapor') is-invalid @enderror" required value="{{ old('nik_pelapor') }}" autocomplete="off" placeholder="Input NIK Pelapor">
-
-                                    @error('nik_pelapor')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
+                                    <select class="form-select" name="nik_pelapor" id="nik_pelapor">
+                                        <option name="nik_pelapor" id="nik_pelapor" value="" selected>Silakan Pilih NIK Pelapor</option>
+                                        @foreach($pendu as $penduduk)
+                                        <option name="nik_pelapor" id="nik_pelapor" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
 
                                 <div class="mb-3">
-                                    <nlabel for="nik_saksisatu" class="form-label"><b>NIK Saksi Satu</b></nlabel>
+                                    <label for="nik_saksisatu" class="form-label"><b>NIK Saksi Satu</b></label>
 
-                                    <input type="text" name="nik_saksisatu" id="nik_saksisatu" class="form-control @error('nik_saksisatu') is-invalid @enderror" required value="{{ old('nik_saksisatu') }}" autocomplete="off" placeholder="Input NIK Saksi Satu">
-
-                                    @error('nik_saksisatu')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
+                                    <select class="form-select" name="nik_saksisatu" id="nik_saksisatu">
+                                        <option name="nik_saksisatu" id="nik_saksisatu" value="" selected>Silakan Pilih NIK Saksi Satu</option>
+                                        @foreach($pendu as $penduduk)
+                                        <option name="nik_saksisatu" id="nik_saksisatu" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="mb-3">
-                                    <nlabel for="nik_saksidua" class="form-label"><b>NIK Saksi Dua</b></nlabel>
+                                    <label for="nik_saksidua" class="form-label"><b>NIK Saksi Dua</b></label>
 
-                                    <input type="text" name="nik_saksidua" id="nik_saksidua" class="form-control @error('nik_saksidua') is-invalid @enderror" required value="{{ old('nik_saksidua') }}" autocomplete="off" placeholder="Input NIK Saksi Dua">
-
-                                    @error('nik_saksidua')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
+                                    <select class="form-select" name="nik_saksidua" id="nik_saksidua">
+                                        <option name="nik_saksidua" id="nik_saksidua" value="" selected>Silakan Pilih NIK Saksi Dua</option>
+                                        @foreach($pendu as $penduduk)
+                                        <option name="nik_saksidua" id="nik_saksidua" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                            </div>
 
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
-                                <button type="submit" class="btn btn-primary">Simpan</button>
-                            </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                </div>
                         </form>
                     </div>
                 </div>
@@ -404,8 +406,8 @@
                     <th>Tempat Lahir</th>
                     <th>Tgl Lahir</th>
                     <th>Jenis Kelamin</th>
-                    <th>Berat Badan</th>
-                    <th style="text-align: center">Action</th>
+                    <th>Verifikasi</th>
+                    <th style="text-align: center">cetak</th>
                 </tr>
                 @foreach ($bayi as $index => $item)
                 <tr style="width: 100%">
@@ -420,7 +422,15 @@
                     <td style="vertical-align: middle;  ">{{ $item->jenis_kelamin }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->berat_bayi }}</td>
                     <td style="text-align: center;  ">
-                        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#editbayi{{ $item->nik_bayi }}">Edit</button>
+                        @if($item->verifikasi=="Belum Verifikasi")
+                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#verifikasibayi{{ $item->nik_bayi }}">Verifikasi</button>
+                        @else
+                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#batalverifikasi{{ $item->nik_bayi }}">Batal Verifikasi</button>
+                        @endif
+                    </td>
+                    <td style="text-align: center;  ">
+                        <a href="{{route('surat-keterangan-kelahiran/pdflurah',$item->nik_bayi) }}" class="btn btn-success" target="_blank">Lurah</a>
+                        <a href="{{route('surat-keterangan-kelahiran/pdf',$item->nik_bayi) }}" class="btn btn-success" target="_blank">Staff</a>
                     </td>
                 </tr>
 
@@ -632,7 +642,7 @@
                                         <div class="col-sm-6">
                                             <label for="berat_bayi" class="form-label"><b>Berat Bayi</b></label>
 
-                                            <input type="text" name="berat_bayi" id="berat_bayi" class="form-control @error('berat_bayi') is-invalid @enderror" required value="{{ old('berat_bayi') }}" autocomplete="off" placeholder="Input Beray Badan Lahir">
+                                            <input type="number" step=".01" name="berat_bayi" id="berat_bayi" class="form-control @error('berat_bayi') is-invalid @enderror" required value="{{ old('berat_bayi') }}" autocomplete="off" placeholder="Input Beray Badan Lahir">
 
                                             @error('berat_bayi')
                                             <div class="invalid-feedback">
@@ -644,9 +654,20 @@
                                         <div class="col-sm-6">
                                             <label for="panjang_bayi" class="form-label"><b>Panjang Bayi</b></label>
 
-                                            <input type="text" name="panjang_bayi" id="panjang_bayi" class="form-control @error('panjang_bayi') is-invalid @enderror" required value="{{ old('panjang_bayi') }}" autocomplete="off" placeholder="Input Tinggi Badan Lahir">
+                                            <input type="number" name="panjang_bayi" id="panjang_bayi" class="form-control @error('panjang_bayi') is-invalid @enderror" required value="{{ old('panjang_bayi') }}" autocomplete="off" placeholder="Input Tinggi Badan Lahir">
 
                                             @error('panjang_bayi')
+                                            <div class="invalid-feedback">
+                                                <p style="text-align: left">{{ $message }}</p>
+                                            </div>
+                                            @enderror
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="anak_ke" class="form-label"><b>Anak Ke</b></label>
+
+                                            <input type="number" name="anak_ke" id="anak_ke" class="form-control @error('anak_ke') is-invalid @enderror" required value="{{ old('anak_ke') }}" autocomplete="off" placeholder="Input Tinggi Badan Lahir">
+
+                                            @error('anak_ke')
                                             <div class="invalid-feedback">
                                                 <p style="text-align: left">{{ $message }}</p>
                                             </div>
@@ -657,24 +678,22 @@
                                     <div class="mb-3">
                                         <label for="nik_ibu" class="form-label"><b>NIK Ibu</b></label>
 
-                                        <input type="text" name="nik_ibu" id="nik_ibu" class="form-control @error('nik_ibu') is-invalid @enderror" required value="{{ old('nik_ibu') }}" autocomplete="off" placeholder="Input NIK Ibu">
-
-                                        @error('nik_ibu')
-                                        <div class="invalid-feedback">
-                                            <p style="text-align: left">{{ $message }}</p>
-                                        </div>
-                                        @enderror
+                                        <select class="form-select" name="nik_ibu" id="nik_ibu">
+                                            <option name="nik_ibu" id="nik_ibu" value="" selected>Silakan Pilih NIK Ibu</option>
+                                            @foreach($pendu as $penduduk)
+                                            <option name="nik_ibu" id="nik_ibu" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="nik_ayah" class="form-label"><b>NIK Ayah</b></label>
+                                        <label for="nik_ayah" class="form-label"><b>NIK Ibu</b></label>
 
-                                        <input type="text" name="nik_ayah" id="nik_ayah" class="form-control @error('nik_ayah') is-invalid @enderror" required value="{{ old('nik_ayah') }}" autocomplete="off" placeholder="Input NIK Ayah">
-
-                                        @error('nik_ayah')
-                                        <div class="invalid-feedback">
-                                            <p style="text-align: left">{{ $message }}</p>
-                                        </div>
-                                        @enderror
+                                        <select class="form-select" name="nik_ayah" id="nik_ayah">
+                                            <option name="nik_ayah" id="nik_ayah" value="" selected>Silakan Pilih NIK Ayah</option>
+                                            @foreach($pendu as $penduduk)
+                                            <option name="nik_ayah" id="nik_ayah" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
 
                                     <div class="mb-3">
@@ -715,48 +734,33 @@
                                     <div class="mb-3">
                                         <label for="nik_pelapor" class="form-label"><b>NIK Pelapor</b></label>
 
-                                        <input type="text" name="nik_pelapor" id="nik_pelapor" class="form-control @error('nik_pelapor') is-invalid @enderror" required value="{{ old('nik_pelapor') }}" autocomplete="off" placeholder="Input NIK Pelapor">
-
-                                        @error('nik_pelapor')
-                                        <div class="invalid-feedback">
-                                            <p style="text-align: left">{{ $message }}</p>
-                                        </div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="nama_pelapor" class="form-label"><b>Nama Pelapor</b></label>
-
-                                        <input type="text" name="nama_pelapor" id="nama_pelapor" class="form-control @error('nama_pelapor') is-invalid @enderror" required value="{{ old('nama_pelapor') }}" autocomplete="off" placeholder="Input NIK Pelapor">
-
-                                        @error('nama_pelapor')
-                                        <div class="invalid-feedback">
-                                            <p style="text-align: left">{{ $message }}</p>
-                                        </div>
-                                        @enderror
+                                        <select class="form-select" name="nik_pelapor" id="nik_pelapor">
+                                            <option name="nik_pelapor" id="nik_pelapor" value="" selected>Silakan Pilih NIK Pelapor</option>
+                                            @foreach($pendu as $penduduk)
+                                            <option name="nik_pelapor" id="nik_pelapor" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="nik_saksisatu" class="form-label"><b>NIK Saksi Satu</b></label>
 
-                                        <input type="text" name="nik_saksisatu" id="nik_saksisatu" class="form-control @error('nik_saksisatu') is-invalid @enderror" required value="{{ old('nik_saksisatu') }}" autocomplete="off" placeholder="Input NIK Ayah">
-
-                                        @error('nik_saksisatu')
-                                        <div class="invalid-feedback">
-                                            <p style="text-align: left">{{ $message }}</p>
-                                        </div>
-                                        @enderror
+                                        <select class="form-select" name="nik_saksisatu" id="nik_saksisatu">
+                                            <option name="nik_saksisatu" id="nik_saksisatu" value="" selected>Silakan Pilih NIK Saksi Satu</option>
+                                            @foreach($pendu as $penduduk)
+                                            <option name="nik_saksisatu" id="nik_saksisatu" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="mb-3">
                                         <label for="nik_saksidua" class="form-label"><b>NIK Saksi Dua</b></label>
 
-                                        <input type="text" name="nik_saksidua" id="nik_saksidua" class="form-control @error('nik_saksidua') is-invalid @enderror" required value="{{ old('nik_saksidua') }}" autocomplete="off" placeholder="Input NIK Ayah">
-
-                                        @error('nik_saksidua')
-                                        <div class="invalid-feedback">
-                                            <p style="text-align: left">{{ $message }}</p>
-                                        </div>
-                                        @enderror
+                                        <select class="form-select" name="nik_saksidua" id="nik_saksidua">
+                                            <option name="nik_saksidua" id="nik_saksidua" value="" selected>Silakan Pilih NIK Saksi Dua</option>
+                                            @foreach($pendu as $penduduk)
+                                            <option name="nik_saksidua" id="nik_saksidua" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="modal-footer">

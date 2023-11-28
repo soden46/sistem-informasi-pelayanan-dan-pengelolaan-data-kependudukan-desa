@@ -69,9 +69,11 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
     Route::controller(SuratKetKelahiranController::class)->group(
         function () {
             Route::get('/surat-keterangan-kelahiran', 'index')->name('surat-keterangan-kelahiran')->middleware('auth');
-            Route::post('/surat-keterangan-kelahiran/store', 'store')->name('surat-keterangan-kelahiran/store')->middleware('auth');
+            Route::post('/surat-keterangan-kelahiran/save', 'save')->name('surat-keterangan-kelahiran/save')->middleware('auth');
             Route::post('/surat-keterangan-kelahiran/{nik_bayi}', 'update')->name('surat-keterangan-kelahiran')->middleware('auth');
             Route::delete('/surat-keterangan-kelahiran/{nik_bayi}', 'destroy')->name('surat-keterangan-kelahiran')->middleware('auth');
+            Route::get('/surat-keterangan-kelahiran/pdf/{nik_bayi}', 'pdf')->name('surat-keterangan-kelahiran/pdf')->middleware('auth');
+            Route::get('/surat-keterangan-kelahiran/pdflurah/{nik_bayi}', 'pdflurah')->name('surat-keterangan-kelahiran/pdflurah')->middleware('auth');
         }
     );
 

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Penduduk;
 use App\Models\ProfilDesa;
 use App\Models\SuratKetKelahiran;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -24,7 +26,7 @@ class SuratKetKelahiranController extends Controller
             return view('adminDashboard.SuratKetKelahiran', [
                 'title' => 'Data Suart Keterangan Kelahiran',
                 'profil' => ProfilDesa::firstWhere('id', 1),
-                'bayi' => SuratKetKelahiran::with('pend')
+                'bayi' => SuratKetKelahiran::with('keluarga', 'pendu', 'mom', 'dad', 'saksi1', 'saksi2', 'lapor')
                     ->where('nik', 'like', "%" . $cari . "%")
                     ->orWhere('no_kk', 'like', "%" . $cari . "%")->paginate(10),
                 'pendu' => Penduduk::get()
@@ -33,7 +35,7 @@ class SuratKetKelahiranController extends Controller
             return view('adminDashboard.SuratKetKelahiran', [
                 'title' => 'Data Data Suart Keterangan Kelahiran',
                 'profil' => ProfilDesa::firstWhere('id', 1),
-                'bayi' => SuratKetKelahiran::with('ibu', 'ayah', 'saksi1', 'saksi2', 'pelapor')->paginate(10),
+                'bayi' => SuratKetKelahiran::with('keluarga', 'pendu', 'mom', 'dad', 'saksi1', 'saksi2', 'lapor')->paginate(10),
                 'pendu' => Penduduk::get()
             ]);
         }
@@ -55,7 +57,8 @@ class SuratKetKelahiranController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+
+    public function save(Request $request)
     {
         $validatedData = $request->validate([
             'tgl_regis_lahir' => 'required',
@@ -72,6 +75,7 @@ class SuratKetKelahiranController extends Controller
             'penolong' => 'required|max:255',
             'berat_bayi' => 'required',
             'panjang_bayi' => 'required|max:255',
+            'anak_ke' => 'required|max:10',
             'nik_ibu' => 'required|max:255',
             'nik_ayah' => 'required|max:255',
             'tempat_kawin' => 'required|max:255',
@@ -147,15 +151,62 @@ class SuratKetKelahiranController extends Controller
         return back()->with('successUpdatedMasyarakat', 'Data has ben updated');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\SuratKetKelahiran  $keluarga
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($nik_bayi)
+
+    public function pdf($nik_bayi)
     {
-        SuratKetKelahiran::where('nik_bayi', $nik_bayi)->delete();
-        return back()->with('successDeletedMasyarakat', 'Data has ben deleted');
+        $surat = SuratKetKelahiran::with('keluarga', 'pendu', 'mom', 'dad', 'saksi1', 'saksi2', 'lapor')->firstWhere('nik_bayi', $nik_bayi);
+        $ibu = $surat->mom->tgl_lahir;
+        $ageMom = \Carbon\Carbon::parse($ibu)->age;
+        $ayah = $surat->dad->tgl_lahir;
+        $ageDad = \Carbon\Carbon::parse($ayah)->age;
+        $pelaporr = $surat->lapor->tgl_lahir;
+        $umpel = \Carbon\Carbon::parse($pelaporr)->age;
+        $saksisatuu = $surat->saksi1->tgl_lahir;
+        $umsatu = \Carbon\Carbon::parse($saksisatuu)->age;
+        $saksiduaa = $surat->saksi2->tgl_lahir;
+        $umdua = \Carbon\Carbon::parse($saksiduaa)->age;
+
+        $data = [
+            'title' => 'Surat Keterangan Kelahiran',
+            'surat' => SuratKetKelahiran::firstWhere('nik_bayi', $nik_bayi),
+            'ageMom' => $ageMom,
+            'ageDad' => $ageDad,
+            'umpel' => $umpel,
+            'umsatu' => $umsatu,
+            'umdua' => $umdua
+        ];
+
+        $customPaper = [0, 0, 567.00, 500.80];
+        $pdf = Pdf::loadView('adminDashboard.pdf.SuratKetLahir', $data)->setPaper('customPaper', 'potrait');
+        return $pdf->stream('surat-keterangan-kelahiran.pdf');
+    }
+
+    public function pdflurah($nik_bayi)
+    {
+        $surat = SuratKetKelahiran::with('keluarga', 'pendu', 'mom', 'dad', 'saksi1', 'saksi2', 'lapor')->firstWhere('nik_bayi', $nik_bayi);
+        $ibu = $surat->mom->tgl_lahir;
+        $ageMom = \Carbon\Carbon::parse($ibu)->age;
+        $ayah = $surat->dad->tgl_lahir;
+        $ageDad = \Carbon\Carbon::parse($ayah)->age;
+        $pelaporr = $surat->lapor->tgl_lahir;
+        $umpel = \Carbon\Carbon::parse($pelaporr)->age;
+        $saksisatuu = $surat->saksi1->tgl_lahir;
+        $umsatu = \Carbon\Carbon::parse($saksisatuu)->age;
+        $saksiduaa = $surat->saksi2->tgl_lahir;
+        $umdua = \Carbon\Carbon::parse($saksiduaa)->age;
+
+        $data = [
+            'title' => 'Surat Keterangan Kelahiran',
+            'surat' => SuratKetKelahiran::firstWhere('nik_bayi', $nik_bayi),
+            'ageMom' => $ageMom,
+            'ageDad' => $ageDad,
+            'umpel' => $umpel,
+            'umsatu' => $umsatu,
+            'umdua' => $umdua
+        ];
+
+        $customPaper = [0, 0, 567.00, 500.80];
+        $pdf = PDF::loadView('adminDashboard.pdf.SuratKetLahirLurah', $data)->setPaper('customPaper', 'potrait');
+        return $pdf->stream('surat-keterangan-kelahiran-lurah.pdf');
     }
 }

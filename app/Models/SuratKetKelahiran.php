@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Penduduk;
+use App\Models\DataKeluarga;
 
 class SuratKetKelahiran extends Model
 {
@@ -14,11 +15,19 @@ class SuratKetKelahiran extends Model
 
     protected $guarded = [];
 
-    public function ibu()
+    public function keluarga()
+    {
+        return $this->belongsTo(DataKeluarga::class, 'no_kk', 'no_kk');
+    }
+    public function pendu()
+    {
+        return $this->belongsTo(Penduduk::class, 'nik_mati', 'nik');
+    }
+    public function mom()
     {
         return $this->belongsTo(Penduduk::class, 'nik_ibu', 'nik');
     }
-    public function ayah()
+    public function dad()
     {
         return $this->belongsTo(Penduduk::class, 'nik_ayah', 'nik');
     }
@@ -30,7 +39,7 @@ class SuratKetKelahiran extends Model
     {
         return $this->belongsTo(Penduduk::class, 'nik_saksidua', 'nik');
     }
-    public function pelapor()
+    public function lapor()
     {
         return $this->belongsTo(Penduduk::class, 'nik_pelapor', 'nik');
     }

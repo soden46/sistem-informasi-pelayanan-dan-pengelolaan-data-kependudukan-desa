@@ -43,7 +43,6 @@ class SuratKetKematianController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-   
      */
     public function store(Request $request)
     {
@@ -66,30 +65,10 @@ class SuratKetKematianController extends Controller
             'tempat_mati' => 'required|max:255',
             'yang_menerangkan' => 'required',
             'nik_ibu' => 'required|max:255',
-            'nama_ibu' => 'required|max:255',
-            'tgl_lh_ibu' => 'required',
-            'pekerjaan_ibu' => 'required|max:255',
-            'alamat_ibu' => 'required|max:255',
             'nik_ayah' => 'required|max:255',
-            'nama_ayah' => 'required|max:255',
-            'tgl_lh_ayah' => 'required',
-            'pekerjaan_ayah' => 'required|max:255',
-            'alamat_ayah' => 'required|max:255',
             'nik_pelapor' => 'required|max:255',
-            'nama_pelapor' => 'required|max:255',
-            'tgl_lh_pelapor' => 'required',
-            'pekerjaan_pelapor' => 'required|max:255',
-            'alamat_pelapor' => 'required|max:255',
             'nik_saksisatu' => 'required|max:255',
-            'nama_saksisatu' => 'required|max:255',
-            'tgl_lh_saksisatu' => 'required',
-            'pekerjaan_saksisatu' => 'required|max:255',
-            'alamat_saksisatu' => 'required|max:255',
             'nik_saksidua' => 'required|max:255',
-            'nama_saksidua' => 'required|max:255',
-            'tgl_lh_saksidua' => 'required',
-            'pekerjaan_saksidua' => 'required|max:255',
-            'alamat_saksidua' => 'required|max:255',
         ];
 
 
@@ -165,9 +144,26 @@ class SuratKetKematianController extends Controller
 
     public function pdf($nik_mati)
     {
+        $surat = DataKematian::with('keluarga', 'pendu', 'mom', 'dad', 'saksi1', 'saksi2', 'lapor')->firstWhere('nik_mati', $nik_mati);
+        $ibu = $surat->mom->tgl_lahir;
+        $ageMom = \Carbon\Carbon::parse($ibu)->age;
+        $ayah = $surat->dad->tgl_lahir;
+        $ageDad = \Carbon\Carbon::parse($ayah)->age;
+        $pelaporr = $surat->lapor->tgl_lahir;
+        $umpel = \Carbon\Carbon::parse($pelaporr)->age;
+        $saksisatuu = $surat->saksi1->tgl_lahir;
+        $umsatu = \Carbon\Carbon::parse($saksisatuu)->age;
+        $saksiduaa = $surat->saksi2->tgl_lahir;
+        $umdua = \Carbon\Carbon::parse($saksiduaa)->age;
+
         $data = [
             'title' => 'Surat Keterangan Kematian',
-            'surat' => DataKematian::firstWhere('nik_mati', $nik_mati),
+            'surat' => DataKematian::with('keluarga', 'pendu', 'mom', 'dad', 'saksi1', 'saksi2', 'lapor')->firstWhere('nik_mati', $nik_mati),
+            'ageDad' => $ageDad,
+            'ageMom' => $ageMom,
+            'umpel' => $umpel,
+            'umdua' => $umdua,
+            'umsatu' => $umsatu
         ];
 
         // dd($data);
@@ -179,9 +175,26 @@ class SuratKetKematianController extends Controller
 
     public function pdflurah($nik_mati)
     {
+        $surat = DataKematian::with('keluarga', 'pendu', 'mom', 'dad', 'saksi1', 'saksi2', 'lapor')->firstWhere('nik_mati', $nik_mati);
+        $ibu = $surat->mom->tgl_lahir;
+        $ageMom = \Carbon\Carbon::parse($ibu)->age;
+        $ayah = $surat->dad->tgl_lahir;
+        $ageDad = \Carbon\Carbon::parse($ayah)->age;
+        $pelaporr = $surat->lapor->tgl_lahir;
+        $umpel = \Carbon\Carbon::parse($pelaporr)->age;
+        $saksisatuu = $surat->saksi1->tgl_lahir;
+        $umsatu = \Carbon\Carbon::parse($saksisatuu)->age;
+        $saksiduaa = $surat->saksi2->tgl_lahir;
+        $umdua = \Carbon\Carbon::parse($saksiduaa)->age;
+
         $data = [
             'title' => 'Surat Keterangan Kematian',
-            'surat' => DataKematian::firstWhere('nik_mati', $nik_mati),
+            'surat' => DataKematian::with('keluarga', 'pendu', 'mom', 'dad', 'saksi1', 'saksi2', 'lapor')->firstWhere('nik_mati', $nik_mati),
+            'ageDad' => $ageDad,
+            'ageMom' => $ageMom,
+            'umpel' => $umpel,
+            'umdua' => $umdua,
+            'umsatu' => $umsatu
         ];
 
         $customPaper = [0, 0, 567.00, 500.80];
