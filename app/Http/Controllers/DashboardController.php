@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kematian;
+use App\Models\DataKematian;
 use App\Models\MutasiKeluar;
 use App\Models\MutasiMAsuk;
 use App\Models\ProfilDesa;
@@ -22,9 +22,7 @@ class DashboardController extends Controller
                 'title' => 'Dashboard Admin',
                 'jumlahLahir' => SuratKetKelahiran::all()->count(),
                 'jumlahMasyarakat' => User::all()->count(),
-                'jumlahMati' => Kematian::all()->count(),
-                'jumlahMM' => MutasiMAsuk::all()->count(),
-                'jumlahMK' => MutasiKeluar::all()->count(),
+                'jumlahMati' => DataKematian::all()->count(),
                 'profil' => ProfilDesa::Where('id', 1)->first(),
             ]);
         }
@@ -33,9 +31,7 @@ class DashboardController extends Controller
                 'title' => 'Dashboard',
                 'jumlahLahir' => SuratKetKelahiran::all()->count(),
                 'jumlahMasyarakat' => User::all()->count(),
-                'jumlahMati' => Kematian::all()->count(),
-                'jumlahMM' => MutasiMAsuk::all()->count(),
-                'jumlahMK' => MutasiKeluar::all()->count(),
+                'jumlahMati' => DataKematian::all()->count(),
                 'profil' => ProfilDesa::Where('id', 1)->first(),
             ]);
         }

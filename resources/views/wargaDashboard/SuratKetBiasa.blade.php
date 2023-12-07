@@ -1,6 +1,6 @@
-@extends('../layout/mainAdmin')
+@extends('../layout/mainWarga')
 
-@section('adminContent')
+@section('wargaContent')
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">{{ $title }}</h1>
@@ -48,9 +48,10 @@
         <div>
             <div class="d-flex">
 
-                <form action="{{route('data-keluarga/cari',$no_kk)}}" method="GET" style="margin-left: 40%">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cretaeDataMasyarakat" style="margin-right: 15px">Tambah Data Surat Keterangan Biasa</button>
+                <form action="/surat-keterangan-biasa" method="GET" style="margin-left: 40%">
 
-                    <input type="text" id="cari" name="cari" placeholder="Cari NIK Atau No KK">
+                    <input type="text" id="cari" name="cari" placeholder="Cari NIK/No KK/Nama">
                     <button type="submit" class="btn btn-success">Cari</button>
                 </form>
             </div>
@@ -61,51 +62,66 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="cretaeDataMasyarakatLabel">Tambah Data Keluarga</h1>
+                            <h1 class="modal-title fs-5" id="cretaeDataMasyarakatLabel">Tambah Data Surat Keterangan Biasa</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{route('data-keluarga/store')}}" method="post">
+                        <form action="/surat-keterangan-biasa/store" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="modal-body">
 
                                 <div class="mb-3">
-                                    <label for="no_kk" class="form-label"><b>NO KK</b></label>
+                                    <label for="no_surat_skb" class="form-label"><b>No Surat SKB</b></label>
 
-                                    <select class="form-select" name="no_kk" id="no_kk">
-                                        <option name="no_kk" id="no_kk" value="" selected>Silakan Pilih NIK</option>
-                                        @foreach($pendu as $penduduk)
-                                        <option name="no_kk" id="no_kk" value="{{$penduduk->no_kk}}">{{$penduduk->no_kk}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                    <input type="text" name="no_surat_skb" id="no_surat_skb" class="form-control @error('no_surat_skb') is-invalid @enderror" required value="{{ old('no_surat_skb') }}" autocomplete="off" placeholder="Input No Surat SKB">
 
-                                <div class="mb-3">
-                                    <label for="nik" class="form-label"><b>NIK</b></label>
-
-                                    <input type="text" name="nik" id="nik" class="form-control @error('nik') is-invalid @enderror" required value="{{ old('nik') }}" autocomplete="off" placeholder="Input NIK">
-
-                                    @error('nik')
+                                    @error('no_surat_skb')
                                     <div class="invalid-feedback">
                                         <p style="text-align: left">{{ $message }}</p>
                                     </div>
                                     @enderror
                                 </div>
+
                                 <div class="mb-3">
-                                    <label for="sts_keluarga" class="form-label"><b>Status Keluarga</b></label>
+                                    <label for="tgl_regis_skb" class="form-label"><b>TGL Regis SKB</b></label>
 
-                                    <input type="text" name="sts_keluarga" id="sts_keluarga" class="form-control @error('sts_keluarga') is-invalid @enderror" required value="{{ old('sts_keluarga') }}" placeholder="Input Status Keluarga">
+                                    <input type="date" name="tgl_regis_skb" id="tgl_regis_skb" class="form-control @error('tgl_regis_skb') is-invalid @enderror" required value="{{ old('tgl_regis_skb') }}" autocomplete="off" placeholder="Input Tanggal Regis SKB">
 
-                                    @error('sts_keluarga')
+                                    @error('tgl_regis_skb')
                                     <div class="invalid-feedback">
                                         <p style="text-align: left">{{ $message }}</p>
                                     </div>
                                     @enderror
                                 </div>
+
+                                <div class="form-group row mb-3">
+                                    <div class="mb-3">
+                                        <label for="nik" class="form-label"><b>NIK</b></label>
+
+                                        <select class="form-select" name="nik" id="nik">
+                                            <option name="nik" id="nik" value="" selected>Silakan Pilih NIK</option>
+                                            @foreach($pendu as $penduduk)
+                                            <option name="nik" id="nik" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="keperluan_skb" class="form-label"><b>Keperluan skb</b></label>
+
+                                    <input type="text" name="keperluan_skb" id="keperluan_skb" class="form-control @error('keperluan_skb') is-invalid @enderror" required value="{{ old('keperluan_skb') }}" autocomplete="off" placeholder="Input Keperluan skb">
+
+                                    @error('keperluan_skb')
+                                    <div class="invalid-feedback">
+                                        <p style="text-align: left">{{ $message }}</p>
+                                    </div>
+                                    @enderror
+                                </div>
+
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
                                     <button type="submit" class="btn btn-primary">Simpan</button>
                                 </div>
-
                         </form>
                     </div>
                 </div>
@@ -116,13 +132,13 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="deleteAllDataLabel">Hapus Seluruh Data Masyarakat</h1>
+                            <h1 class="modal-title fs-5" id="deleteAllDataLabel">Hapus Seluruh Data Bayi</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
 
                             <div class="mb-3">
-                                <p><b>Apakah anda yakin untuk menghapus seluruh data masyarakat? pastikan anda telah meng-export data untuk menanggulangi kesalahan</b></p>
+                                <p><b>Apakah anda yakin untuk menghapus seluruh data bayi? pastikan anda telah meng-export data untuk menanggulangi kesalahan</b></p>
                             </div>
 
 
@@ -148,8 +164,6 @@
                             <div class="mb-3">
                                 <p><b>Apakah anda yakin untuk meng-export seluruh data masyarakat? pastikan data telah benar untuk menanggulangi kesalahan</b></p>
                             </div>
-
-
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
@@ -164,44 +178,74 @@
             <table class="table" style="text-align: left; color: black">
                 <tr>
                     <th>No</th>
+                    <th>TGL Regis</th>
                     <th>NIK</th>
-                    <th>NAMA</th>
-                    <th>NoKK</th>
-                    <th>Status Keluarga</th>
-                    <th>Status Kawin</th>
-                    <th style="text-align: center">Action</th>
+                    <th>Nama</th>
+                    <th>Keperluan</th>
+                    <th style="text-align: center">Verifikasi</th>
+                    <th style="text-align: center">Cetak</th>
                 </tr>
-                @foreach ($keluarga as $index => $item)
+                @foreach ($surat as $index => $item)
                 <tr style="width: 100%">
-                    <td style="vertical-align: middle; width: 5%; ">{{ $index + $keluarga->firstItem() }}</td>
+                    <td style="vertical-align: middle; width: 5%; ">{{ $index + $surat->firstItem() }}</td>
+                    <td style="vertical-align: middle;  ">{{ $item->tgl_regis_skb }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->nik }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->pend->nama }}</td>
-                    <td style="vertical-align: middle;  ">{{ $item->no_kk }}</td>
-                    <td style="vertical-align: middle;  ">{{ $item->sts_keluarga }}</td>
-                    <td style="vertical-align: middle;  ">{{ $item->pend->sts_kawin }}</td>
+                    <td style="vertical-align: middle;  ">{{ $item->keperluan_skb }}</td>
                     <td style="text-align: center;  ">
-                        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ $item->nik }}">Hapus</button>
-                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editDataMasyarakat{{ $item->nik }}">Edit</button>
+                        @if($item->verifikasi=="Belum Verifikasi")
+                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#verifikasibayi{{ $item->nik }}">Verifikasi</button>
+                        @else
+                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#batalverifikasi{{ $item->nik }}">Batal Verifikasi</button>
+                        @endif
+                    </td>
+                    <td style="text-align: center;  ">
+                        <a href="{{route('surat-keterangan-biasa/pdflurah',$item->nik) }}" class="btn btn-success" target="_blank">Lurah</a>
+                        <a href="{{route('surat-keterangan-biasa/pdf',$item->nik) }}" class="btn btn-success" target="_blank">Staff</a>
                     </td>
                 </tr>
 
-                <!-- Modal delete-->
-                <div class="modal fade" id="staticBackdrop{{ $item->nik}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <!-- Modal verifikasi-->
+                <div class="modal fade" id="verifikasibayi{{ $item->nik}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Delete Data Penduduk</h1>
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Verifikasi Surat Keterangan Status</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <p>Apakah anda yakin untuk menghapus data <b>{{ $item->nama }}</b></p>
+                                <p>Apakah anda yakin untuk memverifikasi data <b>{{ $item->nama }}</b></p>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
-                                <form action="{{route('data-keluarga', $item->nik) }}" method="post">
-                                    @method('delete')
+                                <form action="{{route('surat-keterangan-biasa/verif', $item->nik) }}" method="post">
                                     @csrf
-                                    <button type="submit" class="btn btn-danger">Deleted</button>
+                                    <input type="text" id="verifikasi" name="verifikasi" value="Sudah Verifikasi" hidden>
+                                    <button type="submit" class="btn btn-success">Verifikasi</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal batal verifikasi-->
+                <div class="modal fade" id="batalverifikasi{{ $item->nik}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Verifikasi Data Kelahiran</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Apakah anda yakin untuk membatalkan verifikasi data <b>{{ $item->nama }}</b></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
+                                <form action="{{route('surat-keterangan-biasa/verif', $item->nik) }}" method="post">
+                                    @method('post')
+                                    @csrf
+                                    <input type="text" name="verifikasi" value="Belum Verifikasi" value="Belum Verifikasi" hidden>
+                                    <button type="submit" class="btn btn-danger">Batalkan Verifikasi</button>
                                 </form>
                             </div>
                         </div>
@@ -209,51 +253,54 @@
                 </div>
 
                 <!-- Modal edit-->
-                <div class="modal fade" id="editDataMasyarakat{{ $item->nik }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editDataMasyarakatLabel" aria-hidden="true">
+                <div class="modal fade" id="editbayi{{ $item->nik }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editDataMasyarakatLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="editDataMasyarakatLabel">Edit Data Penduduk</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <form action="{{route('data-keluarga',$item->nik)}}" method="post">
+                            <form action="{{route('surat-keterangan-biasa',$item->nik)}}" method="post">
                                 @csrf
                                 <div class="modal-body">
 
                                     <div class="mb-3">
-                                        <label for="no_kk" class="form-label"><b>NoKK</b></label>
+                                        <label for="tgl_regis_sks" class="form-label"><b>TGL Regis SKS</b></label>
 
-                                        <input type="text" name="no_kk" id="no_kk" class="form-control @error('no_kk') is-invalid @enderror" required value="{{ $item->no_kk }}" autocomplete="off" placeholder="Input Nomor KK">
+                                        <input type="date" name="tgl_regis_sks" id="tgl_regis_sks" class="form-control @error('tgl_regis_sks') is-invalid @enderror" required value="{{ old('tgl_regis_sks') }}" autocomplete="off" placeholder="Input Tanggal Regis SKS">
 
-                                        @error('no_kk')
+                                        @error('tgl_regis_sks')
                                         <div class="invalid-feedback">
                                             <p style="text-align: left">{{ $message }}</p>
                                         </div>
                                         @enderror
+                                    </div>
+
+                                    <div class="form-group row mb-3">
+                                        <div class="mb-3">
+                                            <label for="nik" class="form-label"><b>NIK</b></label>
+
+                                            <select class="form-select" name="nik" id="nik">
+                                                <option name="nik" id="nik" value="" selected>Silakan Pilih NIK</option>
+                                                @foreach($pendu as $penduduk)
+                                                <option name="nik" id="nik" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="nik" class="form-label"><b>NIK</b></label>
+                                        <label for="keperluan_sks" class="form-label"><b>Keperluan SKS</b></label>
 
-                                        <input type="text" name="nik" id="nik" class="form-control @error('nik') is-invalid @enderror" required value="{{ $item->nik }}" autocomplete="off" placeholder="Input NIK">
+                                        <input type="text" name="keperluan_sks" id="keperluan_sks" class="form-control @error('keperluan_sks') is-invalid @enderror" required value="{{ old('keperluan_sks') }}" autocomplete="off" placeholder="Input Keperluan SKS">
 
-                                        @error('nik')
+                                        @error('keperluan_sks')
                                         <div class="invalid-feedback">
                                             <p style="text-align: left">{{ $message }}</p>
                                         </div>
                                         @enderror
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="sts_keluarga" class="form-label"><b>Status Keluarga</b></label>
 
-                                        <input type="text" name="sts_keluarga" id="sts_keluarga" class="form-control @error('sts_keluarga') is-invalid @enderror" required value="{{ $item->sts_keluarga }}" autocomplete="off" placeholder="Input Status Keluarga">
-
-                                        @error('sts_keluarga')
-                                        <div class="invalid-feedback">
-                                            <p style="text-align: left">{{ $message }}</p>
-                                        </div>
-                                        @enderror
-                                    </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
                                         <button type="submit" class="btn btn-primary">Simpan</button>
@@ -267,7 +314,7 @@
                 @endforeach
             </table>
             <div class="d-flex justify-content-between mb-3">
-                {{ $keluarga->links('layout.pagination') }}
+                {{ $surat->links('layout.pagination') }}
             </div>
         </div>
 

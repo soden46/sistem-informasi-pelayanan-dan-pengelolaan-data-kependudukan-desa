@@ -46,11 +46,8 @@
 
 
         <div>
-            <div class="d-flex">
-
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cretaeDataMasyarakat" style="margin-right: 15px">Tambah Penduduk</button>
-                <form action="/data-penduduk" method="GET" style="margin-left: 40%">
-
+            <div class="d-flex align-content-end">
+                <form action="/data-kk" method="GET" style="margin-left: 40%">
                     <input type="text" id="cari" name="cari" placeholder="Cari NIK/No KK/Nama">
                     <button type="submit" class="btn btn-success">Cari</button>
                 </form>
@@ -62,10 +59,10 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="cretaeDataMasyarakatLabel">Tambah Penduduk</h1>
+                            <h1 class="modal-title fs-5" id="cretaeDataMasyarakatLabel">Tambah KK</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{route('data-penduduk/store')}}" method="post">
+                        <form action="{{route('data-kk/store')}}" method="post">
                             @csrf
                             <div class="modal-body">
 
@@ -106,23 +103,27 @@
                                 </div>
 
                                 <div class="mb-3">
+                                    <label for="desa" class="form-label"><b>Desa</b></label>
+
+                                    <input type="text" name="desa" id="desa" class="form-control @error('desa') is-invalid @enderror" required value="{{ old('desa') }}" autocomplete="off" placeholder="Input desa">
+
+                                    @error('desa')
+                                    <div class="invalid-feedback">
+                                        <p style="text-align: left">{{ $message }}</p>
+                                    </div>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
                                     <label for="padukuhan" class="form-label"><b>Padukuhan</b></label>
-                                    <select class="form-select" name="padukuhan" id="padukuhan">
-                                        <option value="" selected>Silakan Pilih Padukuhan</option>
-                                        <option value="Bodeh">Bodeh</option>
-                                        <option value="Depok">Depok</option>
-                                        <option value="Gamping Kidul">Gamping Kidul</option>
-                                        <option value="Gamping Lor">Gamping Lor</option>
-                                        <option value="Gamping Tengah">Gamping Tengah</option>
-                                        <option value="Kalimanjung">Kalimanjung</option>
-                                        <option value="Mancasan">Mancasan</option>
-                                        <option value="Mejing Kidul">Mejing Kidul</option>
-                                        <option value="Mejing Lor">Mejing Lor</option>
-                                        <option value="Mejing Wetan">Mejing Wetan</option>
-                                        <option value="Ptukan">Ptukan</option>
-                                        <option value="Tlogo">Tlogo</option>
-                                        <option value="Watulangkah">Watulangkah</option>
-                                    </select>
+
+                                    <input type="text" name="padukuhan" id="padukuhan" class="form-control @error('padukuhan') is-invalid @enderror" required value="{{ old('padukuhan') }}" autocomplete="off" placeholder="Input Padukuhan">
+
+                                    @error('padukuhan')
+                                    <div class="invalid-feedback">
+                                        <p style="text-align: left">{{ $message }}</p>
+                                    </div>
+                                    @enderror
                                 </div>
 
                                 <div class="form-group row mb-3">
@@ -150,6 +151,41 @@
                                     </div>
                                 </div>
 
+                                <div class="mb-3">
+                                    <label for="nama_jalan" class="form-label"><b>Nama Jalan</b></label>
+
+                                    <input type="text" name="nama_jalan" id="nama_jalan" class="form-control @error('nama_jalan') is-invalid @enderror" required value="{{ old('nama_jalan') }}" autocomplete="off" placeholder="Input nama_jalan">
+
+                                    @error('nama_jalan')
+                                    <div class="invalid-feedback">
+                                        <p style="text-align: left">{{ $message }}</p>
+                                    </div>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="kota" class="form-label"><b>Kota</b></label>
+
+                                    <input type="text" name="kota" id="kota" class="form-control @error('kota') is-invalid @enderror" required value="{{ old('kota') }}" autocomplete="off" placeholder="Input kota">
+
+                                    @error('kota')
+                                    <div class="invalid-feedback">
+                                        <p style="text-align: left">{{ $message }}</p>
+                                    </div>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="prov" class="form-label"><b>Provinsi</b></label>
+
+                                    <input type="text" name="prov" id="prov" class="form-control @error('prov') is-invalid @enderror" required value="{{ old('prov') }}" autocomplete="off" placeholder="Input prov">
+
+                                    @error('prov')
+                                    <div class="invalid-feedback">
+                                        <p style="text-align: left">{{ $message }}</p>
+                                    </div>
+                                    @enderror
+                                </div>
 
                                 <div class="mb-3">
                                     <label for="jk" class="form-label"><b>Jenis Kelamin</b></label>
@@ -205,19 +241,16 @@
                                     </div>
                                     @enderror
                                 </div>
-
                                 <div class="mb-3">
                                     <label for="agama" class="form-label"><b>Agama</b></label>
 
-                                    <select class="form-select" name="agama" id="agama">
-                                        <option value="" selected>Silakan Pilih Agama</option>
-                                        <option name="agama" id="agama" value="Islam">Islam</option>
-                                        <option name="agama" id="agama" value="Kristen">Kristen</option>
-                                        <option name="agama" id="agama" value="Katolik">Katolik</option>
-                                        <option name="agama" id="agama" value="Hindu">Hindu</option>
-                                        <option name="agama" id="agama" value="Buddha">Buddha</option>
-                                        <option name="agama" id="agama" value="Konghucu">Konghucu</option>
-                                    </select>
+                                    <input type="text" name="agama" id="agama" class="form-control @error('agama') is-invalid @enderror" required value="{{ old('agama') }}" autocomplete="off" placeholder="Input agama">
+
+                                    @error('agama')
+                                    <div class="invalid-feedback">
+                                        <p style="text-align: left">{{ $message }}</p>
+                                    </div>
+                                    @enderror
                                 </div>
 
                                 <div class="mb-3">
@@ -340,27 +373,28 @@
             <table class="table" style="text-align: left; color: black">
                 <tr>
                     <th>No</th>
+                    <th>NoKK</th>
                     <th>NIK</th>
                     <th>NAMA</th>
-                    <th>NoKK</th>
                     <th>Padukuhan</th>
                     <th>RT</th>
                     <th>RW</th>
-                    <th>Jenis Kelamin</th>
-                    <th>Tempat Lahir</th>
+                    <th style="text-align: center">Data Keluarga</th>
                     <th style="text-align: center">Action</th>
                 </tr>
                 @foreach ($masyarakat as $index => $item)
                 <tr style="width: 100%">
                     <td style="vertical-align: middle; width: 5%; ">{{ $index + $masyarakat->firstItem() }}</td>
+                    <td style="vertical-align: middle;  ">{{ $item->no_kk }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->nik }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->nama }}</td>
-                    <td style="vertical-align: middle;  ">{{ $item->no_kk }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->padukuhan }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->rt }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->rw }}</td>
-                    <td style="vertical-align: middle;  ">{{ $item->jk }}</td>
-                    <td style="vertical-align: middle;  ">{{ $item->tempat_lahir }}</td>
+                    <td style="text-align: center;  ">
+                        <a href="{{route('data-keluarga',$item->no_kk)}}" class="btn btn-success">Lihat</a>
+                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#tambahKel{{ $item->nik }}">Tambah</button>
+                    </td>
                     <td style="text-align: center;  ">
                         <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ $item->nik }}">Hapus</button>
                         <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editDataMasyarakat{{ $item->nik }}">Edit</button>
@@ -372,7 +406,7 @@
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Delete Data Penduduk</h1>
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Delete Data KK</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
@@ -380,7 +414,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
-                                <form action="{{route('data-penduduk', $item->nik) }}" method="post">
+                                <form action="{{route('data-kk', $item->nik) }}" method="post">
                                     @method('delete')
                                     @csrf
                                     <button type="submit" class="btn btn-danger">Deleted</button>
@@ -395,10 +429,10 @@
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="editDataMasyarakatLabel">Edit Data Penduduk</h1>
+                                <h1 class="modal-title fs-5" id="editDataMasyarakatLabel">Edit Data KK</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <form action="{{route('data-penduduk',$item->nik)}}" method="post">
+                            <form action="{{route('data-kk',$item->nik)}}" method="post">
                                 @csrf
                                 <div class="modal-body">
 
@@ -440,22 +474,14 @@
 
                                     <div class="mb-3">
                                         <label for="padukuhan" class="form-label"><b>Padukuhan</b></label>
-                                        <select class="form-select" name="padukuhan" id="padukuhan">
-                                            <option value="" selected>Silakan Pilih Padukuhan</option>
-                                            <option value="Bodeh">Bodeh</option>
-                                            <option value="Depok">Depok</option>
-                                            <option value="Gamping Kidul">Gamping Kidul</option>
-                                            <option value="Gamping Lor">Gamping Lor</option>
-                                            <option value="Gamping Tengah">Gamping Tengah</option>
-                                            <option value="Kalimanjung">Kalimanjung</option>
-                                            <option value="Mancasan">Mancasan</option>
-                                            <option value="Mejing Kidul">Mejing Kidul</option>
-                                            <option value="Mejing Lor">Mejing Lor</option>
-                                            <option value="Mejing Wetan">Mejing Wetan</option>
-                                            <option value="Ptukan">Ptukan</option>
-                                            <option value="Tlogo">Tlogo</option>
-                                            <option value="Watulangkah">Watulangkah</option>
-                                        </select>
+
+                                        <input type="text" name="padukuhan" id="padukuhan" class="form-control @error('padukuhan') is-invalid @enderror" required value="{{ $item->padukuhan }}" autocomplete="off" placeholder="Input Padukuhan">
+
+                                        @error('padukuhan')
+                                        <div class="invalid-feedback">
+                                            <p style="text-align: left">{{ $message }}</p>
+                                        </div>
+                                        @enderror
                                     </div>
 
                                     <div class="form-group row mb-3">
@@ -590,17 +616,6 @@
                                             <option name="sts_penduduk" id="sts_penduduk" value="Pindah Keluar">Pindah Keluar</option>
                                         </select>
                                     </div>
-
-                                    <div class="mb-3">
-                                        <label for="sts_dalam_kk" class="form-label"><b>Status Dalam KK</b></label>
-
-                                        <select class="form-select" name="sts_dalam_kk" id="sts_dalam_kk">
-                                            <option value="" selected>Silakan Pilih Status Penduduk</option>
-                                            <option name="sts_dalam_kk" id="sts_dalam_kk" value="Kepala Keluarga">Kepala Keluarga</option>
-                                            <option name="sts_dalam_kk" id="sts_dalam_kk" value="Istri">Istri</option>
-                                            <option name="sts_dalam_kk" id="sts_dalam_kk" value="Anak">Anak</option>
-                                        </select>
-                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
@@ -628,7 +643,7 @@
                                         <label for="nik" class="form-label"><b>NIK</b></label>
 
                                         <select class="form-select" name="nik" id="nik">
-                                            <option name="nik" id="nik" value="" selected>Silakan Pilih NIK</option>
+                                            <option name="nik" id="nik" value="" selected>Silakan Pilih NIK Keluraga Yang Ingin Ditambahkan</option>
                                             @foreach($pendu as $penduduk)
                                             <option name="nik" id="nik" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
                                             @endforeach
@@ -636,9 +651,9 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="no_kk" class="form-label"><b>No KK</b></label>
+                                        <label for="no_kk" class="form-label"><b>No KK (otomatis terisi)</b></label>
 
-                                        <input type="text" name="no_kk" id="no_kk" class="form-control @error('no_kk') is-invalid @enderror" required value="{{ $item->no_kk }}" autocomplete="off" placeholder="Input Nomor KK Penduduk">
+                                        <input type="text" name="no_kk" id="no_kk" class="form-control @error('no_kk') is-invalid @enderror" required value="{{ $item->no_kk }}" autocomplete="off" placeholder="Input Nomor KK Penduduk" readonly>
 
                                         @error('no_kk')
                                         <div class="invalid-feedback">

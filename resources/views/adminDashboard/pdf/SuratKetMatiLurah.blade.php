@@ -223,7 +223,7 @@
                 <tr>
                     <td width="200px">Alamat</td>
                     <td width="10px">:</td>
-                    <td>{{$surat->dad->nama_jalan}}, {{$surat->dad->desa}}, {{$surat->dad->rt}}, {{$surat->dad->rw}}, {{$surat->dad->kota}}, {{$surat->dad->prov}}</td>
+                    <td>{{$surat->dad->padukuhan}}, {{$surat->dad->rt}}, {{$surat->dad->rw}}</td>
                 </tr>
             </table>
             <p><b>Data IBU :</b></p>
@@ -250,7 +250,7 @@
                 <tr>
                     <td width="200px">Alamat</td>
                     <td width="10px">:</td>
-                    <td>{{$surat->mom->nama_jalan}}, {{$surat->mom->desa}}, {{$surat->mom->rt}}, {{$surat->mom->rw}}, {{$surat->mom->kota}}, {{$surat->mom->prov}}</td>
+                    <td>{{$surat->mom->padukuhan}}, {{$surat->mom->rt}}, {{$surat->mom->rw}}</td>
                 </tr>
             </table>
             <p><b>Data Pelapor :</b></p>
@@ -273,7 +273,7 @@
                 <tr>
                     <td width="200px">Alamat</td>
                     <td width="10px">:</td>
-                    <td>{{$surat->lapor->nama_jalan}}, {{$surat->lapor->desa}}, {{$surat->lapor->rt}}, {{$surat->lapor->rw}}, {{$surat->lapor->kota}}, {{$surat->lapor->prov}}</td>
+                    <td>{{$surat->lapor->padukuhan}}, {{$surat->lapor->rt}}, {{$surat->lapor->rw}}</td>
                 </tr>
             </table>
             <p><b>Data Saksi Satu :</b></p>
@@ -296,7 +296,7 @@
                 <tr>
                     <td width="200px">Alamat</td>
                     <td width="10px">:</td>
-                    <td>{{$surat->saksi1->nama_jalan}}, {{$surat->saksi1->desa}}, {{$surat->saksi1->rt}}, {{$surat->saksi1->rw}}, {{$surat->saksi1->kota}}, {{$surat->saksi1->prov}}</td>
+                    <td>{{$surat->saksi1->padukuhan}}, {{$surat->saksi1->rt}}, {{$surat->saksi1->rw}}</td>
                 </tr>
             </table>
             <p><b>Data Saksi Dua :</b></p>
@@ -319,7 +319,7 @@
                 <tr>
                     <td width="200px">Alamat</td>
                     <td width="10px">:</td>
-                    <td>{{$surat->saksi2->nama_jalan}}, {{$surat->saksi2->desa}}, {{$surat->saksi2->rt}}, {{$surat->saksi2->rw}}, {{$surat->saksi2->kota}}, {{$surat->saksi2->prov}}</td>
+                    <td>{{$surat->saksi2->padukuhan}}, {{$surat->saksi2->rt}}, {{$surat->saksi2->rw}}</td>
                 </tr>
             </table>
             <div class="tandatangan">

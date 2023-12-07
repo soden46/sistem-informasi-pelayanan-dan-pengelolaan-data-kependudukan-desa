@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\DataKematian;
 use App\Models\MutasiKeluar;
 use App\Models\MutasiMAsuk;
+use App\Models\Penduduk;
 use App\Models\ProfilDesa;
 use App\Models\SuratKetKelahiran;
 use App\Models\User;
@@ -19,7 +20,7 @@ class AdminController extends Controller
         return view('AdminDashboard.index', [
             'title' => 'Dashboard',
             'jumlahLahir' => SuratKetKelahiran::all()->count(),
-            'jumlahMasyarakat' => User::all()->count(),
+            'jumlahMasyarakat' => Penduduk::all()->count(),
             'jumlahMati' => DataKematian::all()->count(),
             'jumlahMM' => MutasiMAsuk::all()->count(),
             'jumlahMK' => MutasiKeluar::all()->count(),

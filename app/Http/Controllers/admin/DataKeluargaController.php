@@ -28,14 +28,16 @@ class DataKeluargaController extends Controller
                 'keluarga' => DataKeluarga::with('pend')
                     ->where('nik', 'like', "%" . $cari . "%")
                     ->orWhere('no_kk', 'like', "%" . $cari . "%")->paginate(10),
-                'no_kk' => $no_kk
+                'no_kk' => $no_kk,
+                'pendu' => Penduduk::get()
             ]);
         } else {
             return view('adminDashboard.DataKeluarga', [
                 'title' => 'Data Keluarga',
                 'profil' => ProfilDesa::firstWhere('id', 1),
                 'keluarga' => DataKeluarga::with('pend')->where('no_kk', $no_kk)->paginate(10),
-                'no_kk' => $no_kk
+                'no_kk' => $no_kk,
+                'pendu' => Penduduk::get()
             ]);
         }
     }
@@ -60,8 +62,8 @@ class DataKeluargaController extends Controller
     {
         $validatedData = $request->validate([
             'no_kk' => 'required|max:16',
-            'sts_keluarga' => 'required|max:255',
-            'nik' => 'required|max:16'
+            'nik' => 'required|max:16',
+            'sts_keluarga' => 'required|max:255'
         ]);
 
         // dd($validatedData);
@@ -103,8 +105,9 @@ class DataKeluargaController extends Controller
     {
         $rules = [
             'no_kk' => 'required|max:16',
-            'sts_keluarga' => 'required|max:255',
-            'nik' => 'required|max:16'
+            'nik' => 'required|max:16',
+            'sts_keluarga' => 'required|max:255'
+
         ];
 
         $validatedData = $request->validate($rules);

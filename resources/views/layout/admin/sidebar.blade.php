@@ -23,6 +23,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link {{ Request::is('data-kk') ? 'active' : '' }}" href="/data-kk">
+                    <span class="align-text-bottom bi bi-people"></span>
+                    Data Kepala Keluarga
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link {{ Request::is('surat-keterangan-kelahiran*') ? 'active' : '' }}" href="/surat-keterangan-kelahiran">
                     <span class="align-text-bottom bi bi-file-earmark-text"></span>
                     Data Kelahiran

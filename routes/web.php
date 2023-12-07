@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\DataKeluargaController;
+use App\Http\Controllers\admin\DataKKController;
 use App\Http\Controllers\admin\MasyarakatController;
 use App\Http\Controllers\admin\MutasiKeluarController;
 use App\Http\Controllers\admin\MutasiMAsukController;
@@ -54,6 +55,13 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
         Route::post('/data-penduduk/store', 'store')->name('data-penduduk/store')->middleware('auth');
         Route::post('/data-penduduk/{nik}', 'update')->name('data-penduduk/update')->middleware('auth');
         Route::delete('/data-penduduk/{nik}', 'destroy')->name('data-penduduk')->middleware('auth');
+    });
+
+    Route::controller(DataKKController::class)->group(function () {
+        Route::get('/data-kk', 'index')->name('data-kk')->middleware('auth');
+        Route::post('/data-kk/store', 'store')->name('data-kk/store')->middleware('auth');
+        Route::post('/data-kk/{nik}', 'update')->name('data-kk/update')->middleware('auth');
+        Route::delete('/data-kk/{nik}', 'destroy')->name('data-kk')->middleware('auth');
     });
 
     Route::controller(DataKeluargaController::class)->group(
@@ -152,84 +160,84 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
 });
 
 // Route Akun Warga/Penduduk
-// Route::middleware(['auth', 'role:masyarakat'])->group(function () {
-//     Route::controller(WargaController::class)->group(function () {
-//         Route::get('/masyarakat', 'index')->name('masyarakat');
-//     });
+Route::middleware(['auth', 'role:masyarakat'])->group(function () {
+    Route::controller(WargaController::class)->group(function () {
+        Route::get('/masyarakat', 'index')->name('masyarakat');
+    });
 
-//     // Route::controller(WargaMasyarakatController::class)->group(function () {
-//     //     Route::get('/warga/data-penduduk', 'index')->name('warga/data-penduduk');
-//     //     Route::post('/warga/data-penduduk/store', 'store')->name('warga/data-penduduk/store');
-//     //     Route::post('/warga/data-penduduk/{nik}', 'update')->name('warga/data-penduduk/update');
-//     //     Route::delete('/warga/data-penduduk/{nik}', 'destroy')->name('warga/data-penduduk');
-//     // });
+    // Route::controller(WargaMasyarakatController::class)->group(function () {
+    //     Route::get('/warga/data-penduduk', 'index')->name('warga/data-penduduk');
+    //     Route::post('/warga/data-penduduk/store', 'store')->name('warga/data-penduduk/store');
+    //     Route::post('/warga/data-penduduk/{nik}', 'update')->name('warga/data-penduduk/update');
+    //     Route::delete('/warga/data-penduduk/{nik}', 'destroy')->name('warga/data-penduduk');
+    // });
 
-//     Route::controller(WargaSuratKetKelahiranController::class)->group(
-//         function () {
-//             Route::get('/warga/surat-keterangan-kelahiran', 'index')->name('warga/surat-keterangan-kelahiran');
-//             Route::post('/warga/surat-keterangan-kelahiran/store', 'store')->name('warga/surat-keterangan-kelahiran/store');
-//             Route::post('/warga/surat-keterangan-kelahiran/{nik_bayi}', 'update')->name('warga/surat-keterangan-kelahiran');
-//             Route::delete('/warga/surat-keterangan-kelahiran/{nik_bayi}', 'destroy')->name('warga/surat-keterangan-kelahiran');
-//         }
-//     );
+    Route::controller(WargaSuratKetKelahiranController::class)->group(
+        function () {
+            Route::get('/warga/surat-keterangan-kelahiran', 'index')->name('warga/surat-keterangan-kelahiran');
+            Route::post('/warga/surat-keterangan-kelahiran/store', 'store')->name('warga/surat-keterangan-kelahiran/store');
+            Route::post('/warga/surat-keterangan-kelahiran/{nik_bayi}', 'update')->name('warga/surat-keterangan-kelahiran');
+            Route::delete('/warga/surat-keterangan-kelahiran/{nik_bayi}', 'destroy')->name('warga/surat-keterangan-kelahiran');
+        }
+    );
 
-//     Route::controller(WargaSuratKetKematianController::class)->group(
-//         function () {
-//             Route::get('/warga/surat-keterangan-kematian', 'index')->name('warga/surat-keterangan-kematian');
-//             Route::post('/warga/surat-keterangan-kematian/store', 'store')->name('warga/surat-keterangan-kematian/store');
-//             Route::post('/warga/surat-keterangan-kematian/{nik_bayi}', 'update')->name('warga/surat-keterangan-kematian');
-//             Route::delete('/warga/surat-keterangan-kematian/{nik_bayi}', 'destroy')->name('warga/surat-keterangan-kematian');
-//         }
-//     );
+    Route::controller(WargaSuratKetKematianController::class)->group(
+        function () {
+            Route::get('/warga/surat-keterangan-kematian', 'index')->name('warga/surat-keterangan-kematian');
+            Route::post('/warga/surat-keterangan-kematian/store', 'store')->name('warga/surat-keterangan-kematian/store');
+            Route::post('/warga/surat-keterangan-kematian/{nik_bayi}', 'update')->name('warga/surat-keterangan-kematian');
+            Route::delete('/warga/surat-keterangan-kematian/{nik_bayi}', 'destroy')->name('warga/surat-keterangan-kematian');
+        }
+    );
 
-//     Route::controller(WargaMutasiMAsukController::class)->group(
-//         function () {
-//             Route::get('/warga/data-mutasi-masuk', 'index')->name('warga/data-mutasi-masuk');
-//             Route::post('/warga/data-mutasi-masuk/store', 'store')->name('warga/data-mutasi-masuk/store');
-//             Route::post('/warga/data-mutasi-masuk/update/{nik_mm}', 'update')->name('warga/data-mutasi-masuk/update');
-//             Route::delete('/warga/data-mutasi-masuk/delete/{nik_mm}', 'destroy')->name('warga/data-mutasi-masuk/delete');
-//         }
-//     );
+    Route::controller(WargaMutasiMAsukController::class)->group(
+        function () {
+            Route::get('/warga/data-mutasi-masuk', 'index')->name('warga/data-mutasi-masuk');
+            Route::post('/warga/data-mutasi-masuk/store', 'store')->name('warga/data-mutasi-masuk/store');
+            Route::post('/warga/data-mutasi-masuk/update/{nik_mm}', 'update')->name('warga/data-mutasi-masuk/update');
+            Route::delete('/warga/data-mutasi-masuk/delete/{nik_mm}', 'destroy')->name('warga/data-mutasi-masuk/delete');
+        }
+    );
 
-//     Route::controller(WargaMutasiKeluarController::class)->group(
-//         function () {
-//             Route::get('/warga/data-mutasi-keluar', 'index')->name('warga/data-mutasi-keluar');
-//             Route::post('/warga/data-mutasi-keluar/store', 'store')->name('warga/data-mutasi-keluar/store');
-//             Route::post('/warga/data-mutasi-keluar/update/{nik_mk}', 'update')->name('warga/data-mutasi-keluar/update');
-//             Route::delete('/warga/data-mutasi-keluar/delete/{nik_mk}', 'destroy')->name('warga/data-mutasi-keluar/delete');
-//         }
-//     );
+    Route::controller(WargaMutasiKeluarController::class)->group(
+        function () {
+            Route::get('/warga/data-mutasi-keluar', 'index')->name('warga/data-mutasi-keluar');
+            Route::post('/warga/data-mutasi-keluar/store', 'store')->name('warga/data-mutasi-keluar/store');
+            Route::post('/warga/data-mutasi-keluar/update/{nik_mk}', 'update')->name('warga/data-mutasi-keluar/update');
+            Route::delete('/warga/data-mutasi-keluar/delete/{nik_mk}', 'destroy')->name('warga/data-mutasi-keluar/delete');
+        }
+    );
 
-//     Route::controller(WargaSuratKetBedaNamaController::class)->group(
-//         function () {
-//             Route::get('/warga/surat-ket-beda-nama', 'index')->name('warga/surat-ket-beda-nama');
-//             Route::post('/warga/surat-ket-beda-nama/store', 'store')->name('warga/surat-ket-beda-nama/store');
-//             Route::post('/warga/surat-ket-beda-nama/verif/{nik}', 'update')->name('warga/surat-ket-beda-nama/verif');
-//             Route::delete('/warga/surat-ket-beda-nama/delete/{nik}', 'destroy')->name('warga/surat-ket-beda-nama/delete');
-//             Route::get('/warga/surat-keterangan-beda-nama/pdf/{nik}', 'pdf')->name('warga/surat-keterangan-beda-nama/pdf');
-//             Route::get('/warga/surat-keterangan-beda-nama/pdf/lurah/{nik}', 'pdflurah')->name('warga/surat-keterangan-beda-nama/pdflurah');
-//         }
-//     );
+    Route::controller(WargaSuratKetBedaNamaController::class)->group(
+        function () {
+            Route::get('/warga/surat-ket-beda-nama', 'index')->name('warga/surat-ket-beda-nama');
+            Route::post('/warga/surat-ket-beda-nama/store', 'store')->name('warga/surat-ket-beda-nama/store');
+            Route::post('/warga/surat-ket-beda-nama/verif/{nik}', 'update')->name('warga/surat-ket-beda-nama/verif');
+            Route::delete('/warga/surat-ket-beda-nama/delete/{nik}', 'destroy')->name('warga/surat-ket-beda-nama/delete');
+            Route::get('/warga/surat-keterangan-beda-nama/pdf/{nik}', 'pdf')->name('warga/surat-keterangan-beda-nama/pdf');
+            Route::get('/warga/surat-keterangan-beda-nama/pdf/lurah/{nik}', 'pdflurah')->name('warga/surat-keterangan-beda-nama/pdflurah');
+        }
+    );
 
-//     Route::controller(WargaSuratKetStatusController::class)->group(
-//         function () {
-//             Route::get('/warga/surat-keterangan-status', 'index')->name('warga/surat-keterangan-status');
-//             Route::post('/warga/surat-keterangan-status/store', 'store')->name('warga/surat-keterangan-status/store');
-//             Route::post('/warga/surat-keterangan-status/{nik}', 'update')->name('warga/surat-keterangan-status/verif');
-//             Route::delete('/warga/surat-keterangan-status/delete/{nik}', 'destroy')->name('warga/surat-keterangan-status/delete');
-//             Route::get('/warga/surat-keterangan-status/pdf/{nik}', 'pdf')->name('warga/surat-keterangan-status/pdf');
-//             Route::get('/warga/surat-keterangan-status/pdf/lurah/{nik}', 'pdflurah')->name('warga/surat-keterangan-status/pdflurah');
-//         }
-//     );
+    Route::controller(WargaSuratKetStatusController::class)->group(
+        function () {
+            Route::get('/warga/surat-keterangan-status', 'index')->name('warga/surat-keterangan-status');
+            Route::post('/warga/surat-keterangan-status/store', 'store')->name('warga/surat-keterangan-status/store');
+            Route::post('/warga/surat-keterangan-status/{nik}', 'update')->name('warga/surat-keterangan-status/verif');
+            Route::delete('/warga/surat-keterangan-status/delete/{nik}', 'destroy')->name('warga/surat-keterangan-status/delete');
+            Route::get('/warga/surat-keterangan-status/pdf/{nik}', 'pdf')->name('warga/surat-keterangan-status/pdf');
+            Route::get('/warga/surat-keterangan-status/pdf/lurah/{nik}', 'pdflurah')->name('warga/surat-keterangan-status/pdflurah');
+        }
+    );
 
-//     Route::controller(WargaSuratKetBiasaController::class)->group(
-//         function () {
-//             Route::get('/warga/surat-keterangan-biasa', 'index')->name('warga/surat-keterangan-biasa');
-//             Route::post('/warga/surat-keterangan-biasa/store', 'store')->name('warga/surat-keterangan-biasa/store');
-//             Route::post('/warga/surat-keterangan-biasa/{nik}', 'update')->name('warga/surat-keterangan-biasa/verif');
-//             Route::delete('/warga/surat-keterangan-biasa/delete/{nik}', 'destroy')->name('warga/surat-keterangan-status/delete');
-//             Route::get('/warga/surat-keterangan-biasa/pdf/{nik}', 'pdf')->name('warga/surat-keterangan-biasa/pdf');
-//             Route::get('/warga/surat-keterangan-biasa/pdf/lurah/{nik}', 'pdflurah')->name('warga/surat-keterangan-biasa/pdflurah');
-//         }
-//     );
-// });
+    Route::controller(WargaSuratKetBiasaController::class)->group(
+        function () {
+            Route::get('/warga/surat-keterangan-biasa', 'index')->name('warga/surat-keterangan-biasa');
+            Route::post('/warga/surat-keterangan-biasa/store', 'store')->name('warga/surat-keterangan-biasa/store');
+            Route::post('/warga/surat-keterangan-biasa/{nik}', 'update')->name('warga/surat-keterangan-biasa/verif');
+            Route::delete('/warga/surat-keterangan-biasa/delete/{nik}', 'destroy')->name('warga/surat-keterangan-status/delete');
+            Route::get('/warga/surat-keterangan-biasa/pdf/{nik}', 'pdf')->name('warga/surat-keterangan-biasa/pdf');
+            Route::get('/warga/surat-keterangan-biasa/pdf/lurah/{nik}', 'pdflurah')->name('warga/surat-keterangan-biasa/pdflurah');
+        }
+    );
+});

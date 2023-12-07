@@ -8,7 +8,7 @@ use App\Models\ProfilDesa;
 use Illuminate\Http\Request;
 
 
-class MasyarakatController extends Controller
+class DataKKController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,19 +20,20 @@ class MasyarakatController extends Controller
         $cari = $request->cari;
 
         if ($cari != NULL) {
-            return view('adminDashboard.Penduduk', [
-                'title' => 'Data Penduduk',
+            return view('adminDashboard.KK', [
+                'title' => 'Data Kepala Keluarga',
                 'profil' => ProfilDesa::firstWhere('id', 1),
-                'masyarakat' => Penduduk::orWhere('nik', 'like', "%" . $cari . "%")
+                'masyarakat' => Penduduk::where('sts_dalam_kk', "Kepala Keluarga")
+                    ->orWhere('nik', 'like', "%" . $cari . "%")
                     ->orWhere('no_kk', 'like', "%" . $cari . "%")
                     ->orWhere('nama', 'like', "%" . $cari . "%")->paginate(10),
                 'pendu' => Penduduk::get()
             ]);
         } else {
-            return view('adminDashboard.Penduduk', [
-                'title' => 'Data Penduduk',
+            return view('adminDashboard.KK', [
+                'title' => 'Data Kepala Keluarga',
                 'profil' => ProfilDesa::firstWhere('id', 1),
-                'masyarakat' => Penduduk::paginate(10),
+                'masyarakat' => Penduduk::where('sts_dalam_kk', "Kepala Keluarga")->paginate(10),
                 'pendu' => Penduduk::get()
             ]);
         }
@@ -61,8 +62,12 @@ class MasyarakatController extends Controller
             'nama' => 'required|max:255',
             'no_kk' => 'required|max:255',
             'padukuhan' => 'required|max:255',
+            'desa' => 'required|max:255',
             'rt' => 'required|max:255',
             'rw' => 'required|max:255',
+            'nama_jalan' => 'required|max:255',
+            'kota' => 'required|max:255',
+            'prov' => 'required|max:255',
             'jk' => 'required|max:255',
             'tempat_lahir' => 'required|max:255',
             'tgl_lahir' => 'required|max:255',
@@ -118,8 +123,13 @@ class MasyarakatController extends Controller
             'nama' => 'max:255',
             'no_kk' => 'max:255',
             'padukuhan' => 'max:255',
+            'desa' => 'max:255',
             'rt' => 'max:255',
             'rw' => 'max:255',
+            'nama_jalan' => 'max:255',
+            'kota' => 'max:255',
+            'prov' => 'max:255',
+            'jk' => 'max:255',
             'tempat_lahir' => 'max:255',
             'tgl_lahir' => 'max:255',
             'wn' => 'max:255',

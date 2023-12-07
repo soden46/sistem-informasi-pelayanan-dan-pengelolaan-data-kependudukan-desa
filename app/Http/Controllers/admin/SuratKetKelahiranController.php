@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\DataKeluarga;
 use App\Models\Penduduk;
 use App\Models\ProfilDesa;
 use App\Models\SuratKetKelahiran;
@@ -86,8 +87,38 @@ class SuratKetKelahiranController extends Controller
             'nik_saksidua' => 'required|max:255'
         ]);
 
+
+
         // dd($validatedData);
         SuratKetKelahiran::create($validatedData);
+
+        DataKeluarga::create([
+            'no_kk' => $request->no_kk,
+            'nik' => $request->nik_bayi,
+            'sts_keluarga' => 'Anak'
+        ]);
+
+        $data_penduduk = Penduduk::where('nama', $request->nama_kepala_keluarga)->first();
+
+        Penduduk::create([
+            'nik' => $request->nik_bayi,
+            'nama' => $request->nama_bayi,
+            'no_kk' => $request->no_kk,
+            'padukuhan' => $data_penduduk->padukuhan,
+            'rt' => $data_penduduk->rt,
+            'rw' => $data_penduduk->rw,
+            'jk' => $request->jenis_kelamin,
+            'tempat_lahir' => $request->tempat_kelahiran,
+            'tgl_lahir' => $request->tgl_lahir,
+            'wn' => $data_penduduk->wn,
+            'kebangsaan' => 'INDONESIA',
+            'agama' => $data_penduduk->agama,
+            'pekerjaan' => '-',
+            'pendidikan' => '-',
+            'sts_kawin' => 'Belum Kawin',
+            'sts_penduduk' => 'Hidup',
+            'sts_dalam_kk' => 'Anak'
+        ]);
 
         return back()->with('successCreatedPenduduk', 'Data has ben created');
     }

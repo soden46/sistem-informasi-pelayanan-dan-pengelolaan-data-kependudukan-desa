@@ -242,27 +242,27 @@
                 <tr>
                     <td width="200px">NIK</td>
                     <td width="10px">:</td>
-                    <td>{{$surat->ayah->nama}}</td>
+                    <td>{{$surat->dad->nama}}</td>
                 </tr>
                 <tr>
                     <td width="200px">Tanggal Lahir</td>
                     <td width="10px">:</td>
-                    <td>{{date('d/m/Y',strtotime($surat->ayah->tgl_lahir))}} Umur: {{$ageDad}} Tahun</td>
+                    <td>{{date('d/m/Y',strtotime($surat->dad->tgl_lahir))}} Umur: {{$ageDad}} Tahun</td>
                 </tr>
                 <tr>
                     <td width="200px">Pekerjaan</td>
                     <td width="10px">:</td>
-                    <td>{{$surat->ayah->pekerjaan}}</td>
+                    <td>{{$surat->dad->pekerjaan}}</td>
                 </tr>
                 <tr>
                     <td width="200px">Alamat</td>
                     <td width="10px">:</td>
-                    <td>{{$surat->ayah->nama_jalan}}, {{$surat->ayah->desa}}, {{$surat->ayah->rt}}, {{$surat->ayah->rw}}, {{$surat->ayah->kota}}, {{$surat->ayah->prov}}</td>
+                    <td>{{$surat->dad->padukuhan}}, {{$surat->dad->rt}}, {{$surat->dad->rw}}</td>
                 </tr>
                 <tr>
                     <td width="200px">Kewarganegaraan</td>
                     <td width="10px">:</td>
-                    <td>{{$surat->ayah->wn}} / Kebangsaan: {{$surat->ayah->kebangsaan}}</td>
+                    <td>{{$surat->dad->wn}} / Kebangsaan: {{$surat->dad->kebangsaan}}</td>
                 </tr>
             </table>
             <p><b>Data Pelapor:</b></p>
@@ -275,63 +275,29 @@
                 <tr>
                     <td width="200px">NIK</td>
                     <td width="10px">:</td>
-                    <td>{{$surat->pelapor->nama}}</td>
+                    <td>{{$surat->lapor->nama}}</td>
                 </tr>
                 <tr>
                     <td width="200px">Tanggal Lahir</td>
                     <td width="10px">:</td>
-                    <td>{{date('d/m/Y',strtotime($surat->pelapor->tgl_lahir))}} Umur: {{$ageDad}} Tahun</td>
+                    <td>{{date('d/m/Y',strtotime($surat->lapor->tgl_lahir))}} Umur: {{$ageDad}} Tahun</td>
                 </tr>
                 <tr>
                     <td width="200px">Pekerjaan</td>
                     <td width="10px">:</td>
-                    <td>{{$surat->pelapor->pekerjaan}}</td>
+                    <td>{{$surat->lapor->pekerjaan}}</td>
                 </tr>
                 <tr>
                     <td width="200px">Alamat</td>
                     <td width="10px">:</td>
-                    <td>{{$surat->pelapor->nama_jalan}}, {{$surat->pelapor->desa}}, {{$surat->pelapor->rt}}, {{$surat->pelapor->rw}}, {{$surat->pelapor->kota}}, {{$surat->pelapor->prov}}</td>
+                    <td>{{$surat->lapor->padukuhan}}, {{$surat->lapor->rt}}, {{$surat->lapor->rw}}</td>
                 </tr>
                 <tr>
                     <td width="200px">Kewarganegaraan</td>
                     <td width="10px">:</td>
-                    <td>{{$surat->pelapor->wn}} / Kebangsaan: {{$surat->pelapor->kebangsaan}}</td>
+                    <td>{{$surat->lapor->wn}} / Kebangsaan: {{$surat->lapor->kebangsaan}}</td>
                 </tr>
             </table>
-            <p><b>Data AYAH Kandung:</b></p>
-            <table class="font-12">
-                <tr>
-                    <td width="200px">NIK</td>
-                    <td width="10px">:</td>
-                    <td>{{$surat->nik_ayah}}</td>
-                </tr>
-                <tr>
-                    <td width="200px">NIK</td>
-                    <td width="10px">:</td>
-                    <td>{{$surat->ayah->nama}}</td>
-                </tr>
-                <tr>
-                    <td width="200px">Tanggal Lahir</td>
-                    <td width="10px">:</td>
-                    <td>{{date('d/m/Y',strtotime($surat->ayah->tgl_lahir))}} Umur: {{$umpel}} Tahun</td>
-                </tr>
-                <tr>
-                    <td width="200px">Pekerjaan</td>
-                    <td width="10px">:</td>
-                    <td>{{$surat->ayah->pekerjaan}}</td>
-                </tr>
-                <tr>
-                    <td width="200px">Alamat</td>
-                    <td width="10px">:</td>
-                    <td>{{$surat->ayah->nama_jalan}}, {{$surat->ayah->desa}}, {{$surat->ayah->rt}}, {{$surat->ayah->rw}}, {{$surat->ayah->kota}}, {{$surat->ayah->prov}}</td>
-                </tr>
-                <tr>
-                    <td width="200px">Kewarganegaraan</td>
-                    <td width="10px">:</td>
-                    <td>{{$surat->ayah->wn}} / Kebangsaan: {{$surat->ayah->kebangsaan}}</td>
-                </tr>
-            </table>
-            <p><b>Data Saksi:</b></p>
             <table class="font-12">
                 <p>Saksi Satu:</p>
                 <tr>
@@ -357,7 +323,7 @@
                 <tr>
                     <td width="200px">Alamat</td>
                     <td width="10px">:</td>
-                    <td>{{$surat->saksi1->nama_jalan}}, {{$surat->saksi1->desa}}, {{$surat->saksi1->rt}}, {{$surat->saksi1->rw}}, {{$surat->saksi1->kota}}, {{$surat->saksi1->prov}}</td>
+                    <td>{{$surat->saksi1->padukuhan}}, {{$surat->saksi1->rt}}, {{$surat->saksi1->rw}}</td>
                 </tr>
                 <tr>
                     <td width="200px">Kewarganegaraan</td>
@@ -390,7 +356,7 @@
                 <tr>
                     <td width="200px">Alamat</td>
                     <td width="10px">:</td>
-                    <td>{{$surat->saksi2->nama_jalan}}, {{$surat->saksi2->desa}}, {{$surat->saksi2->rt}}, {{$surat->saksi2->rw}}, {{$surat->saksi2->kota}}, {{$surat->saksi2->prov}}</td>
+                    <td>{{$surat->saksi2->padukuhan}}, {{$surat->saksi2->rt}}, {{$surat->saksi2->rw}}</td>
                 </tr>
                 <tr>
                     <td width="200px">Kewarganegaraan</td>

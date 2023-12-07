@@ -162,14 +162,16 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="agama_mati" class="form-label"><b>Agama Jenazah</b></label>
+                                    <label for="agama_mati" class="form-label"><b>Agama Jenazah Jenazah</b></label>
 
                                     <select class="form-select" name="agama_mati" id="agama_mati">
-                                        <option name="agama_mati" id="agama_mati" value="" selected>Silakan Pilih Agama Jenazah</option>
+                                        <option value="" selected>Silakan Pilih agama_mati</option>
                                         <option name="agama_mati" id="agama_mati" value="Islam">Islam</option>
                                         <option name="agama_mati" id="agama_mati" value="Kristen">Kristen</option>
                                         <option name="agama_mati" id="agama_mati" value="Katolik">Katolik</option>
-                                        <option name="agama_mati" id="agama_mati" value="Budha">Budha</option>
+                                        <option name="agama_mati" id="agama_mati" value="Hindu">Hindu</option>
+                                        <option name="agama_mati" id="agama_mati" value="Buddha">Buddha</option>
+                                        <option name="agama_mati" id="agama_mati" value="Konghucu">Konghucu</option>
                                     </select>
                                 </div>
 

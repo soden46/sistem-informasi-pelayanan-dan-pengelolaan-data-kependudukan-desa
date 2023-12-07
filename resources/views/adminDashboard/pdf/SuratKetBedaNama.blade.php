@@ -165,6 +165,7 @@
                     <td>{{$surat->pend->padukuhan}}, RT {{ $surat->pend->rt}} / RW {{ $surat->pend->rw}}</td>
                 </tr>
             </table>
+            <br>
             <p>adalah orang yang sama dengan yang tertulis di ............................. sama dengan data :</p>
             <table class="font-12">
                 <tr>
