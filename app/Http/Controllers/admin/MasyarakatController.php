@@ -22,7 +22,6 @@ class MasyarakatController extends Controller
         if ($cari != NULL) {
             return view('adminDashboard.Penduduk', [
                 'title' => 'Data Penduduk',
-                'profil' => ProfilDesa::firstWhere('id', 1),
                 'masyarakat' => Penduduk::orWhere('nik', 'like', "%" . $cari . "%")
                     ->orWhere('no_kk', 'like', "%" . $cari . "%")
                     ->orWhere('nama', 'like', "%" . $cari . "%")->paginate(10),
@@ -31,7 +30,6 @@ class MasyarakatController extends Controller
         } else {
             return view('adminDashboard.Penduduk', [
                 'title' => 'Data Penduduk',
-                'profil' => ProfilDesa::firstWhere('id', 1),
                 'masyarakat' => Penduduk::paginate(10),
                 'pendu' => Penduduk::get()
             ]);

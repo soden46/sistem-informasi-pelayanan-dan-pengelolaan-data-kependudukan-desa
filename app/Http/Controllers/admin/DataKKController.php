@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Penduduk;
 use App\Models\ProfilDesa;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 
 class DataKKController extends Controller
 {
@@ -22,17 +22,15 @@ class DataKKController extends Controller
         if ($cari != NULL) {
             return view('adminDashboard.KK', [
                 'title' => 'Data Kepala Keluarga',
-                'profil' => ProfilDesa::firstWhere('id', 1),
                 'masyarakat' => Penduduk::where('sts_dalam_kk', "Kepala Keluarga")
                     ->orWhere('nik', 'like', "%" . $cari . "%")
                     ->orWhere('no_kk', 'like', "%" . $cari . "%")
                     ->orWhere('nama', 'like', "%" . $cari . "%")->paginate(10),
-                'pendu' => Penduduk::get()
+                'pendu' => Penduduk::get(),
             ]);
         } else {
             return view('adminDashboard.KK', [
                 'title' => 'Data Kepala Keluarga',
-                'profil' => ProfilDesa::firstWhere('id', 1),
                 'masyarakat' => Penduduk::where('sts_dalam_kk', "Kepala Keluarga")->paginate(10),
                 'pendu' => Penduduk::get()
             ]);
@@ -160,5 +158,13 @@ class DataKKController extends Controller
     {
         Penduduk::where('nik', $nik)->delete();
         return redirect('/data-penduduk')->with('successDeletedMasyarakat', 'Data has ben deleted');
+    }
+
+    public function GetSts($nik)
+    {
+        $sts = DB::table("data_penduduk")
+            ->where("nik", $nik)
+            ->pluck('sts_dalam_kk', 'sts_dalam_kk');
+        return json_encode($sts);
     }
 }

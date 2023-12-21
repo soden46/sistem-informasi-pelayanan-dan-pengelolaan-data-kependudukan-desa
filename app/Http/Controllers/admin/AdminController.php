@@ -20,11 +20,10 @@ class AdminController extends Controller
         return view('AdminDashboard.index', [
             'title' => 'Dashboard',
             'jumlahLahir' => SuratKetKelahiran::all()->count(),
-            'jumlahMasyarakat' => Penduduk::all()->count(),
+            'jumlahMasyarakat' => Penduduk::where('sts_penduduk', 'Hidup')->count(),
             'jumlahMati' => DataKematian::all()->count(),
             'jumlahMM' => MutasiMAsuk::all()->count(),
             'jumlahMK' => MutasiKeluar::all()->count(),
-            'profil' => ProfilDesa::Where('id', 1)->first(),
         ]);
     }
 }

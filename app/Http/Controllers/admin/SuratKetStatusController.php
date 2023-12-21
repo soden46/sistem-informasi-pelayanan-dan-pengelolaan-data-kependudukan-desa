@@ -25,7 +25,6 @@ class SuratKetStatusController extends Controller
         if ($cari != NULL) {
             return view('adminDashboard.SuratKetStatus', [
                 'title' => 'Data Surat Keterangan Status',
-                'profil' => ProfilDesa::firstWhere('id', 1),
                 'surat' => SuratKetStatus::with('pend')
                     ->where('nik', 'like', "%" . $cari . "%")
                     ->orWhere('nama_baru', 'like', "%" . $cari . "%")->paginate(10),
@@ -34,7 +33,6 @@ class SuratKetStatusController extends Controller
         } else {
             return view('adminDashboard.SuratKetStatus', [
                 'title' => 'Data Surat Keterangan Status',
-                'profil' => ProfilDesa::firstWhere('id', 1),
                 'surat' => SuratKetStatus::with('pend')->paginate(10),
                 'pendu' => Penduduk::get()
             ]);

@@ -348,6 +348,7 @@
                     <th>RW</th>
                     <th>Jenis Kelamin</th>
                     <th>Tempat Lahir</th>
+                    <th>Status</th>
                     <th style="text-align: center">Action</th>
                 </tr>
                 @foreach ($masyarakat as $index => $item)
@@ -361,6 +362,7 @@
                     <td style="vertical-align: middle;  ">{{ $item->rw }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->jk }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->tempat_lahir }}</td>
+                    <td style="vertical-align: middle;  ">{{ $item->sts_penduduk }}</td>
                     <td style="text-align: center;  ">
                         <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ $item->nik }}">Hapus</button>
                         <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editDataMasyarakat{{ $item->nik }}">Edit</button>

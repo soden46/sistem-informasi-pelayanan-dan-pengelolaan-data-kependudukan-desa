@@ -20,7 +20,6 @@ class WargaController extends Controller
             'jumlahLahir' => SuratKetKelahiran::all()->count(),
             'jumlahMasyarakat' => User::all()->count(),
             'jumlahMati' => DataKematian::all()->count(),
-            'profil' => ProfilDesa::Where('id', 1)->first(),
         ]);
     }
 }

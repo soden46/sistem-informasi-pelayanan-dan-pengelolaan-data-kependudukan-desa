@@ -25,14 +25,12 @@ class SuratKetKematianController extends Controller
         if ($cari != NULL) {
             return view('adminDashboard.SuratKetKematian', [
                 'title' => 'Data Suart Keterangan Kematian',
-                'profil' => ProfilDesa::firstWhere('id', 1),
                 'mati' => DataKematian::where('nik', 'like', "%" . $cari . "%")
                     ->orWhere('no_kk', 'like', "%" . $cari . "%")->paginate(10),
             ]);
         } else {
             return view('adminDashboard.SuratKetKematian', [
                 'title' => 'Data Data Suart Keterangan Kematian',
-                'profil' => ProfilDesa::firstWhere('id', 1),
                 'mati' => DataKematian::with('keluarga', 'pendu', 'mom', 'dad', 'saksi1', 'saksi2', 'lapor')->paginate(10),
                 'pendu' => Penduduk::get()
             ]);
@@ -71,6 +69,7 @@ class SuratKetKematianController extends Controller
             'nik_saksidua' => 'required|max:255',
         ];
 
+        Penduduk::where('nik', $request->nik_mati)->update(['sts_penduduk' => 'Meninggal']);
 
         $validatedData = $request->validate($rules);
         // dd($validatedData);

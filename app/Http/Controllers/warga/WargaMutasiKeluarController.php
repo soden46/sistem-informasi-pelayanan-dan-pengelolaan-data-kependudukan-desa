@@ -20,7 +20,6 @@ class WargaMutasiKeluarController extends Controller
         if ($cari != NULL) {
             return view('wargaDashboard.MutasiKeluar', [
                 'title' => 'Data Mutasi Keluar',
-                'profil' => ProfilDesa::firstWhere('id', 1),
                 'MutasiKeluar' => MutasiKeluar::with('pend')
                     ->where('nik', 'like', "%" . $cari . "%")
                     ->orWhere('no_kk', 'like', "%" . $cari . "%")->paginate(10),
@@ -28,7 +27,6 @@ class WargaMutasiKeluarController extends Controller
         } else {
             return view('wargaDashboard.MutasiKeluar', [
                 'title' => 'Data Mutasi Keluar',
-                'profil' => ProfilDesa::firstWhere('id', 1),
                 'MutasiKeluar' => MutasiKeluar::with('pend')->paginate(10),
             ]);
         }

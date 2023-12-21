@@ -24,7 +24,6 @@ class DataKeluargaController extends Controller
         if ($cari != NULL) {
             return view('adminDashboard.DataKeluarga', [
                 'title' => 'Data Keluarga',
-                'profil' => ProfilDesa::firstWhere('id', 1),
                 'keluarga' => DataKeluarga::with('pend')
                     ->where('nik', 'like', "%" . $cari . "%")
                     ->orWhere('no_kk', 'like', "%" . $cari . "%")->paginate(10),
@@ -34,7 +33,6 @@ class DataKeluargaController extends Controller
         } else {
             return view('adminDashboard.DataKeluarga', [
                 'title' => 'Data Keluarga',
-                'profil' => ProfilDesa::firstWhere('id', 1),
                 'keluarga' => DataKeluarga::with('pend')->where('no_kk', $no_kk)->paginate(10),
                 'no_kk' => $no_kk,
                 'pendu' => Penduduk::get()

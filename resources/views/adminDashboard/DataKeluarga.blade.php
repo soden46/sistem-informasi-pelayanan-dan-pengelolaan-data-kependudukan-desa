@@ -93,13 +93,11 @@
                                 <div class="mb-3">
                                     <label for="sts_keluarga" class="form-label"><b>Status Keluarga</b></label>
 
-                                    <input type="text" name="sts_keluarga" id="sts_keluarga" class="form-control @error('sts_keluarga') is-invalid @enderror" required value="{{ old('sts_keluarga') }}" placeholder="Input Status Keluarga">
-
-                                    @error('sts_keluarga')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
+                                    <select class="form-select" name="sts_keluarga" id="sts_keluarga">
+                                        <option value="" selected>Silakan Pilih Status Keluarga</option>
+                                        <option name="sts_keluarga" id="sts_keluarga" value="Istri">Istri</option>
+                                        <option name="sts_keluarga" id="sts_keluarga" value="Anak">Anak</option>
+                                    </select>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
@@ -246,13 +244,11 @@
                                     <div class="mb-3">
                                         <label for="sts_keluarga" class="form-label"><b>Status Keluarga</b></label>
 
-                                        <input type="text" name="sts_keluarga" id="sts_keluarga" class="form-control @error('sts_keluarga') is-invalid @enderror" required value="{{ $item->sts_keluarga }}" autocomplete="off" placeholder="Input Status Keluarga">
-
-                                        @error('sts_keluarga')
-                                        <div class="invalid-feedback">
-                                            <p style="text-align: left">{{ $message }}</p>
-                                        </div>
-                                        @enderror
+                                        <select class="form-select" name="sts_keluarga" id="sts_keluarga">
+                                            <option value="" selected>Silakan Pilih Status Keluarga</option>
+                                            <option name="sts_keluarga" id="sts_keluarga" value="Istri">Istri</option>
+                                            <option name="sts_keluarga" id="sts_keluarga" value="Anak">Anak</option>
+                                        </select>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>

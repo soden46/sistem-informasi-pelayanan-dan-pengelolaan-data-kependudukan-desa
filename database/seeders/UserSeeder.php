@@ -16,9 +16,9 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::create([
-            'name' => 'Agung',
-            'userName' => 'Agung1331',
-            'status' => 'admin',
+            'name' => 'BagusRA',
+            'userName' => 'BagusRA123',
+            'role' => 'admin',
             'password' => '$2y$10$/.GcYVvXN1p2nQeysYfYqO5cH.id.sB1UtZPUKGQSjk.Due2zuSQi',
             'created_at' => '2022-11-29 10:30:27',
             'updated_at' => '2022-11-29 10:30:27'

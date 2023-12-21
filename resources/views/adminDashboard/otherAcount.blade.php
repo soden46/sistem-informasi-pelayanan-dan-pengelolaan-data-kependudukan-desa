@@ -113,10 +113,10 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="status" class="form-label"><b>Status Acount</b></label>
+                                        <label for="role" class="form-label"><b>Status Akun</b></label>
 
-                                        <select class="form-select" name="status" id="status">
-                                            <option value="" selected>Select status acount</option>
+                                        <select class="form-select" name="role" id="role">
+                                            <option value="" selected>Pilih status akun</option>
                                             <option value="Staff">Staff</option>
                                             <option value="Masyarakat">Masyarakat</option>
                                         </select>
@@ -238,10 +238,10 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="status" class="form-label"><b>Status Acount</b></label>
+                                        <label for="role" class="form-label"><b>Status Akun</b></label>
 
-                                        <select class="form-select" name="status" id="status">
-                                            <option value="{{ $item->status }}" selected>{{ $item->status }}</option>
+                                        <select class="form-select" name="role" id="role">
+                                            <option value="{{ $item->role }}" selected>{{ $item->role }}</option>
                                             <option value="Staff">Staff</option>
                                             <option value="Masyarakat">Masyarakat</option>
                                         </select>
@@ -288,4 +288,21 @@
 
     </div>
 </main>
+<script>
+    function password_show_hide() {
+        var x = document.getElementById("password");
+        var show_eye = document.getElementById("show_eye");
+        var hide_eye = document.getElementById("hide_eye");
+        hide_eye.classList.remove("d-none");
+        if (x.type === "password") {
+            x.type = "text";
+            show_eye.style.display = "none";
+            hide_eye.style.display = "block";
+        } else {
+            x.type = "password";
+            show_eye.style.display = "block";
+            hide_eye.style.display = "none";
+        }
+    }
+</script>
 @endsection

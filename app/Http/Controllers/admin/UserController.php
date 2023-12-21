@@ -21,7 +21,6 @@ class UserController extends Controller
     {
         return view('adminDashboard.otherAcount', [
             'title' => 'Other Acount',
-            'profil' => ProfilDesa::firstWhere('id', 1),
             'user' => User::all()
         ]);
     }
@@ -30,33 +29,36 @@ class UserController extends Controller
     {
         return view('adminDashboard.myAcount', [
             'title' => 'My Acount',
-            'profil' => ProfilDesa::firstWhere('id', 1),
             'user' => Auth::user()
         ]);
     }
 
     public function updateMyAcount(Request $request, $id)
     {
+        $user = User::findOrFail($id);
+
         $validatedData = $request->validate([
             'name' => 'max:255',
-            'userName' => ['unique:users', 'max:255'],
-            'status' => 'max:255',
-            'password' => 'max:15'
+            'userName' => 'max:255',
+            'role' => 'max:255',
         ]);
 
+        $currentPasswordStatus = Hash::check($request->password_lama, auth()->user()->password);
+        if ($currentPasswordStatus) {
 
-        if ($request->password) {
-            $rules['password'] = ['max:15', Password::min(8)->letters()->mixedCase()->numbers()];
-        }
+            User::findOrFail(Auth::user()->id)->update([
+                'password' => Hash::make($request->password_baru),
+            ]);
 
-        if ($request->password) {
+            return redirect('myAcount')->with('successUpdatedAcount', 'Password Berhasil Diperbaharui');
+        } else {
 
-            $validatedData['password'] = Hash::make($validatedData['password']);
+            return redirect('myAcount')->with('failUpdatedAcount', 'Password Tidak Valid');
         }
 
         User::where('id', $id)->update($validatedData);
 
-        return redirect()->back()->with('successUpdatedAcount', 'Acount has ben updated');
+        return redirect('myAcount')->with('successUpdatedAcount', 'Acount has ben updated');
     }
 
     /**
@@ -80,7 +82,7 @@ class UserController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'userName' => ['required', 'unique:users', 'max:255'],
-            'status' => 'required|max:255',
+            'role' => 'required|max:255',
             'password' => [Password::min(8)->letters()->mixedCase()->numbers()]
         ]);
 
@@ -124,7 +126,7 @@ class UserController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'max:255',
-            'userName' => ['unique:users', 'max:255'],
+            'userName' => 'max:255',
             'status' => 'max:255',
             'password' => 'max:15'
         ]);

@@ -304,7 +304,6 @@
 
                                     <select class="form-select" name="sts_dalam_kk" id="sts_dalam_kk">
                                         <option value="" selected>Silakan Pilih Status Penduduk</option>
-                                        <option name="sts_dalam_kk" id="sts_dalam_kk" value="Kepala Keluarga">Kepala Keluarga</option>
                                         <option name="sts_dalam_kk" id="sts_dalam_kk" value="Istri">Istri</option>
                                         <option name="sts_dalam_kk" id="sts_dalam_kk" value="Anak">Anak</option>
                                     </select>
@@ -663,15 +662,10 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="sts_keluarga" class="form-label"><b>Status Keluarga</b></label>
-
-                                        <input type="text" name="sts_keluarga" id="sts_keluarga" class="form-control @error('sts_keluarga') is-invalid @enderror" required value="{{ $item->sts_keluarga }}" autocomplete="off" placeholder="Input Status Keluarga">
-
-                                        @error('sts_keluarga')
-                                        <div class="invalid-feedback">
-                                            <p style="text-align: left">{{ $message }}</p>
-                                        </div>
-                                        @enderror
+                                        <label for="sts_keluarga" class="form-label">Status Dalam KK</label>
+                                        <select class="form-select form-select-lg" name="sts_keluarga" id="sts_keluarga">
+                                            <option selected>---Pilih Status Keluarga---</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -693,4 +687,27 @@
 
     </div>
 </main>
+<!-- Dependent Select -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('select[name="nik"]').on('change', function() {
+            var NIK = $(this).val();
+            if (NIK) {
+                $.ajax({
+                    url: '/getSts/' + NIK,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        $('select[name="sts_keluarga"]').empty();
+                        $.each(data, function(key, value) {
+                            $('select[name="sts_keluarga"]').append('<option value="' + key + '">' + value + '</option>');
+                        });
+                    }
+                });
+            } else {
+                $('select[name="sts_keluarga"]').empty();
+            }
+        });
+    });
+</script>
 @endsection

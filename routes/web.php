@@ -61,6 +61,7 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
         Route::get('/data-kk', 'index')->name('data-kk')->middleware('auth');
         Route::post('/data-kk/store', 'store')->name('data-kk/store')->middleware('auth');
         Route::post('/data-kk/{nik}', 'update')->name('data-kk/update')->middleware('auth');
+        Route::get('/getSts/{nik}', 'getSts');
         Route::delete('/data-kk/{nik}', 'destroy')->name('data-kk')->middleware('auth');
     });
 
@@ -93,15 +94,6 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
             Route::delete('/surat-keterangan-kematian/{nik_mati}', 'destroy')->name('surat-keterangan-kematian')->middleware('auth');
             Route::get('/surat-keterangan-kematian/pdf/{nik_mati}', 'pdf')->name('surat-keterangan-kematian/pdf')->middleware('auth');
             Route::get('/surat-keterangan-kematian/pdflurah/{nik_mati}', 'pdflurah')->name('surat-keterangan-kematian/pdflurah')->middleware('auth');
-        }
-    );
-
-    Route::controller(UserController::class)->group(
-        function () {
-            Route::get('/other-account', 'index')->name('other-account')->middleware('auth');
-            Route::post('/other-account/store', 'store')->name('other-account/store')->middleware('auth');
-            Route::post('/other-account/update/{id}', 'updateMyAcount')->name('other-account/update')->middleware('auth');
-            Route::delete('/other-account/delete/{id}', 'destroy')->name('other-account/delete')->middleware('auth');
         }
     );
 
@@ -165,13 +157,6 @@ Route::middleware(['auth', 'role:masyarakat'])->group(function () {
         Route::get('/masyarakat', 'index')->name('masyarakat');
     });
 
-    // Route::controller(WargaMasyarakatController::class)->group(function () {
-    //     Route::get('/warga/data-penduduk', 'index')->name('warga/data-penduduk');
-    //     Route::post('/warga/data-penduduk/store', 'store')->name('warga/data-penduduk/store');
-    //     Route::post('/warga/data-penduduk/{nik}', 'update')->name('warga/data-penduduk/update');
-    //     Route::delete('/warga/data-penduduk/{nik}', 'destroy')->name('warga/data-penduduk');
-    // });
-
     Route::controller(WargaSuratKetKelahiranController::class)->group(
         function () {
             Route::get('/warga/surat-keterangan-kelahiran', 'index')->name('warga/surat-keterangan-kelahiran');
@@ -187,15 +172,6 @@ Route::middleware(['auth', 'role:masyarakat'])->group(function () {
             Route::post('/warga/surat-keterangan-kematian/store', 'store')->name('warga/surat-keterangan-kematian/store');
             Route::post('/warga/surat-keterangan-kematian/{nik_bayi}', 'update')->name('warga/surat-keterangan-kematian');
             Route::delete('/warga/surat-keterangan-kematian/{nik_bayi}', 'destroy')->name('warga/surat-keterangan-kematian');
-        }
-    );
-
-    Route::controller(WargaMutasiMAsukController::class)->group(
-        function () {
-            Route::get('/warga/data-mutasi-masuk', 'index')->name('warga/data-mutasi-masuk');
-            Route::post('/warga/data-mutasi-masuk/store', 'store')->name('warga/data-mutasi-masuk/store');
-            Route::post('/warga/data-mutasi-masuk/update/{nik_mm}', 'update')->name('warga/data-mutasi-masuk/update');
-            Route::delete('/warga/data-mutasi-masuk/delete/{nik_mm}', 'destroy')->name('warga/data-mutasi-masuk/delete');
         }
     );
 
@@ -240,4 +216,15 @@ Route::middleware(['auth', 'role:masyarakat'])->group(function () {
             Route::get('/warga/surat-keterangan-biasa/pdf/lurah/{nik}', 'pdflurah')->name('warga/surat-keterangan-biasa/pdflurah');
         }
     );
+});
+
+Route::controller(UserController::class)->group(function () {
+    Route::get('/myAcount', 'myAcount')->name('myAcount')->middleware('auth');
+    Route::post('Update/Account/{id}', 'updateMyAcount')->name('Update/Account')->middleware('auth');
+});
+
+Route::controller(UserController::class)->group(function () {
+    Route::get('/other-account', 'index')->name('other-account')->middleware('auth');
+    Route::post('/other-account/store', 'store')->name('other-account')->middleware('auth');
+    Route::post('other-account/update/{id}', 'update')->name('other-account/update')->middleware('auth');
 });

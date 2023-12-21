@@ -26,7 +26,6 @@ class SuratKetKelahiranController extends Controller
         if ($cari != NULL) {
             return view('adminDashboard.SuratKetKelahiran', [
                 'title' => 'Data Suart Keterangan Kelahiran',
-                'profil' => ProfilDesa::firstWhere('id', 1),
                 'bayi' => SuratKetKelahiran::with('keluarga', 'pendu', 'mom', 'dad', 'saksi1', 'saksi2', 'lapor')
                     ->where('nik', 'like', "%" . $cari . "%")
                     ->orWhere('no_kk', 'like', "%" . $cari . "%")->paginate(10),
@@ -35,7 +34,6 @@ class SuratKetKelahiranController extends Controller
         } else {
             return view('adminDashboard.SuratKetKelahiran', [
                 'title' => 'Data Data Suart Keterangan Kelahiran',
-                'profil' => ProfilDesa::firstWhere('id', 1),
                 'bayi' => SuratKetKelahiran::with('keluarga', 'pendu', 'mom', 'dad', 'saksi1', 'saksi2', 'lapor')->paginate(10),
                 'pendu' => Penduduk::get()
             ]);

@@ -24,14 +24,12 @@ class MutasiMAsukController extends Controller
         if ($cari != NULL) {
             return view('adminDashboard.MutasiMasuk', [
                 'title' => 'Data Mutasi Masuk',
-                'profil' => ProfilDesa::firstWhere('id', 1),
                 'MutasiMasuk' => MutasiMAsuk::where('nik', 'like', "%" . $cari . "%")
                     ->orWhere('no_kk', 'like', "%" . $cari . "%")->paginate(10),
             ]);
         } else {
             return view('adminDashboard.MutasiMasuk', [
                 'title' => 'Data Mutasi Masuk',
-                'profil' => ProfilDesa::firstWhere('id', 1),
                 'MutasiMasuk' => MutasiMAsuk::paginate(10),
             ]);
         }

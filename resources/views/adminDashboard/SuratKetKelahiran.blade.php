@@ -405,8 +405,7 @@
                     <th>Tgl Lahir</th>
                     <th>Jenis Kelamin</th>
                     <th>Verifikasi</th>
-                    <th>Aksi</th>
-                    <th style="text-align: center">cetak</th>
+                    <th>Cetak</th>
                 </tr>
                 @foreach ($bayi as $index => $item)
                 <tr style="width: 100%">

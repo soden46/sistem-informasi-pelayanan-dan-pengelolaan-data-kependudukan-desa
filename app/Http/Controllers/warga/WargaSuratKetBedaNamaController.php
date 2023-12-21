@@ -22,7 +22,6 @@ class WargaSuratKetBedaNamaController extends Controller
         $nik = Auth::user()->nik;
         return view('wargaDashboard.SuratKetBedaNama', [
             'title' => 'Surat Keterangan Beda Nama',
-            'profil' => ProfilDesa::firstWhere('id', 1),
             'surat' => SuratKetBedaNama::with('pend')
                 ->where('nik', $nik)->paginate(10),
             'pendu' => Penduduk::where('nik', $nik)->get(),

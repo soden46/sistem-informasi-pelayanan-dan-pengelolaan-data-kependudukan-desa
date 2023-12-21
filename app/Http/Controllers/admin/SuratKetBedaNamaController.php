@@ -23,7 +23,6 @@ class SuratKetBedaNamaController extends Controller
         if ($cari != NULL) {
             return view('adminDashboard.SuratKetBedaNama', [
                 'title' => 'Data Surat Keterangan Beda Nama',
-                'profil' => ProfilDesa::firstWhere('id', 1),
                 'surat' => SuratKetBedaNama::with('pend')
                     ->where('nik', 'like', "%" . $cari . "%")
                     ->orWhere('nama_baru', 'like', "%" . $cari . "%")->paginate(10),
@@ -32,7 +31,6 @@ class SuratKetBedaNamaController extends Controller
         } else {
             return view('adminDashboard.SuratKetBedaNama', [
                 'title' => 'Data Suart Keterangan Beda Nama',
-                'profil' => ProfilDesa::firstWhere('id', 1),
                 'surat' => SuratKetBedaNama::with('pend')->paginate(10),
                 'pendu' => Penduduk::get()
             ]);

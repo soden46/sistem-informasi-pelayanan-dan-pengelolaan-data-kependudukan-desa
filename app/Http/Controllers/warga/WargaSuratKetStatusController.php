@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Penduduk;
 use App\Models\ProfilDesa;
 use App\Models\SuratKetStatus;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,7 +22,6 @@ class WargaSuratKetStatusController extends Controller
         $nik = Auth::user()->nik;
         return view('wargaDashboard.SuratKetStatus', [
             'title' => 'Surat Keterangan Status',
-            'profil' => ProfilDesa::firstWhere('id', 1),
             'surat' => SuratKetStatus::with('pend')
                 ->where('nik', $nik)->paginate(10),
             'pendu' => Penduduk::where('nik', $nik)->get(),
