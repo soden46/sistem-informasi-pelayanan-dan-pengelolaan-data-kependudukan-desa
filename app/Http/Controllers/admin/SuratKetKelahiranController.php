@@ -238,4 +238,50 @@ class SuratKetKelahiranController extends Controller
         $pdf = PDF::loadView('adminDashboard.pdf.SuratKetLahirLurah', $data)->setPaper('customPaper', 'potrait');
         return $pdf->stream('surat-keterangan-kelahiran-lurah.pdf');
     }
+
+    public function lampiranStore(Request $request, $nik_bayi)
+    {
+        $request->validate([
+            'pengantar_rt' => 'file|mimes:pdf,jpg,jpeg|max:2048',
+            'surat_ket_kelahiran' => 'file|mimes:pdf,jpg,jpeg|max:2048',
+            'kk' => 'file|mimes:pdf,jpg,jpeg|max:2048',
+            'ktp_suami' => 'file|mimes:pdf,jpg,jpeg|max:2048',
+            'ktp_istri' => 'file|mimes:pdf,jpg,jpeg|max:2048',
+            'buku_nikah' => 'file|mimes:pdf,jpg,jpeg|max:2048',
+            'ktp_pelapor' => 'file|mimes:pdf,jpg,jpeg|max:2048',
+            'ktp_saksi' => 'file|mimes:pdf,jpg,jpeg|max:2048',
+        ]);
+
+        $lampiran = [];
+        if ($request->hasFile('pengantar_rt')) {
+            $lampiran['pengantar_rt'] = $request->file('pengantar_rt')->store('lampiran-data-kelahiran');
+        }
+        if ($request->hasFile('surat_ket_kelahiran')) {
+            $lampiran['surat_ket_kelahiran'] = $request->file('surat_ket_kelahiran')->store('lampiran-data-kelahiran');
+        }
+        if ($request->hasFile('kk')) {
+            $lampiran['kk'] = $request->file('kk')->store('lampiran-data-kelahiran');
+        }
+        if ($request->hasFile('ktp_suami')) {
+            $lampiran['ktp_suami'] = $request->file('ktp_suami')->store('lampiran-data-kelahiran');
+        }
+        if ($request->hasFile('ktp_istri')) {
+            $lampiran['ktp_istri'] = $request->file('ktp_istri')->store('lampiran-data-kelahiran');
+        }
+        if ($request->hasFile('buku_nikah')) {
+            $lampiran['buku_nikah'] = $request->file('buku_nikah')->store('lampiran-data-kelahiran');
+        }
+        if ($request->hasFile('ktp_pelapor')) {
+            $lampiran['ktp_pelapor'] = $request->file('ktp_pelapor')->store('lampiran-data-kelahiran');
+        }
+        if ($request->hasFile('ktp_saksi')) {
+            $lampiran['ktp_saksi'] = $request->file('ktp_saksi')->store('lampiran-data-kelahiran');
+        }
+
+
+        // Simpan data lampiran ke dalam database
+        SuratKetKelahiran::where('nik_bayi', $nik_bayi)->update(['lampiran' => json_encode($lampiran)]);
+
+        return redirect()->back()->with('success', 'Lampiran berhasil disimpan.');
+    }
 }

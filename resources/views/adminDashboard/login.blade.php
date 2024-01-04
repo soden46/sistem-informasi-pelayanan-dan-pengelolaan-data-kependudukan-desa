@@ -30,13 +30,20 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         @endif
+        @if (session()->has('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ session('success') }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
         <form action="/authenticate" method="POST">
             @csrf
 
+            <div class="d-flex justify-content-center px-2"><img src="{{asset('images/logo/sleman.png')}}" id="foto" alt="Logo" height="120px" /></div>
             <h1 class="h3 mb-3 fw-normal"><b>Sign in to Your Acount</b></h1>
             <p class="text-muted" style="font-size: 12px; margin-top: -8px;">Silakan masukan Username dan Password anda</p>
 
-            <div>
+            <div class="form-group">
                 <input style="height: 55px" type="text" class="form-control" id="userName" name="userName" placeholder="Username" autocomplete="off">
             </div>
             {{-- <div class="form-floating">
@@ -73,7 +80,9 @@
                     </div>
                 </div>
             </div>
-
+            <div class="form-group">
+                <span>Atau <a href="/register"> Buat Akun</a> Untuk Warga Yang Belum Mempunyai Akun</span>
+            </div>
             <button class="w-100 btn btn-lg btn-success" type="submit"><b>Sign in</b></button>
         </form>
     </main>

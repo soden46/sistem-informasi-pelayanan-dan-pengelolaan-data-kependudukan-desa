@@ -44,6 +44,12 @@
         </div>
         @endif
 
+        @if (session()->has('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ session('success') }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
 
         <div>
             <div class="d-flex">
@@ -404,6 +410,7 @@
                     <th>Tempat Lahir</th>
                     <th>Tgl Lahir</th>
                     <th>Jenis Kelamin</th>
+                    <th>Lampiran</th>
                     <th>Verifikasi</th>
                     <th>Cetak</th>
                 </tr>
@@ -418,6 +425,11 @@
                     <td style="vertical-align: middle;  ">{{ $item->tempat_kelahiran }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->tgl_lahir }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->jenis_kelamin }}</td>
+                    <td style="text-align: center;  ">
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#showLampiran{{ $item->nik_bayi }}"><i class="bi bi-eye-fill"></i></button>
+                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#cretaeLampiran{{ $item->nik_bayi }}"><i class="bi bi-plus-square-fill"></i></button>
+                        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#destroyLampiran{{ $item->nik_bayi }}"><i class="bi bi-trash"></i></button>
+                    </td>
                     <td style="text-align: center;  ">
                         @if($item->verifikasi=="Belum Verifikasi")
                         <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#verifikasibayi{{ $item->nik_bayi }}">Verifikasi</button>
@@ -769,7 +781,109 @@
                         </div>
                     </div>
                 </div>
+                <!-- Modal Lampiran-->
+                <div class="modal fade" id="cretaeLampiran{{ $item->nik_bayi }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="cretaeLampiranLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="cretaeLampiranLabel">Tambah Lampiran Surat Keterangan Kelahiran</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <span class="modal-title fs-6 text-center" id="cretaeLampiranLabel">Upload dokumen kelengkapan, pastikan file berupa (jpg/pdf) dengan ukuran masksmal 2MB/file</span>
+                            <form id="lampiranForm" action="{{route('surat-keterangan-kelahiran/lampiran/store',$item->nik_bayi)}}" method="POST" enctype="multipart/form-data">
+                                @method('POST')
+                                @csrf
+                                <div class="modal-body">
 
+                                    <div class="mb-3">
+                                        <label for="pengantar_rt" class="form-label">Surat Pengantar RT</label>
+                                        <input class="form-control" type="file" id="pengantar_rt" name="pengantar_rt">
+                                        @error('pengantar_rt')
+                                        <div class="invalid-feedback">
+                                            <p style="text-align: left">{{ $message }}</p>
+                                        </div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="surat_ket_kelahiran" class="form-label">Surat Keterangan Kelahiran Doket/Bidan</label>
+                                        <input class="form-control" type="file" id="surat_ket_kelahiran" name="surat_ket_kelahiran">
+                                        @error('surat_ket_kelahiran')
+                                        <div class="invalid-feedback">
+                                            <p style="text-align: left">{{ $message }}</p>
+                                        </div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="kk" class="form-label">Kartu Keluarga</label>
+                                        <input class="form-control" type="file" id="kk" name="kk">
+                                        @error('kk')
+                                        <div class="invalid-feedback">
+                                            <p style="text-align: left">{{ $message }}</p>
+                                        </div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="ktp_suami" class="form-label">KTP Suami</label>
+                                        <input class="form-control" type="file" id="ktp_suami" name="ktp_suami">
+                                        @error('ktp_suami')
+                                        <div class="invalid-feedback">
+                                            <p style="text-align: left">{{ $message }}</p>
+                                        </div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="ktp_istri" class="form-label">KTP Istri</label>
+                                        <input class="form-control" type="file" id="ktp_istri" name="ktp_istri">
+                                        @error('ktp_istri')
+                                        <div class="invalid-feedback">
+                                            <p style="text-align: left">{{ $message }}</p>
+                                        </div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="buku_nikah" class="form-label">Buku Nikah/Surat Nikah Orang Tua</label>
+                                        <input class="form-control" type="file" id="buku_nikah" name="buku_nikah">
+                                        @error('buku_nikah')
+                                        <div class="invalid-feedback">
+                                            <p style="text-align: left">{{ $message }}</p>
+                                        </div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="ktp_pelapor" class="form-label">KTP Pelapor</label>
+                                        <input class="form-control" type="file" id="ktp_pelapor" name="ktp_pelapor">
+                                        @error('ktp_pelapor')
+                                        <div class="invalid-feedback">
+                                            <p style="text-align: left">{{ $message }}</p>
+                                        </div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="ktp_saksi" class="form-label">KTP Saksi</label>
+                                        <input class="form-control" type="file" id="ktp_saksi" name="ktp_saksi">
+                                        @error('ktp_saksi')
+                                        <div class="invalid-feedback">
+                                            <p style="text-align: left">{{ $message }}</p>
+                                        </div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                    </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
                 @endforeach
             </table>
             <div class="d-flex justify-content-between mb-3">

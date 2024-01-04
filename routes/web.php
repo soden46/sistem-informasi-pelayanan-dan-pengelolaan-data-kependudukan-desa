@@ -14,6 +14,7 @@ use App\Http\Controllers\admin\SuratKetBiasaController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\warga\WargaController;
 use App\Http\Controllers\warga\WargaMutasiKeluarController;
 use App\Http\Controllers\warga\WArgaMutasiMAsukController;
@@ -39,6 +40,8 @@ use Illuminate\Support\Facades\Route;
 // Auth::routes();
 // Login
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::get('/register', [RegisterController::class, 'index'])->name('register')->middleware('guest');
+Route::post('/register', [RegisterController::class, 'store'])->name('register')->middleware('guest');
 Route::get('/', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/authenticate', [LoginController::class, 'authenticate']);
 Route::get('/logout', [LoginController::class, 'logout'])->name('guest');
@@ -83,6 +86,10 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
             Route::delete('/surat-keterangan-kelahiran/{nik_bayi}', 'destroy')->name('surat-keterangan-kelahiran')->middleware('auth');
             Route::get('/surat-keterangan-kelahiran/pdf/{nik_bayi}', 'pdf')->name('surat-keterangan-kelahiran/pdf')->middleware('auth');
             Route::get('/surat-keterangan-kelahiran/pdflurah/{nik_bayi}', 'pdflurah')->name('surat-keterangan-kelahiran/pdflurah')->middleware('auth');
+            Route::post('/surat-keterangan-kelahiran/lampiran/store/{nik_mati}', 'lampiranStore')->name('surat-keterangan-kelahiran/lampiran/store')->middleware('auth');
+            Route::get('/surat-keterangan-kelahiran/lampiran/edit/{nik_mati}', 'lampiranEdit')->name('surat-keterangan-kelahiran/lampiran/edit')->middleware('auth');
+            Route::get('/surat-keterangan-kelahiran/lampiran/update/{nik_mati}', 'lampiranUpdate')->name('surat-keterangan-kelahiran/lampiran/update')->middleware('auth');
+            Route::get('/surat-keterangan-kelahiran/lampiran/destroy/{nik_mati}', 'lampiranDestroy')->name('surat-keterangan-kelahiran/lampiran/destroy')->middleware('auth');
         }
     );
 
@@ -94,6 +101,10 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
             Route::delete('/surat-keterangan-kematian/{nik_mati}', 'destroy')->name('surat-keterangan-kematian')->middleware('auth');
             Route::get('/surat-keterangan-kematian/pdf/{nik_mati}', 'pdf')->name('surat-keterangan-kematian/pdf')->middleware('auth');
             Route::get('/surat-keterangan-kematian/pdflurah/{nik_mati}', 'pdflurah')->name('surat-keterangan-kematian/pdflurah')->middleware('auth');
+            Route::post('/surat-keterangan-kematian/lampiran/store/{nik_mati}', 'lampiranStore')->name('surat-keterangan-kematian/lampiran/store')->middleware('auth');
+            Route::get('/surat-keterangan-kematian/lampiran/edit/{nik_mati}', 'lampiranEdit')->name('surat-keterangan-kematian/lampiran/edit')->middleware('auth');
+            Route::get('/surat-keterangan-kematian/lampiran/update/{nik_mati}', 'lampiranUpdate')->name('surat-keterangan-kematian/lampiran/update')->middleware('auth');
+            Route::get('/surat-keterangan-kematian/lampiran/destroy/{nik_mati}', 'lampiranDestroy')->name('surat-keterangan-kematian/lampiran/destroy')->middleware('auth');
         }
     );
 

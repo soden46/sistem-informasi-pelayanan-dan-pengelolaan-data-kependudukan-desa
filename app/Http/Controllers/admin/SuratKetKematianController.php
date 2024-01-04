@@ -200,4 +200,41 @@ class SuratKetKematianController extends Controller
         $pdf = PDF::loadView('adminDashboard.pdf.SuratKetMatiLurah', $data)->setPaper('customPaper', 'potrait');
         return $pdf->stream('surat-keterangan-Kematian-lurah.pdf');
     }
+
+    public function lampiranStore(Request $request, $nik_mati)
+    {
+        $request->validate([
+            'pengantar_rt' => 'file|mimes:pdf,jpg,jpeg|max:2048',
+            'pengantar_dokter' => 'file|mimes:pdf,jpg,jpeg|max:2048',
+            'kk' => 'file|mimes:pdf,jpg,jpeg|max:2048',
+            'ktp_jenazah' => 'file|mimes:pdf,jpg,jpeg|max:2048',
+            'ktp_pelapor' => 'file|mimes:pdf,jpg,jpeg|max:2048',
+            'ktp_saksi' => 'file|mimes:pdf,jpg,jpeg|max:2048',
+        ]);
+
+        $lampiran = [];
+        if ($request->hasFile('pengantar_rt')) {
+            $lampiran['pengantar_rt'] = $request->file('pengantar_rt')->store('lampiran-data-kematian');
+        }
+        if ($request->hasFile('pengantar_dokter')) {
+            $lampiran['pengantar_dokter'] = $request->file('pengantar_dokter')->store('lampiran-data-kematian');
+        }
+        if ($request->hasFile('kk')) {
+            $lampiran['kk'] = $request->file('kk')->store('lampiran-data-kematian');
+        }
+        if ($request->hasFile('ktp_jenazah')) {
+            $lampiran['ktp_jenazah'] = $request->file('ktp_jenazah')->store('lampiran-data-kematian');
+        }
+        if ($request->hasFile('ktp_pelapor')) {
+            $lampiran['ktp_pelapor'] = $request->file('ktp_pelapor')->store('lampiran-data-kematian');
+        }
+        if ($request->hasFile('ktp_saksi')) {
+            $lampiran['ktp_saksi'] = $request->file('ktp_saksi')->store('lampiran-data-kematian');
+        }
+
+        // Simpan data lampiran ke dalam database
+        DataKematian::where('nik_mati', $nik_mati)->update(['lampiran' => json_encode($lampiran)]);
+
+        return redirect()->back()->with('success', 'Lampiran berhasil disimpan.');
+    }
 }
