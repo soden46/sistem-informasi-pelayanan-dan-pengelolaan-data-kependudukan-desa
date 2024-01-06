@@ -86,10 +86,11 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
             Route::delete('/surat-keterangan-kelahiran/{nik_bayi}', 'destroy')->name('surat-keterangan-kelahiran')->middleware('auth');
             Route::get('/surat-keterangan-kelahiran/pdf/{nik_bayi}', 'pdf')->name('surat-keterangan-kelahiran/pdf')->middleware('auth');
             Route::get('/surat-keterangan-kelahiran/pdflurah/{nik_bayi}', 'pdflurah')->name('surat-keterangan-kelahiran/pdflurah')->middleware('auth');
-            Route::post('/surat-keterangan-kelahiran/lampiran/store/{nik_mati}', 'lampiranStore')->name('surat-keterangan-kelahiran/lampiran/store')->middleware('auth');
-            Route::get('/surat-keterangan-kelahiran/lampiran/edit/{nik_mati}', 'lampiranEdit')->name('surat-keterangan-kelahiran/lampiran/edit')->middleware('auth');
-            Route::get('/surat-keterangan-kelahiran/lampiran/update/{nik_mati}', 'lampiranUpdate')->name('surat-keterangan-kelahiran/lampiran/update')->middleware('auth');
-            Route::get('/surat-keterangan-kelahiran/lampiran/destroy/{nik_mati}', 'lampiranDestroy')->name('surat-keterangan-kelahiran/lampiran/destroy')->middleware('auth');
+            Route::post('/surat-keterangan-kelahiran/lampiran/store/{nik_bayi}', 'lampiranStore')->name('surat-keterangan-kelahiran/lampiran/store')->middleware('auth');
+            Route::get('/surat-keterangan-kelahiran/lampiran/edit/{nik_bayi}', 'lampiranEdit')->name('surat-keterangan-kelahiran/lampiran/edit')->middleware('auth');
+            Route::get('/surat-keterangan-kelahiran/lampiran/update/{nik_bayi}', 'lampiranUpdate')->name('surat-keterangan-kelahiran/lampiran/update')->middleware('auth');
+            Route::get('/surat-keterangan-kelahiran/lampiran/destroy/{nik_bayi}', 'lampiranDestroy')->name('surat-keterangan-kelahiran/lampiran/destroy')->middleware('auth');
+            Route::get('/surat-keterangan-kelahiran/lampiran/show/{nik_bayi}', 'showLampiran')->name('surat-keterangan-kelahiran/lampiran/show')->middleware('auth');
         }
     );
 
@@ -105,6 +106,7 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
             Route::get('/surat-keterangan-kematian/lampiran/edit/{nik_mati}', 'lampiranEdit')->name('surat-keterangan-kematian/lampiran/edit')->middleware('auth');
             Route::get('/surat-keterangan-kematian/lampiran/update/{nik_mati}', 'lampiranUpdate')->name('surat-keterangan-kematian/lampiran/update')->middleware('auth');
             Route::get('/surat-keterangan-kematian/lampiran/destroy/{nik_mati}', 'lampiranDestroy')->name('surat-keterangan-kematian/lampiran/destroy')->middleware('auth');
+            Route::get('/surat-keterangan-kematian/lampiran/show/{nik_mati}', 'showLampiran')->name('surat-keterangan-kematian/lampiran/show')->middleware('auth');
         }
     );
 
@@ -136,6 +138,11 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
             Route::delete('/surat-ket-beda-nama/delete/{nik}', 'destroy')->name('surat-ket-beda-nama/delete')->middleware('auth');
             Route::get('/surat-keterangan-beda-nama/pdf/{nik}', 'pdf')->name('surat-keterangan-beda-nama/pdf')->middleware('auth');
             Route::get('/surat-keterangan-beda-nama/pdf/lurah/{nik}', 'pdflurah')->name('surat-keterangan-beda-nama/pdflurah')->middleware('auth');
+            Route::post('/surat-keterangan-beda-nama/lampiran/store/{nik}', 'lampiranStore')->name('surat-keterangan-beda-nama/lampiran/store')->middleware('auth');
+            Route::get('/surat-keterangan-beda-nama/lampiran/edit/{nik}', 'lampiranEdit')->name('surat-keterangan-beda-nama/lampiran/edit')->middleware('auth');
+            Route::get('/surat-keterangan-beda-nama/lampiran/update/{nik}', 'lampiranUpdate')->name('surat-keterangan-beda-nama/lampiran/update')->middleware('auth');
+            Route::get('/surat-keterangan-beda-nama/lampiran/destroy/{nik}', 'lampiranDestroy')->name('surat-keterangan-beda-nama/lampiran/destroy')->middleware('auth');
+            Route::get('/surat-keterangan-beda-nama/lampiran/show/{nik}', 'showLampiran')->name('surat-keterangan-beda-nama/lampiran/show')->middleware('auth');
         }
     );
 
@@ -147,6 +154,11 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
             Route::delete('/surat-keterangan-status/delete/{nik}', 'destroy')->name('surat-keterangan-status/delete')->middleware('auth');
             Route::get('/surat-keterangan-status/pdf/{nik}', 'pdf')->name('surat-keterangan-status/pdf')->middleware('auth');
             Route::get('/surat-keterangan-status/pdf/lurah/{nik}', 'pdflurah')->name('surat-keterangan-status/pdflurah')->middleware('auth');
+            Route::post('/surat-keterangan-status/lampiran/store/{nik}', 'lampiranStore')->name('surat-keterangan-status/lampiran/store')->middleware('auth');
+            Route::get('/surat-keterangan-status/lampiran/edit/{nik}', 'lampiranEdit')->name('surat-keterangan-status/lampiran/edit')->middleware('auth');
+            Route::get('/surat-keterangan-status/lampiran/update/{nik}', 'lampiranUpdate')->name('surat-keterangan-status/lampiran/update')->middleware('auth');
+            Route::get('/surat-keterangan-status/lampiran/destroy/{nik}', 'lampiranDestroy')->name('surat-keterangan-status/lampiran/destroy')->middleware('auth');
+            Route::get('/surat-keterangan-status/lampiran/show/{nik}', 'showLampiran')->name('surat-keterangan-status/lampiran/show')->middleware('auth');
         }
     );
 
@@ -158,6 +170,11 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
             Route::delete('/surat-keterangan-biasa/delete/{nik}', 'destroy')->name('surat-keterangan-status/delete')->middleware('auth');
             Route::get('/surat-keterangan-biasa/pdf/{nik}', 'pdf')->name('surat-keterangan-biasa/pdf')->middleware('auth');
             Route::get('/surat-keterangan-biasa/pdf/lurah/{nik}', 'pdflurah')->name('surat-keterangan-biasa/pdflurah')->middleware('auth');
+            Route::post('/surat-keterangan-biasa/lampiran/store/{nik}', 'lampiranStore')->name('surat-keterangan-biasa/lampiran/store')->middleware('auth');
+            Route::get('/surat-keterangan-biasa/lampiran/edit/{nik}', 'lampiranEdit')->name('surat-keterangan-biasa/lampiran/edit')->middleware('auth');
+            Route::get('/surat-keterangan-biasa/lampiran/update/{nik}', 'lampiranUpdate')->name('surat-keterangan-biasa/lampiran/update')->middleware('auth');
+            Route::get('/surat-keterangan-biasa/lampiran/destroy/{nik}', 'lampiranDestroy')->name('surat-keterangan-biasa/lampiran/destroy')->middleware('auth');
+            Route::get('/surat-keterangan-biasa/lampiran/show/{nik}', 'showLampiran')->name('surat-keterangan-biasa/lampiran/show')->middleware('auth');
         }
     );
 });

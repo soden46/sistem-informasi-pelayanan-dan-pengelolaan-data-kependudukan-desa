@@ -239,6 +239,36 @@ class SuratKetKelahiranController extends Controller
         return $pdf->stream('surat-keterangan-kelahiran-lurah.pdf');
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showLampiran($nik_bayi)
+    {
+        $kematian = SuratKetKelahiran::where('nik_bayi', $nik_bayi)->with('keluarga', 'pendu', 'mom', 'dad', 'saksi1', 'saksi2', 'lapor')->first();
+        $lampiran = json_decode($kematian->lampiran, true);
+        if (isset($lampiran['pengantar_rt']) && ($lampiran['surat_ket_kelahiran'])) {
+            // dd($lampiran['pengantar_rt']);
+            return view('adminDashboard.LampiranDataKelahiran', [
+                'title' => 'Lampiran Keterangan Kelahiran',
+                'pendu' => Penduduk::get(),
+                'rt' => $lampiran['pengantar_rt'],
+                'dokter' => $lampiran['surat_ket_kelahiran'],
+                'kk' => $lampiran['kk'],
+                'suami' => $lampiran['ktp_suami'],
+                'istri' => $lampiran['ktp_istri'],
+                'nikah' => $lampiran['buku_nikah'],
+                'pelapor' => $lampiran['ktp_pelapor'],
+                'saksi' => $lampiran['ktp_saksi'],
+                'saksi2' => $lampiran['ktp_saksi2'],
+
+            ]);
+        } else {
+            // Tindakan jika properti 'pengantar_rt' tidak ada
+        }
+    }
+
     public function lampiranStore(Request $request, $nik_bayi)
     {
         $request->validate([
@@ -250,6 +280,7 @@ class SuratKetKelahiranController extends Controller
             'buku_nikah' => 'file|mimes:pdf,jpg,jpeg|max:2048',
             'ktp_pelapor' => 'file|mimes:pdf,jpg,jpeg|max:2048',
             'ktp_saksi' => 'file|mimes:pdf,jpg,jpeg|max:2048',
+            'ktp_saksi2' => 'file|mimes:pdf,jpg,jpeg|max:2048',
         ]);
 
         $lampiran = [];
@@ -276,6 +307,9 @@ class SuratKetKelahiranController extends Controller
         }
         if ($request->hasFile('ktp_saksi')) {
             $lampiran['ktp_saksi'] = $request->file('ktp_saksi')->store('lampiran-data-kelahiran');
+        }
+        if ($request->hasFile('ktp_saksi2')) {
+            $lampiran['ktp_saksi2'] = $request->file('ktp_saksi2')->store('lampiran-data-kelahiran');
         }
 
 

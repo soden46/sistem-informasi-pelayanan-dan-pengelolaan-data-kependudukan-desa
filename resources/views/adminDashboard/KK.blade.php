@@ -396,7 +396,6 @@
                     </td>
                     <td style="text-align: center;  ">
                         <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ $item->nik }}">Hapus</button>
-                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editDataMasyarakat{{ $item->nik }}">Edit</button>
                     </td>
                 </tr>
 

@@ -426,7 +426,7 @@
                     <td style="vertical-align: middle;  ">{{ $item->tgl_lahir }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->jenis_kelamin }}</td>
                     <td style="text-align: center;  ">
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#showLampiran{{ $item->nik_bayi }}"><i class="bi bi-eye-fill"></i></button>
+                        <a href="{{route('surat-keterangan-kelahiran/lampiran/show',$item->nik_bayi)}}"><button class="btn btn-success"><i class="bi bi-eye-fill"></i></button></a>
                         <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#cretaeLampiran{{ $item->nik_bayi }}"><i class="bi bi-plus-square-fill"></i></button>
                         <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#destroyLampiran{{ $item->nik_bayi }}"><i class="bi bi-trash"></i></button>
                     </td>
@@ -781,6 +781,7 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- Modal Lampiran-->
                 <div class="modal fade" id="cretaeLampiran{{ $item->nik_bayi }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="cretaeLampiranLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
@@ -866,9 +867,19 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="ktp_saksi" class="form-label">KTP Saksi</label>
+                                        <label for="ktp_saksi" class="form-label">KTP Saksi 1</label>
                                         <input class="form-control" type="file" id="ktp_saksi" name="ktp_saksi">
                                         @error('ktp_saksi')
+                                        <div class="invalid-feedback">
+                                            <p style="text-align: left">{{ $message }}</p>
+                                        </div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="ktp_saksi2" class="form-label">KTP Saksi 2</label>
+                                        <input class="form-control" type="file" id="ktp_saksi2" name="ktp_saksi2">
+                                        @error('ktp_saksi2')
                                         <div class="invalid-feedback">
                                             <p style="text-align: left">{{ $message }}</p>
                                         </div>

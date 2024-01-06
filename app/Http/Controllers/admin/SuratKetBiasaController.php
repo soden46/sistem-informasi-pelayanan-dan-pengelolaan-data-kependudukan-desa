@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Penduduk;
 use App\Models\ProfilDesa;
 use App\Models\SuratKetBiasa;
+use App\Models\SuratKetStatus;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -151,5 +152,49 @@ class SuratKetBiasaController extends Controller
         $customPaper = [0, 0, 567.00, 500.80];
         $pdf = Pdf::loadView('adminDashboard.pdf.SuratKetBiasaLurah', $data)->setPaper('customPaper', 'potrait');
         return $pdf->stream('surat-keterangan-biasa-lurah.pdf');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showLampiran($nik)
+    {
+        $kematian = SuratKetBiasa::with('pend')->first();
+        $lampiran = json_decode($kematian->lampiran, true);
+        if (isset($lampiran['ktp']) && ($lampiran['kk'])) {
+            // dd($lampiran['pengantar_rt']);
+            return view('adminDashboard.LampiranDataBiasa', [
+                'title' => 'Lampiran Keterangan Biasa',
+                'pendu' => Penduduk::get(),
+                'ktp' => $lampiran['ktp'],
+                'kk' => $lampiran['kk'],
+
+            ]);
+        } else {
+            // Tindakan jika properti 'pengantar_rt' tidak ada
+        }
+    }
+
+    public function lampiranStore(Request $request, $nik)
+    {
+        $request->validate([
+            'ktp' => 'file|mimes:pdf,jpg,jpeg|max:2048',
+            'kk' => 'file|mimes:pdf,jpg,jpeg|max:2048',
+        ]);
+
+        $lampiran = [];
+        if ($request->hasFile('ktp')) {
+            $lampiran['ktp'] = $request->file('ktp')->store('lampiran-data-status');
+        }
+        if ($request->hasFile('kk')) {
+            $lampiran['kk'] = $request->file('kk')->store('lampiran-data-status');
+        }
+
+        // Simpan data lampiran ke dalam database
+        SuratKetBiasa::where('nik', $nik)->update(['lampiran' => json_encode($lampiran)]);
+
+        return redirect()->back()->with('success', 'Lampiran berhasil disimpan.');
     }
 }
