@@ -14,9 +14,9 @@ class WargaSuratKetKelahiranController extends Controller
     public function index(Request $request)
     {
         $nik = Auth::user()->nik;
-        return view('wargaDashboard.SuratKetBiasa', [
-            'title' => 'Data Surat Keterangan Biasa',
-            'surat' => SuratKetKelahiran::where('nik_ayah', $nik)->with('pend')->paginate(10),
+        return view('wargaDashboard.SuratKetKelahiran', [
+            'title' => 'Data Surat Keterangan kelahiran',
+            'bayi' => SuratKetKelahiran::where('nik_ayah', $nik)->with('pend')->paginate(10),
             'pendu' => Penduduk::get()
         ]);
     }

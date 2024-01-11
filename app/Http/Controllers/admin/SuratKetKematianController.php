@@ -260,7 +260,7 @@ class SuratKetKematianController extends Controller
         if ($request->hasFile('ktp_saksi')) {
             $lampiran['ktp_saksi'] = $request->file('ktp_saksi')->store('lampiran-data-kematian');
         }
-        if ($request->hasFile('ktp_saks2')) {
+        if ($request->hasFile('ktp_saksi2')) {
             $lampiran['ktp_saksi2'] = $request->file('ktp_saksi2')->store('lampiran-data-kematian');
         }
 

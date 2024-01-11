@@ -58,7 +58,6 @@ class SuratKetStatusController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'no_surat_sks' => 'required|max:255',
             'tgl_regis_sks' => 'required',
             'nik' => 'required|max:16',
             'keperluan_sks' => 'required|max:255',
@@ -102,7 +101,6 @@ class SuratKetStatusController extends Controller
     public function update(Request $request, SuratKetStatus $penduduk, $nik)
     {
         $validatedData = $request->validate([
-            'no_surat_sks' => 'max:255',
             'nik' => 'max:16',
             'keperluan_sks' => 'max:255',
             'verifikasi' => 'required'
@@ -160,7 +158,7 @@ class SuratKetStatusController extends Controller
      */
     public function showLampiran($nik)
     {
-        $kematian = SuratKetStatus::with('pend')->first();
+        $kematian = SuratKetStatus::where('nik', $nik)->with('pend')->first();
         $lampiran = json_decode($kematian->lampiran, true);
         if (isset($lampiran['ktp']) && ($lampiran['kk'])) {
             // dd($lampiran['pengantar_rt']);

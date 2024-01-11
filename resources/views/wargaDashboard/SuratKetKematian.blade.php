@@ -46,7 +46,7 @@
             <div class="d-flex">
 
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cretaeDataMasyarakat" style="margin-right: 15px">Tambah Data Kematian</button>
-                <form action="/surat-keterangan-kematian" method="GET" style="margin-left: 40%">
+                <form action="warga/surat-keterangan-kematian" method="GET" style="margin-left: 40%">
 
                     <input type="text" id="cari" name="cari" placeholder="Cari NIK/No KK/Nama">
                     <button type="submit" class="btn btn-success">Cari</button>
@@ -61,7 +61,7 @@
                             <h1 class="modal-title fs-5" id="cretaeDataMasyarakatLabel">Tambah Data Surat Keterangan Beda Nama</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="/surat-keterangan-kematian/save" method="POST" enctype="multipart/form-data">
+                        <form action="warga/surat-keterangan-kematian/save" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="modal-body">
 
@@ -401,7 +401,7 @@
                     <td style="vertical-align: middle;  ">{{ $item->tempat_mati }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->tgl_mati }}</td>
                     <td style="text-align: center;  ">
-                        <a href="{{route('surat-keterangan-kematian/lampiran/show',$item->nik_mati)}}"><button class="btn btn-success"><i class="bi bi-eye-fill"></i></button></a>
+                        <a href="{{route('warga/surat-keterangan-kematian/lampiran/show',$item->nik_mati)}}"><button class="btn btn-success"><i class="bi bi-eye-fill"></i></button></a>
                         <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#cretaeLampiran{{ $item->nik_mati }}"><i class="bi bi-plus-square-fill"></i></button>
                         <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#destroyLampiran{{ $item->nik_mati }}"><i class="bi bi-trash"></i></button>
                     </td>
@@ -413,8 +413,8 @@
                         @endif
                     </td>
                     <td style="text-align: center;  ">
-                        <a href="{{route('surat-keterangan-kematian/pdflurah',$item->nik_mati) }}" class="btn btn-success" target="_blank">Lurah</a>
-                        <a href="{{route('surat-keterangan-kematian/pdf',$item->nik_mati) }}" class="btn btn-success" target="_blank">Staff</a>
+                        <a href="{{route('warga/surat-keterangan-kematian/pdflurah',$item->nik_mati) }}" class="btn btn-success" target="_blank">Lurah</a>
+                        <a href="{{route('warga/surat-keterangan-kematian/pdf',$item->nik_mati) }}" class="btn btn-success" target="_blank">Staff</a>
                     </td>
                 </tr>
 
@@ -431,7 +431,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
-                                <form action="{{route('surat-keterangan-kematian', $item->nik_mati) }}" method="post">
+                                <form action="{{route('warga/surat-keterangan-kematian', $item->nik_mati) }}" method="post">
                                     @csrf
                                     <input type="text" id="verifikasi" name="verifikasi" value="Sudah Verifikasi" hidden>
                                     <button type="submit" class="btn btn-success">Verifikasi</button>
@@ -454,7 +454,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
-                                <form action="{{route('surat-keterangan-kematian', $item->nik_mati) }}" method="post">
+                                <form action="{{route('warga/surat-keterangan-kematian', $item->nik_mati) }}" method="post">
                                     @method('post')
                                     @csrf
                                     <input type="text" name="verifikasi" value="Belum Verifikasi" value="Belum Verifikasi" hidden>
@@ -478,7 +478,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
-                                <form action="{{route('surat-keterangan-kematian/lampiran/destroy', $item->nik_mati) }}" method="post">
+                                <form action="{{route('warga/surat-keterangan-kematian/lampiran/destroy', $item->nik_mati) }}" method="post">
                                     @method('delete')
                                     @csrf
                                     <button type="submit" class="btn btn-danger">Deleted</button>
@@ -496,7 +496,7 @@
                                 <h1 class="modal-title fs-5" id="editDataMasyarakatLabel">Edit Data Penduduk</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <form action="{{route('surat-keterangan-kematian',$item->nik_mati)}}" method="post">
+                            <form action="{{route('warga/surat-keterangan-kematian',$item->nik_mati)}}" method="post">
                                 @csrf
                                 <div class="modal-body">
 
@@ -704,7 +704,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <span class="modal-title fs-6 text-center" id="cretaeLampiranLabel">Upload dokumen kelengkapan, pastikan file berupa (jpg/pdf) dengan ukuran masksmal 2MB/file</span>
-                            <form id="lampiranForm" action="{{route('surat-keterangan-kematian/lampiran/store',$item->nik_mati)}}" method="POST" enctype="multipart/form-data">
+                            <form id="lampiranForm" action="{{route('warga/surat-keterangan-kematian/lampiran/store',$item->nik_mati)}}" method="POST" enctype="multipart/form-data">
                                 @method('POST')
                                 @csrf
                                 <div class="modal-body">
@@ -778,11 +778,11 @@
                                         </div>
                                         @enderror
                                     </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
-                                    <button type="submit" class="btn btn-primary">Simpan</button>
-                                </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                    </div>
 
                             </form>
                         </div>

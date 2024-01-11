@@ -72,8 +72,8 @@
                 <a href="data-mutasi-masuk" style="text-decoration: none; color: black">
                     <div class="d-flex">
                         <div style="width: 12rem">
-                            <h6 style="color: green">Jumlah Mutasi Masuk</h6>
-                            <h4>{{ $jumlahMM }} Mutasi Masuk</h4>
+                            <h6 style="color: green">Jumlah SK Beda Nama</h6>
+                            <h4>{{ $jumlahBN }} SK Beda Nama</h4>
                         </div>
                         <div style="width: 4rem; ">
                             <h1><span style="color: black; vertical-align: middle" class="mainIcon bi bi-person-badge"></span></h1>
@@ -88,8 +88,8 @@
                 <a href="data-mutasi-keluar" style="text-decoration: none; color: black">
                     <div class="d-flex">
                         <div style="width: 12rem">
-                            <h6 style="color: #1746a2">Jumlah Mutasi Keluar</h6>
-                            <h4>{{ $jumlahMK }} Mutasi Keluar</h4>
+                            <h6 style="color: #1746a2">Jumlah SK Status</h6>
+                            <h4>{{ $jumlahS }} SK Status</h4>
                         </div>
                         <div style="width: 4rem; ">
                             <h1><span style="color: black; vertical-align: middle" class="bi bi-file-earmark-text"></span></h1>

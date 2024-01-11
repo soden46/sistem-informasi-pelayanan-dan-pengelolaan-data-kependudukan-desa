@@ -6,7 +6,9 @@
 <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
     <div class="d-flex">
         <div class="d-flex justify-content-start px-2"><img src="{{asset('images/logo/sleman.png')}}" id="foto" alt="Logo" height="75px" /></div>
-        <div class="mt-3"><b>Kalurahan Ambarketawang</b></div>
+        <div class="mt-3"><b>Kalurahan Ambarketawang,</b><br>
+            <b>Staff Kalurahan</b>
+        </div>
     </div>
     <div class="position-sticky pt-3 sidebar-sticky">
         <ul class="nav flex-column">
@@ -71,7 +73,7 @@
                 </a>
             </li>
         </ul>
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-uppercase">
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-2 mb-1 text-uppercase">
             <span style="text-align: center">Administrator</span>
         </h6>
         <ul class="nav flex-column mb-2">

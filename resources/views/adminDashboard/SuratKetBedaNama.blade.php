@@ -23,9 +23,9 @@
         </div>
         @endif
 
-        @if (session()->has('successCreatedMasyarakat'))
+        @if (session()->has('successCreatedPenduduk'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ session('successCreatedMasyarakat') }}</strong>
+            <strong>{{ session('successCreatedPenduduk') }}</strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         @endif
@@ -82,18 +82,6 @@
                                     <input type="date" name="tgl_regis_skbn" id="tgl_regis_skbn" class="form-control @error('tgl_regis_skbn') is-invalid @enderror" required value="{{ old('tgl_regis_skbn') }}" autocomplete="off" placeholder="Input Tanggal Regis SKBN">
 
                                     @error('tgl_regis_skbn')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="no_surat_skbn" class="form-label"><b>Nomor Surat</b></label>
-
-                                    <input type="text" name="no_surat_skbn" id="no_surat_skbn" class="form-control @error('no_surat_skbn') is-invalid @enderror" required value="{{ old('no_surat_skbn') }}" autocomplete="off" placeholder="Input NO KK">
-
-                                    @error('no_surat_skbn')
                                     <div class="invalid-feedback">
                                         <p style="text-align: left">{{ $message }}</p>
                                     </div>
