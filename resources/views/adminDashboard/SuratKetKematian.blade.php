@@ -414,7 +414,6 @@
                     </td>
                     <td style="text-align: center;  ">
                         <a href="{{route('surat-keterangan-kematian/pdflurah',$item->nik_mati) }}" class="btn btn-success" target="_blank">Lurah</a>
-                        <a href="{{route('surat-keterangan-kematian/pdf',$item->nik_mati) }}" class="btn btn-success" target="_blank">Staff</a>
                     </td>
                 </tr>
 

@@ -162,7 +162,7 @@ class SuratKetStatusController extends Controller
         $lampiran = json_decode($kematian->lampiran, true);
         if (isset($lampiran['ktp']) && ($lampiran['kk'])) {
             // dd($lampiran['pengantar_rt']);
-            return view('adminDashboard.LampiranDataStatus', [
+            return view('adminDashboard.lampiran.LampiranDataStatus', [
                 'title' => 'Lampiran Keterangan Status',
                 'pendu' => Penduduk::get(),
                 'ktp' => $lampiran['ktp'],
@@ -170,7 +170,9 @@ class SuratKetStatusController extends Controller
 
             ]);
         } else {
-            // Tindakan jika properti 'pengantar_rt' tidak ada
+            return view('adminDashboard.lampiran.LampiranKosong', [
+                'title' => 'Lampiran Surat Keterangan Status',
+            ]);
         }
     }
 

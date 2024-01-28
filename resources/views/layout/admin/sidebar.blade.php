@@ -24,25 +24,25 @@
                     Data Penduduk
                 </a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link {{ Request::is('data-kk') ? 'active' : '' }}" href="/data-kk">
                     <span class="align-text-bottom bi bi-people"></span>
                     Data Kepala Keluarga
                 </a>
-            </li>
-            <li class="nav-item">
+            </li> -->
+            <!-- <li class="nav-item">
                 <a class="nav-link {{ Request::is('surat-keterangan-kelahiran*') ? 'active' : '' }}" href="/surat-keterangan-kelahiran">
                     <span class="align-text-bottom bi bi-file-earmark-text"></span>
                     Data Kelahiran
                 </a>
-            </li>
+            </li> -->
             <li class="nav-item">
                 <a class="nav-link {{ Request::is('surat-keterangan-kematian*') ? 'active' : '' }}" href="/surat-keterangan-kematian">
                     <span class="align-text-bottom bi bi-file-earmark-text"></span>
                     Data Kematian
                 </a>
             </li>
-            <!-- <li class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link {{ Request::is('data-mutasi-masuk*') ? 'active' : '' }}" href="/data-mutasi-masuk">
                     <span class="align-text-bottom bi bi-file-earmark-text"></span>
                     Data Mutasi Masuk
@@ -53,7 +53,7 @@
                     <span class="align-text-bottom bi bi-file-earmark-text"></span>
                     Data Mutasi Keluar
                 </a>
-            </li> -->
+            </li>
             <li class="nav-item">
                 <a class="nav-link {{ Request::is('surat-ket-beda-nama*') ? 'active' : '' }}" href="/surat-ket-beda-nama">
                     <span class="align-text-bottom bi bi-file-earmark-text"></span>

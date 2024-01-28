@@ -117,6 +117,16 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
             Route::post('/data-mutasi-masuk/update/{nik_mm}', 'update')->name('data-mutasi-masuk/update')->middleware('auth');
             Route::delete('/data-mutasi-masuk/delete/{nik_mm}', 'destroy')->name('data-mutasi-masuk/delete')->middleware('auth');
             Route::get('/data-mutasi-masuk/pdf/{nik_mm}', 'pdf')->name('data-mutasi-masuk/pdf')->middleware('auth');
+            Route::post('/data-mutasi-masuk/lampiran/store/{nik_mm}', 'lampiranStore')->name('data-mutasi-masuk/lampiran/store')->middleware('auth');
+            Route::get('/data-mutasi-masuk/lampiran/edit/{nik_mm}', 'lampiranEdit')->name('data-mutasi-masuk/lampiran/edit')->middleware('auth');
+            Route::get('/data-mutasi-masuk/lampiran/update/{nik_mm}', 'lampiranUpdate')->name('data-mutasi-masuk/lampiran/update')->middleware('auth');
+            Route::get('/data-mutasi-masuk/lampiran/destroy/{nik_mm}', 'lampiranDestroy')->name('data-mutasi-masuk/lampiran/destroy')->middleware('auth');
+            Route::get('/data-mutasi-masuk/lampiran/show/{nik_mm}', 'showLampiran')->name('data-mutasi-masuk/lampiran/show')->middleware('auth');
+            // Route Depend Penduduk Pada Form Tambah Data
+            Route::get('getPelapor/{id}', function ($id) {
+                $nama_pelapor = App\Models\Penduduk::where('nik', $id)->get();
+                return response()->json($nama_pelapor);
+            });
         }
     );
 
@@ -127,6 +137,11 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
             Route::post('/data-mutasi-keluar/update/{nik_mk}', 'update')->name('data-mutasi-keluar/update')->middleware('auth');
             Route::delete('/data-mutasi-keluar/delete/{nik_mk}', 'destroy')->name('data-mutasi-keluar/delete')->middleware('auth');
             Route::get('/data-mutasi-keluar/pdf/{nik_mk}', 'pdf')->name('data-mutasi-keluar/pdf')->middleware('auth');
+            Route::post('/data-mutasi-keluar/lampiran/store/{nik_mk}', 'lampiranStore')->name('data-mutasi-keluar/lampiran/store')->middleware('auth');
+            Route::get('/data-mutasi-keluar/lampiran/edit/{nik_mk}', 'lampiranEdit')->name('data-mutasi-keluar/lampiran/edit')->middleware('auth');
+            Route::get('/data-mutasi-keluar/lampiran/update/{nik_mk}', 'lampiranUpdate')->name('data-mutasi-keluar/lampiran/update')->middleware('auth');
+            Route::get('/data-mutasi-keluar/lampiran/destroy/{nik_mk}', 'lampiranDestroy')->name('data-mutasi-keluar/lampiran/destroy')->middleware('auth');
+            Route::get('/data-mutasi-keluar/lampiran/show/{nik_mk}', 'showLampiran')->name('data-mutasi-keluar/lampiran/show')->middleware('auth');
         }
     );
 

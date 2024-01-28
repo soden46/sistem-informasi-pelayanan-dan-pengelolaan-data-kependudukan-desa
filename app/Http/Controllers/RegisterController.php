@@ -22,7 +22,6 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
-
         $data = Validator::make($request->all(), [
             'nik' => ['required', 'string', 'max:18'],
             'name' => ['required', 'string', 'max:255'],
@@ -31,7 +30,6 @@ class RegisterController extends Controller
             'syarat' => ['required'],
             'password' => ['required', 'string', 'min:8'],
         ]);
-
         if ($data->fails()) {
             return $data->errors();
         } else {

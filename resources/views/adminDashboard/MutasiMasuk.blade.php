@@ -74,25 +74,17 @@
                                 <div class="mb-3">
                                     <label for="nik_pelapor" class="form-label"><b>NIK Pelapor</b></label>
 
-                                    <input type="text" name="nik_pelapor" id="nik_pelapor" class="form-control @error('nik_pelapor') is-invalid @enderror" required value="{{ old('nik_pelapor') }}" autocomplete="off" placeholder="Input NIK pelapor">
-
-                                    @error('nik_pelapor')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
+                                    <select class="form-select" name="nik_pelapor" id="nik_pelapor">
+                                        <option name="nik_pelapor" id="nik_pelapor" value="" selected>Silakan Pilih NIK</option>
+                                        @foreach($pendu as $penduduk)
+                                        <option name="nik_pelapor" id="nik_pelapor" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="nama_pelapor" class="form-label"><b>Nama Pelapor</b></label>
-
-                                    <input type="text" name="nama_pelapor" id="nama_pelapor" class="form-control @error('nama_pelapor') is-invalid @enderror" required value="{{ old('nama_pelapor') }}" autocomplete="off" placeholder="Input Nama Pelapor">
-
-                                    @error('nama_pelapor')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
+                                    <select class="form-control" name="nama_pelapor" id="nama_pelapor"></select>
                                 </div>
 
                                 <div class="mb-3">
@@ -156,9 +148,23 @@
                                 <div class="mb-3">
                                     <label for="agama_mm" class="form-label"><b>Agama</b></label>
 
-                                    <input type="text" name="agama_mm" id="agama_mm" class="form-control @error('agama_mm') is-invalid @enderror" required value="{{ old('agama_mm') }}" autocomplete="off" placeholder="Input Agama">
+                                    <select class="form-select" name="agama_mm" id="agama_mm">
+                                        <option value="" selected>Silakan Pilih Agama</option>
+                                        <option name="agama_mm" id="agama_mm" value="Islam">Islam</option>
+                                        <option name="agama_mm" id="agama_mm" value="Kristen">Kristen</option>
+                                        <option name="agama_mm" id="agama_mm" value="Katolik">Katolik</option>
+                                        <option name="agama_mm" id="agama_mm" value="Hindu">Hindu</option>
+                                        <option name="agama_mm" id="agama_mm" value="Buddha">Buddha</option>
+                                        <option name="agama_mm" id="agama_mm" value="Konghucu">Konghucu</option>
+                                    </select>
+                                </div>
 
-                                    @error('agama_mm')
+                                <div class="mb-3">
+                                    <label for="pendidikan" class="form-label"><b>Pendidikan</b></label>
+
+                                    <input type="text" name="pendidikan" id="pendidikan" class="form-control @error('pendidikan') is-invalid @enderror" required value="{{ old('pendidikan') }}" autocomplete="off" placeholder="Input pendidikan">
+
+                                    @error('pendidikan')
                                     <div class="invalid-feedback">
                                         <p style="text-align: left">{{ $message }}</p>
                                     </div>
@@ -180,9 +186,21 @@
                                 <div class="mb-3">
                                     <label for="status_kawin_mm" class="form-label"><b>Status Kawin</b></label>
 
-                                    <input type="text" name="status_kawin_mm" id="status_kawin_mm" class="form-control @error('status_kawin_mm') is-invalid @enderror" required value="{{ old('status_kawin_mm') }}" autocomplete="off" placeholder="Input Status Kawin">
+                                    <select class="form-select" name="status_kawin_mm" id="status_kawin_mm">
+                                        <option value="" selected>Silakan Pilih Status Kawin</option>
+                                        <option name="status_kawin_mm" id="status_kawin_mm" value="Kawin">Kawin</option>
+                                        <option name="status_kawin_mm" id="status_kawin_mm" value="Belum Kawin">Belum Kawin</option>
+                                        <option name="status_kawin_mm" id="status_kawin_mm" value="Cerai Hidup">Cerai Hidup</option>
+                                        <option name="status_kawin_mm" id="status_kawin_mm" value="Cerai Mati">Cerai Mati</option>
+                                    </select>
+                                </div>
 
-                                    @error('status_kawin_mm')
+                                <div class="mb-3">
+                                    <label for="no_kk" class="form-label"><b>No KK</b></label>
+
+                                    <input type="text" name="no_kk" id="no_kk" class="form-control @error('no_kk') is-invalid @enderror" required value="{{ old('no_kk') }}" autocomplete="off" placeholder="Input Status Kawin">
+
+                                    @error('no_kk')
                                     <div class="invalid-feedback">
                                         <p style="text-align: left">{{ $message }}</p>
                                     </div>
@@ -190,11 +208,21 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="no_kk" class="form-label"><b>NO KK</b></label>
+                                    <label for="wn" class="form-label"><b>Warga Negara</b></label>
 
-                                    <input type="text" name="no_kk" id="no_kk" class="form-control @error('no_kk') is-invalid @enderror" required value="{{ old('no_kk') }}" autocomplete="off" placeholder="Input NO KK">
+                                    <select class="form-select" name="wn" id="wn">
+                                        <option value="">Silakan Pilih Jenis Warga Negara</option>
+                                        <option name="wn" id="wn" value="WNI">WNI</option>
+                                        <option name="wn" id="wn" value="WNA" selected>WNA</option>
+                                    </select>
+                                </div>
 
-                                    @error('no_kk')
+                                <div class="mb-3">
+                                    <label for="kebangsaan" class="form-label"><b>Kebangsaan</b></label>
+
+                                    <input type="text" name="kebangsaan" id="kebangsaan" class="form-control @error('kebangsaan') is-invalid @enderror" required value="{{ old('kebangsaan') }}" autocomplete="off" placeholder="Input Kebangsaan">
+
+                                    @error('kebangsaan')
                                     <div class="invalid-feedback">
                                         <p style="text-align: left">{{ $message }}</p>
                                     </div>
@@ -250,445 +278,25 @@
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="nik1" class="form-label"><b>NIK 1</b></label>
+                                    <label for="sts_penduduk" class="form-label"><b>Status Penduduk</b></label>
 
-                                    <input type="text" name="nik1" id="nik1" class="form-control @error('nik1') is-invalid @enderror" required value="{{ old('tgl_regis') }}" autocomplete="off" placeholder="Input Tanggal Regis">
-
-                                    @error('nik1')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="nama1" class="form-label"><b>Nama 1</b></label>
-
-                                    <input type="text" name="nama1" id="nama1" class="form-control @error('nama1') is-invalid @enderror" required value="{{ old('nama1') }}" autocomplete="off" placeholder="Input NIK">
-
-                                    @error('nama1')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <div class="mb-3">
-                                        <label for="jk1" class="form-label"><b>Jenis Kelamin</b></label>
-
-                                        <select class="form-select" name="jk1" id="jk1">
-                                            <option name="jk1" id="jk1" value="" selected>Silakan Pilih Jenis Kelamin</option>
-                                            <option name="jk1" id="jk1" value="Laki-Laki">Laki-Laki</option>
-                                            <option name="jk1" id="jk1" value="Perempuan">Perempuan</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="agama1" class="form-label"><b>Agama 1</b></label>
-
-                                    <input type="text" name="agama1" id="agama1" class="form-control @error('agama1') is-invalid @enderror" required value="{{ old('agama1') }}" autocomplete="off" placeholder="Input Alamat Tujuan">
-
-                                    @error('agama1')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="ket_kawin1" class="form-label"><b>Keterangan Kawin 1</b></label>
-
-                                    <input type="text" name="ket_kawin1" id="ket_kawin1" class="form-control @error('ket_kawin1') is-invalid @enderror" required value="{{ old('ket_kawin1') }}" autocomplete="off" placeholder="Input Alamat Tujuan">
-
-                                    @error('ket_kawin1')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="ket_kel1" class="form-label"><b>Keterangan Dalam keluarga 1</b></label>
-
-                                    <input type="text" name="ket_kel1" id="ket_kel1" class="form-control @error('ket_kel1') is-invalid @enderror" required value="{{ old('ket_kel1') }}" autocomplete="off" placeholder="Input Alamat Tujuan">
-
-                                    @error('ket_kel1')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="nik2" class="form-label"><b>NIK 2</b></label>
-
-                                    <input type="text" name="nik2" id="nik2" class="form-control @error('nik2') is-invalid @enderror" required value="{{ old('tgl_regis') }}" autocomplete="off" placeholder="Input Tanggal Regis">
-
-                                    @error('nik2')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="nama2" class="form-label"><b>Nama 2</b></label>
-
-                                    <input type="text" name="nama2" id="nama2" class="form-control @error('nama2') is-invalid @enderror" required value="{{ old('nama2') }}" autocomplete="off" placeholder="Input NIK">
-
-                                    @error('nama2')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <div class="mb-3">
-                                        <label for="jk2" class="form-label"><b>Jenis Kelamin</b></label>
-
-                                        <select class="form-select" name="jk2" id="jk2">
-                                            <option name="jk2" id="jk2" value="" selected>Silakan Pilih Jenis Kelamin</option>
-                                            <option name="jk2" id="jk2" value="Laki-Laki">Laki-Laki</option>
-                                            <option name="jk2" id="jk2" value="Perempuan">Perempuan</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="agama2" class="form-label"><b>Agama 2</b></label>
-
-                                    <input type="text" name="agama2" id="agama2" class="form-control @error('agama2') is-invalid @enderror" required value="{{ old('agama2') }}" autocomplete="off" placeholder="Input Alamat Tujuan">
-
-                                    @error('agama2')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="ket_kawin2" class="form-label"><b>Keterangan Kawin 2</b></label>
-
-                                    <input type="text" name="ket_kawin2" id="ket_kawin2" class="form-control @error('ket_kawin2') is-invalid @enderror" required value="{{ old('ket_kawin2') }}" autocomplete="off" placeholder="Input Alamat Tujuan">
-
-                                    @error('ket_kawin2')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="ket_kel2" class="form-label"><b>Keterangan Dalam keluarga 2</b></label>
-
-                                    <input type="text" name="ket_kel2" id="ket_kel2" class="form-control @error('ket_kel2') is-invalid @enderror" required value="{{ old('ket_kel2') }}" autocomplete="off" placeholder="Input Alamat Tujuan">
-
-                                    @error('ket_kel2')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="nik3" class="form-label"><b>NIK 3</b></label>
-
-                                    <input type="text" name="nik3" id="nik3" class="form-control @error('nik3') is-invalid @enderror" required value="{{ old('tgl_regis') }}" autocomplete="off" placeholder="Input Tanggal Regis">
-
-                                    @error('nik3')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="nama3" class="form-label"><b>Nama 3</b></label>
-
-                                    <input type="text" name="nama3" id="nama3" class="form-control @error('nama3') is-invalid @enderror" required value="{{ old('nama3') }}" autocomplete="off" placeholder="Input NIK">
-
-                                    @error('nama3')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <div class="mb-3">
-                                        <label for="jk3" class="form-label"><b>Jenis Kelamin</b></label>
-
-                                        <select class="form-select" name="jk3" id="jk3">
-                                            <option name="jk3" id="jk3" value="" selected>Silakan Pilih Jenis Kelamin</option>
-                                            <option name="jk3" id="jk3" value="Laki-Laki">Laki-Laki</option>
-                                            <option name="jk3" id="jk3" value="Perempuan">Perempuan</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="agama3" class="form-label"><b>Agama 3</b></label>
-
-                                    <input type="text" name="agama3" id="agama3" class="form-control @error('agama3') is-invalid @enderror" required value="{{ old('agama3') }}" autocomplete="off" placeholder="Input Alamat Tujuan">
-
-                                    @error('agama3')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="ket_kawin3" class="form-label"><b>Keterangan Kawin 3</b></label>
-
-                                    <input type="text" name="ket_kawin3" id="ket_kawin3" class="form-control @error('ket_kawin3') is-invalid @enderror" required value="{{ old('ket_kawin3') }}" autocomplete="off" placeholder="Input Alamat Tujuan">
-
-                                    @error('ket_kawin3')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="ket_kel3" class="form-label"><b>Keterangan Dalam keluarga 3</b></label>
-
-                                    <input type="text" name="ket_kel3" id="ket_kel3" class="form-control @error('ket_kel3') is-invalid @enderror" required value="{{ old('ket_kel3') }}" autocomplete="off" placeholder="Input Alamat Tujuan">
-
-                                    @error('ket_kel3')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
+                                    <select class="form-select" name="sts_penduduk" id="sts_penduduk">
+                                        <option value="" selected>Silakan Pilih Status Penduduk</option>
+                                        <option name="sts_penduduk" id="sts_penduduk" value="Meninggal">Meninggal</option>
+                                        <option name="sts_penduduk" id="sts_penduduk" value="tinggal">Tinggal</option>
+                                        <option name="sts_penduduk" id="sts_penduduk" value="Pindah Keluar">Pindah Keluar</option>
+                                    </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="nik4" class="form-label"><b>NIK 4</b></label>
+                                    <label for="sts_dalam_kk" class="form-label"><b>Status Dalam KK</b></label>
 
-                                    <input type="text" name="nik4" id="nik4" class="form-control @error('nik4') is-invalid @enderror" required value="{{ old('tgl_regis') }}" autocomplete="off" placeholder="Input Tanggal Regis">
-
-                                    @error('nik4')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
+                                    <select class="form-select" name="sts_dalam_kk" id="sts_dalam_kk">
+                                        <option value="" selected>Silakan Pilih Status Penduduk</option>
+                                        <option name="sts_dalam_kk" id="sts_dalam_kk" value="Kepala Keluarga">Kepala Keluarga</option>
+                                        <option name="sts_dalam_kk" id="sts_dalam_kk" value="Istri">Istri</option>
+                                        <option name="sts_dalam_kk" id="sts_dalam_kk" value="Anak">Anak</option>
+                                    </select>
                                 </div>
-
-                                <div class="mb-3">
-                                    <label for="nama4" class="form-label"><b>Nama 4</b></label>
-
-                                    <input type="text" name="nama4" id="nama4" class="form-control @error('nama4') is-invalid @enderror" required value="{{ old('nama4') }}" autocomplete="off" placeholder="Input NIK">
-
-                                    @error('nama4')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <div class="mb-3">
-                                        <label for="jk4" class="form-label"><b>Jenis Kelamin</b></label>
-
-                                        <select class="form-select" name="jk4" id="jk4">
-                                            <option name="jk4" id="jk4" value="" selected>Silakan Pilih Jenis Kelamin</option>
-                                            <option name="jk4" id="jk4" value="Laki-Laki">Laki-Laki</option>
-                                            <option name="jk4" id="jk4" value="Perempuan">Perempuan</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="agama4" class="form-label"><b>Agama 4</b></label>
-
-                                    <input type="text" name="agama4" id="agama4" class="form-control @error('agama4') is-invalid @enderror" required value="{{ old('agama4') }}" autocomplete="off" placeholder="Input Alamat Tujuan">
-
-                                    @error('agama4')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="ket_kawin4" class="form-label"><b>Keterangan Kawin 4</b></label>
-
-                                    <input type="text" name="ket_kawin4" id="ket_kawin4" class="form-control @error('ket_kawin4') is-invalid @enderror" required value="{{ old('ket_kawin4') }}" autocomplete="off" placeholder="Input Alamat Tujuan">
-
-                                    @error('ket_kawin4')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="ket_kel4" class="form-label"><b>Keterangan Dalam keluarga 4</b></label>
-
-                                    <input type="text" name="ket_kel4" id="ket_kel4" class="form-control @error('ket_kel4') is-invalid @enderror" required value="{{ old('ket_kel4') }}" autocomplete="off" placeholder="Input Alamat Tujuan">
-
-                                    @error('ket_kel4')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label for="nik5" class="form-label"><b>NIK 5</b></label>
-
-                                    <input type="text" name="nik5" id="nik5" class="form-control @error('nik5') is-invalid @enderror" required value="{{ old('tgl_regis') }}" autocomplete="off" placeholder="Input Tanggal Regis">
-
-                                    @error('nik5')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="nama5" class="form-label"><b>Nama 5</b></label>
-
-                                    <input type="text" name="nama5" id="nama5" class="form-control @error('nama5') is-invalid @enderror" required value="{{ old('nama5') }}" autocomplete="off" placeholder="Input NIK">
-
-                                    @error('nama5')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <div class="mb-3">
-                                        <label for="jk5" class="form-label"><b>Jenis Kelamin</b></label>
-
-                                        <select class="form-select" name="jk5" id="jk5">
-                                            <option name="jk5" id="jk5" value="" selected>Silakan Pilih Jenis Kelamin</option>
-                                            <option name="jk5" id="jk5" value="Laki-Laki">Laki-Laki</option>
-                                            <option name="jk5" id="jk5" value="Perempuan">Perempuan</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="agama5" class="form-label"><b>Agama 5</b></label>
-
-                                    <input type="text" name="agama5" id="agama5" class="form-control @error('agama5') is-invalid @enderror" required value="{{ old('agama5') }}" autocomplete="off" placeholder="Input Alamat Tujuan">
-
-                                    @error('agama5')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="ket_kawin5" class="form-label"><b>Keterangan Kawin 5</b></label>
-
-                                    <input type="text" name="ket_kawin5" id="ket_kawin5" class="form-control @error('ket_kawin5') is-invalid @enderror" required value="{{ old('ket_kawin5') }}" autocomplete="off" placeholder="Input Alamat Tujuan">
-
-                                    @error('ket_kawin5')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="ket_kel5" class="form-label"><b>Keterangan Dalam keluarga 5</b></label>
-
-                                    <input type="text" name="ket_kel5" id="ket_kel5" class="form-control @error('ket_kel5') is-invalid @enderror" required value="{{ old('ket_kel5') }}" autocomplete="off" placeholder="Input Alamat Tujuan">
-
-                                    @error('ket_kel5')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label for="nik6" class="form-label"><b>NIK 6</b></label>
-
-                                    <input type="text" name="nik6" id="nik6" class="form-control @error('nik6') is-invalid @enderror" required value="{{ old('tgl_regis') }}" autocomplete="off" placeholder="Input Tanggal Regis">
-
-                                    @error('nik6')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="nama6" class="form-label"><b>Nama 6</b></label>
-
-                                    <input type="text" name="nama6" id="nama6" class="form-control @error('nama6') is-invalid @enderror" required value="{{ old('nama6') }}" autocomplete="off" placeholder="Input NIK">
-
-                                    @error('nama6')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <div class="mb-3">
-                                        <label for="jk6" class="form-label"><b>Jenis Kelamin</b></label>
-
-                                        <select class="form-select" name="jk6" id="jk6">
-                                            <option name="jk6" id="jk6" value="" selected>Silakan Pilih Jenis Kelamin</option>
-                                            <option name="jk6" id="jk6" value="Laki-Laki">Laki-Laki</option>
-                                            <option name="jk6" id="jk6" value="Perempuan">Perempuan</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="agama6" class="form-label"><b>Agama 6</b></label>
-
-                                    <input type="text" name="agama6" id="agama6" class="form-control @error('agama6') is-invalid @enderror" required value="{{ old('agama6') }}" autocomplete="off" placeholder="Input Alamat Tujuan">
-
-                                    @error('agama6')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="ket_kawin6" class="form-label"><b>Keterangan Kawin 6</b></label>
-
-                                    <input type="text" name="ket_kawin6" id="ket_kawin6" class="form-control @error('ket_kawin6') is-invalid @enderror" required value="{{ old('ket_kawin6') }}" autocomplete="off" placeholder="Input Alamat Tujuan">
-
-                                    @error('ket_kawin6')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="ket_kel6" class="form-label"><b>Keterangan Dalam keluarga 6</b></label>
-
-                                    <input type="text" name="ket_kel6" id="ket_kel6" class="form-control @error('ket_kel6') is-invalid @enderror" required value="{{ old('ket_kel6') }}" autocomplete="off" placeholder="Input Alamat Tujuan">
-
-                                    @error('ket_kel6')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label for="prov_asal" class="form-label"><b>Provinsi Asal</b></label>
-
-                                    <input type="text" name="prov_asal" id="prov_asal" class="form-control @error('prov_asal') is-invalid @enderror" required value="{{ old('prov_asal') }}" autocomplete="off" placeholder="Input RW Tujuan">
-
-                                    @error('prov_asal')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
@@ -760,8 +368,9 @@
                     <th>Jenis Kelamin</th>
                     <th>Tempat Lahir</th>
                     <th>Tanggal Lahir</th>
+                    <th style="text-align: center">Lampiran</th>
                     <th style="text-align: center">Varifikasi</th>
-                    <th style="text-align: center">Aksi</th>
+                    <th style="text-align: center">Cetak</th>
                 </tr>
                 @foreach ($MutasiMasuk as $index => $item)
                 <tr style="width: 100%">
@@ -774,6 +383,11 @@
                     <td style="vertical-align: middle;  ">{{ $item->tempat_lh_mm }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->tgl_lh_mm }}</td>
                     <td style="text-align: center;  ">
+                        <a href="{{route('data-mutasi-masuk/lampiran/show',$item->nik_mm)}}"><button class="btn btn-success"><i class="bi bi-eye-fill"></i></button></a>
+                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#cretaeLampiran{{ $item->nik_mm }}"><i class="bi bi-plus-square-fill"></i></button>
+                        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#destroyLampiran{{ $item->nik_mm }}"><i class="bi bi-trash"></i></button>
+                    </td>
+                    <td style="text-align: center;  ">
                         @if($item->verifikasi=="Belum Verifikasi")
                         <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#verifikasibayi{{ $item->nik_mm }}">Verifikasi</button>
                         @else
@@ -781,7 +395,7 @@
                         @endif
                     </td>
                     <td style="text-align: center;  ">
-                        <a href="{{route('data-mutasi-masuk/pdf',$item->nik_mm) }}" class="btn btn-success" target="_blank">Staff</a>
+                        <a href="{{route('data-mutasi-masuk/pdf',$item->nik_mm) }}" class="btn btn-success" target="_blank">Lurah</a>
                     </td>
                 </tr>
 
@@ -851,6 +465,83 @@
                                     <button type="submit" class="btn btn-danger">Batalkan Verifikasi</button>
                                 </form>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal delete lampiran-->
+                <div class="modal fade" id="destroyLampiran{{ $item->nik_mm}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="destroyLampiranLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="destroyLampiranLabel">Delete Lampiran</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Apakah anda yakin untuk menghapus lampiran dari <b>{{ $item->nama_mm }}</b></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
+                                <form action="{{route('data-mutasi-masuk/lampiran/destroy', $item->nik_mm) }}" method="post">
+                                    @method('delete')
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger">Deleted</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal Create Lampiran-->
+                <div class="modal fade" id="cretaeLampiran{{ $item->nik_mm }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="cretaeLampiranLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="cretaeLampiranLabel">Tambah Lampiran Surat Mutasi Masuk</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <span class="modal-title fs-6 text-center" id="cretaeLampiranLabel">Upload dokumen kelengkapan, pastikan file berupa (jpg/pdf) dengan ukuran masksmal 2MB/file</span>
+                            <form id="lampiranForm" action="{{route('data-mutasi-masuk/lampiran/store',$item->nik_mm)}}" method="POST" enctype="multipart/form-data">
+                                @method('POST')
+                                @csrf
+                                <div class="modal-body">
+
+                                    <div class="mb-3">
+                                        <label for="kk" class="form-label">Kartu Keluarga</label>
+                                        <input class="form-control" type="file" id="kk" name="kk">
+                                        @error('kk')
+                                        <div class="invalid-feedback">
+                                            <p style="text-align: left">{{ $message }}</p>
+                                        </div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="ktp_mm" class="form-label">KTP </label>
+                                        <input class="form-control" type="file" id="ktp_mm" name="ktp_mm">
+                                        @error('ktp')
+                                        <div class="invalid-feedback">
+                                            <p style="text-align: left">{{ $message }}</p>
+                                        </div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="ktp_pelapor" class="form-label">KTP Pelapor</label>
+                                        <input class="form-control" type="file" id="ktp_pelapor" name="ktp_pelapor">
+                                        @error('ktp_pelapor')
+                                        <div class="invalid-feedback">
+                                            <p style="text-align: left">{{ $message }}</p>
+                                        </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                </div>
+
+                            </form>
                         </div>
                     </div>
                 </div>

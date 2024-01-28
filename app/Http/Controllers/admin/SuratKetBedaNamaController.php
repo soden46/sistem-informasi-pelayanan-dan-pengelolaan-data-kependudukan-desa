@@ -170,15 +170,17 @@ class SuratKetBedaNamaController extends Controller
         $lampiran = json_decode($kematian->lampiran, true);
         if (isset($lampiran['ktp']) && ($lampiran['kk'])) {
             // dd($lampiran['pengantar_rt']);
-            return view('adminDashboard.LampiranDataBedaNama', [
-                'title' => 'Lampiran Keterangan Biasa',
+            return view('adminDashboard.lampiran.LampiranDataBedaNama', [
+                'title' => 'Lampiran Keterangan Beda Nama',
                 'pendu' => Penduduk::get(),
                 'ktp' => $lampiran['ktp'],
                 'kk' => $lampiran['kk'],
 
             ]);
         } else {
-            // Tindakan jika properti 'pengantar_rt' tidak ada
+            return view('adminDashboard.lampiran.LampiranKosong', [
+                'title' => 'Lampiran Surat Keterangan Beda Nama',
+            ]);
         }
     }
 

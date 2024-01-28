@@ -164,42 +164,22 @@
                 <tr>
                     <td width="150px">Status Dalam Keluarga</td>
                     <td width="10px">:</td>
-                    <td>{{$surat->sts_dalam_keluarga}}</td>
+                    <td>{{$surat->pend->sts_dalam_kk}}</td>
                 </tr>
                 <tr>
-                    <td width="150px">Kewarganegaraan</td>
+                    <td width="150px">Warganegara</td>
                     <td width="10px">:</td>
-                    <td>{{$surat->pend->sts_penduduk}}</td>
+                    <td>{{$surat->pend->wn}}</td>
                 </tr>
                 <tr>
-                    <td width="150px">Kewarganegaraan</td>
+                    <td width="150px">Kebangsaan</td>
                     <td width="10px">:</td>
-                    <td>{{$surat->pend->sts_penduduk}}</td>
+                    <td>{{$surat->pend->kebangsaan}}</td>
                 </tr>
                 <tr>
                     <td width="150px">Alamat Asal</td>
                     <td width="10px">:</td>
-                    <td>{{$surat->pend->nama_jalan}}, {{$surat->pend->rt}}, {{$surat->pend->rw}}</td>
-                </tr>
-                <tr>
-                    <td width="100px"></td>
-                    <td width="5px">Desa: </td>
-                    <td>{{$surat->pend->desa}}</td>
-                </tr>
-                <tr>
-                    <td width="150px"></td>
-                    <td width="5px">Kec: </td>
-                    <td>{{$surat->pend->kota}}</td>
-                </tr>
-                <tr>
-                    <td width="100px"></td>
-                    <td width="5px">Kab: </td>
-                    <td>{{$surat->pend->kota}}</td>
-                </tr>
-                <tr>
-                    <td width="100px"></td>
-                    <td width="5px">Prov:</td>
-                    <td>{{$surat->pend->prov}}</td>
+                    <td>{{$alamat[0]}}, {{$alamat[1]}}, {{$alamat[2]}}</td>
                 </tr>
             </table>
             <p>Mengajukan permohonan untuk pindah penduduk ke:</p>
@@ -207,93 +187,12 @@
                 <tr>
                     <td width="150px">Alamat Yang Dituju</td>
                     <td width="10px">:</td>
-                    <td>{{$surat->alamat_tuju}}</td>
+                    <td>Padukuhan: {{$surat->padukuhan_tuju }}, RT: {{$surat->rt_tuju }}, RW: {{$surat->rw_tuju }}</td>
                 </tr>
                 <td width="150px">Pindah Pada</td>
                 <td width="10px">:</td>
                 <td>{{date('d/m/Y', strtotime($surat->pend->tgl_regis_mk))}}</td>
                 </tr>
-                <tr>
-                    <td width="150px">Keluarga Yang Turut</td>
-                    <td width="10px">:</td>
-                    <td>{{$surat->kel_ikut}}</td>
-                </tr>
-            </table>
-            </br>
-            </br>
-            <table class="font-12 table table-bordered">
-                <thead>
-                    <tr>
-                        <td>Nama Lengkap</td>
-                        <td>NIK</td>
-                        <td>Jenis Kelamin</td>
-                        <td>Agama</td>
-                        <td>Status Perkawinana</td>
-                        <td>Keterangan Keluarga</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if($surat->nik1 !='')
-                    <tr>
-                        <td>{{$surat->nama1}}</td>
-                        <td>{{$surat->nik1}}</td>
-                        <td>{{$surat->jk1}}</td>
-                        <td>{{$surat->agama1}}</td>
-                        <td>{{$surat->sts_kawin1}}</td>
-                        <td>{{$surat->ket_kel1}}</td>
-                    </tr>
-                    @endif
-                    @if($surat->nik2!='')
-                    <tr>
-                        <td>{{$surat->nama2}}</td>
-                        <td>{{$surat->nik2}}</td>
-                        <td>{{$surat->jk2}}</td>
-                        <td>{{$surat->agama2}}</td>
-                        <td>{{$surat->sts_kawin2}}</td>
-                        <td>{{$surat->ket_kel2}}</td>
-                    </tr>
-                    @endif
-                    @if($surat->nik3!='')
-                    <tr>
-                        <td>{{$surat->nama3}}</td>
-                        <td>{{$surat->nik3}}</td>
-                        <td>{{$surat->jk3}}</td>
-                        <td>{{$surat->agama3}}</td>
-                        <td>{{$surat->sts_kawin3}}</td>
-                        <td>{{$surat->ket_kel3}}</td>
-                    </tr>
-                    @endif
-                    @if($surat->nik4!='')
-                    <tr>
-                        <td>{{$surat->nama4}}</td>
-                        <td>{{$surat->nik4}}</td>
-                        <td>{{$surat->jk4}}</td>
-                        <td>{{$surat->agama4}}</td>
-                        <td>{{$surat->sts_kawin4}}</td>
-                        <td>{{$surat->ket_kel4}}</td>
-                    </tr>
-                    @endif
-                    @if($surat->nik5!='')
-                    <tr>
-                        <td>{{$surat->nama5}}</td>
-                        <td>{{$surat->nik5}}</td>
-                        <td>{{$surat->jk5}}</td>
-                        <td>{{$surat->agama5}}</td>
-                        <td>{{$surat->sts_kawin5}}</td>
-                        <td>{{$surat->ket_kel5}}</td>
-                    </tr>
-                    @endif
-                    @if($surat->nik6!='')
-                    <tr>
-                        <td>{{$surat->nama6}}</td>
-                        <td>{{$surat->nik6}}</td>
-                        <td>{{$surat->jk6}}</td>
-                        <td>{{$surat->agama6}}</td>
-                        <td>{{$surat->sts_kawin6}}</td>
-                        <td>{{$surat->ket_kel6}}</td>
-                    </tr>
-                    @endif
-                </tbody>
             </table>
 
             <div class="tandatangan">

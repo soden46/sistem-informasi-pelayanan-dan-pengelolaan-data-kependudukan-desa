@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,9 +14,8 @@
     <link rel="stylesheet" type="text/css" href="/css/trix.css">
     <script type="text/javascript" src="/js/trix.js"></script>
     <style>
-        
-        trix-toolbar [data-trix-button-group="file-tools"]{
-        display: none
+        trix-toolbar [data-trix-button-group="file-tools"] {
+            display: none
         }
     </style>
 
@@ -25,8 +25,9 @@
 
     <title>{{ $title }}</title>
 </head>
+
 <body class="bodyPublic">
-    
+
     @include('../all/allScript')
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://unpkg.com/bootstrap-show-password@1.2.1/dist/bootstrap-show-password.min.js"></script>
@@ -38,9 +39,11 @@
         <div class="row">
             <script>
                 // mematikan fungsi add file trix editor (e) = end
-                document.addEventListener('trix-file-accept', function(e) { e.preventDefault();})
+                document.addEventListener('trix-file-accept', function(e) {
+                    e.preventDefault();
+                })
 
-                function previewImage(){
+                function previewImage() {
                     // tangkap variabel image dengan id image
                     const logoDesa = document.querySelector('#logoDesa');
 
@@ -53,13 +56,13 @@
                     const oFReader = new FileReader();
                     oFReader.readAsDataURL(logoDesa.files[0]);
 
-                    
-                    oFReader.onload = function(oFREvent){
-                    imgPreview.src = oFREvent.target.result;
+
+                    oFReader.onload = function(oFREvent) {
+                        imgPreview.src = oFREvent.target.result;
                     }
                 }
 
-                function previewImageApbdesa(){
+                function previewImageApbdesa() {
                     // tangkap variabel image dengan id image
                     const fotoApbdesa = document.querySelector('#fotoApbdes');
 
@@ -72,9 +75,9 @@
                     const oFReader = new FileReader();
                     oFReader.readAsDataURL(fotoApbdesa.files[0]);
 
-                    
-                    oFReader.onload = function(oFREvent){
-                    imgPreview.src = oFREvent.target.result;
+
+                    oFReader.onload = function(oFREvent) {
+                        imgPreview.src = oFREvent.target.result;
                     }
                 }
             </script>
@@ -82,5 +85,39 @@
         </div>
     </div>
 
+    <!-- Dependent Select -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+            $('#nik_pelapor').on('change', function() {
+                var pelaporID = $(this).val();
+                if (pelaporID) {
+                    $.ajax({
+                        url: '/getPelapor/' + pelaporID,
+                        type: "GET",
+                        data: {
+                            "_token": "{{ csrf_token() }}"
+                        },
+                        dataType: "json",
+                        success: function(data) {
+                            if (data) {
+                                $('#nama_pelapor').empty();
+                                $('#nama_pelapor').append('<option hidden>Pilih Nama Pelapor</option>');
+                                $.each(data, function(key, nama_pelapor) {
+                                    $('select[name="nama_pelapor"]').append('<option value="' + key + '" selected>' + nama_pelapor.nama + '</option>');
+                                });
+                            } else {
+                                $('#nama_pelapor').empty();
+                            }
+                        }
+                    });
+                } else {
+                    $('#nama_pelapor').empty();
+                }
+            });
+        });
+    </script>
 </body>
+
 </html>

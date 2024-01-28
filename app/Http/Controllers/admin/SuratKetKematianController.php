@@ -212,7 +212,7 @@ class SuratKetKematianController extends Controller
         $lampiran = json_decode($kematian->lampiran, true);
         if (isset($lampiran['pengantar_rt']) && ($lampiran['pengantar_dokter'])) {
             // dd($lampiran['pengantar_rt']);
-            return view('adminDashboard.LampiranDataKematian', [
+            return view('adminDashboard.lampiran.LampiranDataKematian', [
                 'title' => 'Lampiran Keterangan Kematian',
                 'pendu' => Penduduk::get(),
                 'rt' => $lampiran['pengantar_rt'],
@@ -225,7 +225,9 @@ class SuratKetKematianController extends Controller
 
             ]);
         } else {
-            // Tindakan jika properti 'pengantar_rt' tidak ada
+            return view('adminDashboard.lampiran.LampiranKosong', [
+                'title' => 'Lampiran Surat Keterangan Kematian',
+            ]);
         }
     }
 

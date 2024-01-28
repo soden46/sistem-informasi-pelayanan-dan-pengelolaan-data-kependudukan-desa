@@ -18,7 +18,6 @@ class LoginController extends Controller
         ]);
     }
 
-
     public function authenticate(Request $request)
     {
         $input = $request->all();

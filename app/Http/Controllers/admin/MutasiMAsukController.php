@@ -26,11 +26,13 @@ class MutasiMAsukController extends Controller
                 'title' => 'Data Mutasi Masuk',
                 'MutasiMasuk' => MutasiMAsuk::where('nik', 'like', "%" . $cari . "%")
                     ->orWhere('no_kk', 'like', "%" . $cari . "%")->paginate(10),
+                'pendu' => Penduduk::get()
             ]);
         } else {
             return view('adminDashboard.MutasiMasuk', [
                 'title' => 'Data Mutasi Masuk',
                 'MutasiMasuk' => MutasiMAsuk::paginate(10),
+                'pendu' => Penduduk::get()
             ]);
         }
     }
@@ -53,7 +55,7 @@ class MutasiMAsukController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $validatedDataMM = $request->validate([
             'tgl_regis_mm' => 'required',
             'nik_pelapor' => 'required|max:16',
             'nama_pelapor' => 'required|max:255',
@@ -70,43 +72,32 @@ class MutasiMAsukController extends Controller
             'padukuhan_tuju' => 'required|max:255',
             'rt_tuju' => 'required|max:255',
             'rw_tuju' => 'required|max:255',
-            'nik1' => 'max:16',
-            'nama1' => 'max:255',
-            'jk1' => 'max:255',
-            'agama1' => 'max:255',
-            'sts_kawin1' => 'max:255',
-            'ket_kel1' => 'max:255',
-            'nik2' => 'max:16',
-            'nama2' => 'max:255',
-            'jk2' => 'max:255',
-            'agama2' => 'max:255',
-            'sts_kawin2' => 'max:255',
-            'ket_kel2' => 'max:255',
-            'nik3' => 'max:16',
-            'nama3' => 'max:255',
-            'jk3' => 'max:255',
-            'agama3' => 'max:255',
-            'sts_kawin3' => 'max:255',
-            'ket_kel3' => 'max:255',
-            'nik5' => 'max:16',
-            'nama5' => 'max:255',
-            'jk5' => 'max:255',
-            'agama5' => 'max:255',
-            'sts_kawin5' => 'max:255',
-            'ket_kel5' => 'max:255',
-            'nik6' => 'max:16',
-            'nama6' => 'max:255',
-            'jk6' => 'max:255',
-            'agama6' => 'max:255',
-            'sts_kawin6' => 'max:255',
-            'ket_kel6' => 'max:255',
-            'prov_asal' => 'required|max:16',
         ]);
 
         // dd($validatedData);
-        MutasiMAsuk::create($validatedData);
+        $masuk = MutasiMAsuk::create($validatedDataMM);
 
-        return back()->with('successCreatedMutasiMAsuk', 'Data has ben created');
+        Penduduk::create([
+            'nik' => $request->nik_mm,
+            'nama' => $request->nama_mm,
+            'no_kk' => $request->no_kk,
+            'padukuhan' => $request->padukuhan_tuju,
+            'rt' => $request->rt_tuju,
+            'rw' => $request->rw_tuju,
+            'jk' => $request->jk_mm,
+            'tempat_lahir' => $request->tempat_lh_mm,
+            'tgl_lahir' => $request->tgl_lh_mm,
+            'wn' => $request->wn,
+            'kebangsaan' => $request->kebangsaan,
+            'agama' => $request->agama_mm,
+            'pekerjaan' => $request->pekerjaan_mm,
+            'pendidikan' => $request->pendidikan,
+            'sts_kawin' => $request->status_kawin_mm,
+            'sts_penduduk' => $request->sts_penduduk,
+            'sts_dalam_kk' => $request->sts_dalam_kk
+        ]);
+
+        return back()->with('successCreatedMutasiMAsuk', 'Data Sukses Ditambahkan Ke Tabel Mutasi Masuk Dan Data Penduduk');
     }
 
     /**
@@ -155,42 +146,10 @@ class MutasiMAsukController extends Controller
             'padukuhan_tuju' => 'max:255',
             'rt_tuju' => 'max:255',
             'rw_tuju' => 'max:255',
-            'nik1' => 'max:16',
-            'nama1' => 'max:255',
-            'jk1' => 'max:255',
-            'agama1' => 'max:255',
-            'sts_kawin1' => 'max:255',
-            'ket_kel1' => 'max:255',
-            'nik2' => 'max:16',
-            'nama2' => 'max:255',
-            'jk2' => 'max:255',
-            'agama2' => 'max:255',
-            'sts_kawin2' => 'max:255',
-            'ket_kel2' => 'max:255',
-            'nik3' => 'max:16',
-            'nama3' => 'max:255',
-            'jk3' => 'max:255',
-            'agama3' => 'max:255',
-            'sts_kawin3' => 'max:255',
-            'ket_kel3' => 'max:255',
-            'nik5' => 'max:16',
-            'nama5' => 'max:255',
-            'jk5' => 'max:255',
-            'agama5' => 'max:255',
-            'sts_kawin5' => 'max:255',
-            'ket_kel5' => 'max:255',
-            'nik6' => 'max:16',
-            'nama6' => 'max:255',
-            'jk6' => 'max:255',
-            'agama6' => 'max:255',
-            'sts_kawin6' => 'max:255',
-            'ket_kel6' => 'max:255',
-            'prov_asal' => 'max:16',
-            'verifikasi' => 'max:255'
         ]);
 
 
-        MutasiMAsuk::where('nik_mm', $nik_mm)->update($validatedData);
+        $masuk = MutasiMAsuk::where('nik_mm', $nik_mm)->update($validatedData);
 
         return back()->with('successUpdatedMasyarakat', 'Data has ben updated');
     }
@@ -218,5 +177,55 @@ class MutasiMAsukController extends Controller
         $customPaper = [0, 0, 567.00, 500.80];
         $pdf = Pdf::loadView('adminDashboard.pdf.SuratMutasiMasuk', $data)->setPaper('customPaper', 'potrait');
         return $pdf->stream('surat-permohonan-mutasi-masuk.pdf');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showLampiran($nik_mm)
+    {
+        $masuk = MutasiMAsuk::where('nik_mm', $nik_mm)->first();
+        $lampiran = json_decode($masuk->lampiran, true);
+        // dd($lampiran);
+        if (isset($lampiran['kk']) && ($lampiran['ktp_mm'])) {
+            // dd($lampiran['pengantar_rt']);
+            return view('adminDashboard.lampiran.LampiranMutasiMasuk', [
+                'title' => 'Lampiran Keterangan Mutasi Masuk',
+                'kk' => $lampiran['kk'],
+                'ktp_mm' => $lampiran['ktp_mm'],
+                'ktp_pelapor' => $lampiran['ktp_pelapor'],
+            ]);
+        } else {
+            return view('adminDashboard.lampiran.LampiranKosong', [
+                'title' => 'Lampiran Surat Keterangan Mutasi Masuk',
+            ]);
+        }
+    }
+
+    public function lampiranStore(Request $request, $nik_mm)
+    {
+        $request->validate([
+            'kk' => 'file|mimes:pdf,jpg,jpeg|max:2048',
+            'ktp_mm' => 'file|mimes:pdf,jpg,jpeg|max:2048',
+            'ktp_pelapor' => 'file|mimes:pdf,jpg,jpeg|max:2048',
+        ]);
+
+        $lampiran = [];
+        if ($request->hasFile('kk')) {
+            $lampiran['kk'] = $request->file('kk')->store('lampiran-data-mutasi-masuk');
+        }
+        if ($request->hasFile('ktp_mm')) {
+            $lampiran['ktp_mm'] = $request->file('ktp_mm')->store('lampiran-data-mutasi-masuk');
+        }
+        if ($request->hasFile('ktp_pelapor')) {
+            $lampiran['ktp_pelapor'] = $request->file('ktp_pelapor')->store('lampiran-data-mutasi-masuk');
+        }
+
+        // Simpan data lampiran ke dalam database
+        MutasiMAsuk::where('nik_mm', $nik_mm)->update(['lampiran' => json_encode($lampiran)]);
+
+        return redirect()->back()->with('success', 'Lampiran berhasil disimpan.');
     }
 }

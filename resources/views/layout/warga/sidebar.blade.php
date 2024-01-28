@@ -37,19 +37,19 @@
                     Data SK Biasa
                 </a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link {{ Request::is('warga/surat-keterangan-kelahiran*') ? 'active' : '' }}" href="/warga/surat-keterangan-kelahiran">
                     <span class="align-text-bottom bi bi-file-earmark-text"></span>
                     Data Kelahiran
                 </a>
-            </li>
+            </li> -->
             <li class="nav-item">
                 <a class="nav-link {{ Request::is('warga/surat-keterangan-kematian*') ? 'active' : '' }}" href="/warga/surat-keterangan-kematian">
                     <span class="align-text-bottom bi bi-file-earmark-text"></span>
                     Data Kematian
                 </a>
             </li>
-            <!-- <li class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link {{ Request::is('warga/data-mutasi-masuk*') ? 'active' : '' }}" href="/warga/data-mutasi-masuk">
                     <span class="align-text-bottom bi bi-file-earmark-text"></span>
                     Data Mutasi Masuk
@@ -60,7 +60,7 @@
                     <span class="align-text-bottom bi bi-file-earmark-text"></span>
                     Data Mutasi Keluar
                 </a>
-            </li> -->
+            </li>
         </ul>
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-uppercase">
             <span style="text-align: center">LOGOUT</span>

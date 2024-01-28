@@ -163,7 +163,7 @@ class SuratKetBiasaController extends Controller
         $lampiran = json_decode($kematian->lampiran, true);
         if (isset($lampiran['ktp']) && ($lampiran['kk'])) {
             // dd($lampiran['pengantar_rt']);
-            return view('adminDashboard.LampiranDataBiasa', [
+            return view('adminDashboard.lampiran.LampiranDataBiasa', [
                 'title' => 'Lampiran Keterangan Biasa',
                 'pendu' => Penduduk::get(),
                 'ktp' => $lampiran['ktp'],
@@ -171,7 +171,9 @@ class SuratKetBiasaController extends Controller
 
             ]);
         } else {
-            // Tindakan jika properti 'pengantar_rt' tidak ada
+            return view('adminDashboard.lampiran.LampiranKosong', [
+                'title' => 'Lampiran Surat Keterangan Biasa',
+            ]);
         }
     }
 

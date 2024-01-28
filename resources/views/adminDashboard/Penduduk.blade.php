@@ -262,7 +262,7 @@
                                     <select class="form-select" name="sts_penduduk" id="sts_penduduk">
                                         <option value="" selected>Silakan Pilih Status Penduduk</option>
                                         <option name="sts_penduduk" id="sts_penduduk" value="Meninggal">Meninggal</option>
-                                        <option name="sts_penduduk" id="sts_penduduk" value="Hidup">Hidup</option>
+                                        <option name="sts_penduduk" id="sts_penduduk" value="Tinggal">Tinggal</option>
                                         <option name="sts_penduduk" id="sts_penduduk" value="Pindah Keluar">Pindah Keluar</option>
                                     </select>
                                 </div>
@@ -364,7 +364,6 @@
                     <td style="vertical-align: middle;  ">{{ $item->tempat_lahir }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->sts_penduduk }}</td>
                     <td style="text-align: center;  ">
-                        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ $item->nik }}">Hapus</button>
                         <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editDataMasyarakat{{ $item->nik }}">Edit</button>
                     </td>
                 </tr>
@@ -588,7 +587,6 @@
                                         <select class="form-select" name="sts_penduduk" id="sts_penduduk">
                                             <option value="" selected>Silakan Pilih Status Penduduk</option>
                                             <option name="sts_penduduk" id="sts_penduduk" value="Meninggal">Meninggal</option>
-                                            <option name="sts_penduduk" id="sts_penduduk" value="Hidup">Hidup</option>
                                             <option name="sts_penduduk" id="sts_penduduk" value="Pindah Keluar">Pindah Keluar</option>
                                         </select>
                                     </div>

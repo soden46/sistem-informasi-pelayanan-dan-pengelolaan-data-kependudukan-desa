@@ -378,7 +378,7 @@
                     <th>Padukuhan</th>
                     <th>RT</th>
                     <th>RW</th>
-                    <th style="text-align: center">Data Keluarga</th>
+                    <!-- <th style="text-align: center">Data Keluarga</th> -->
                     <th style="text-align: center">Action</th>
                 </tr>
                 @foreach ($masyarakat as $index => $item)
@@ -390,10 +390,10 @@
                     <td style="vertical-align: middle;  ">{{ $item->padukuhan }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->rt }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->rw }}</td>
-                    <td style="text-align: center;  ">
+                    <!-- <td style="text-align: center;  ">
                         <a href="{{route('data-keluarga',$item->no_kk)}}" class="btn btn-success">Lihat</a>
                         <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#tambahKel{{ $item->nik }}">Tambah</button>
-                    </td>
+                    </td> -->
                     <td style="text-align: center;  ">
                         <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ $item->nik }}">Hapus</button>
                     </td>
