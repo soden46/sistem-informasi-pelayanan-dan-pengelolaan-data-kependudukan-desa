@@ -242,15 +242,23 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="padukuhan_tuju" class="form-label"><b>Padukuhan Tujuan</b></label>
-
-                                    <input type="text" name="padukuhan_tuju" id="padukuhan_tuju" class="form-control @error('padukuhan_tuju') is-invalid @enderror" required value="{{ old('padukuhan_tuju') }}" autocomplete="off" placeholder="Input Padukuhan Tujuan">
-
-                                    @error('padukuhan_tuju')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
+                                    <label for="padukuhan_tuju" class="form-label"><b>Padukuhan Tuju</b></label>
+                                    <select class="form-select" name="padukuhan_tuju" id="padukuhan_tuju">
+                                        <option value="" selected>Silakan Pilih Padukuhan</option>
+                                        <option value="Bodeh">Bodeh</option>
+                                        <option value="Depok">Depok</option>
+                                        <option value="Gamping Kidul">Gamping Kidul</option>
+                                        <option value="Gamping Lor">Gamping Lor</option>
+                                        <option value="Gamping Tengah">Gamping Tengah</option>
+                                        <option value="Kalimanjung">Kalimanjung</option>
+                                        <option value="Mancasan">Mancasan</option>
+                                        <option value="Mejing Kidul">Mejing Kidul</option>
+                                        <option value="Mejing Lor">Mejing Lor</option>
+                                        <option value="Mejing Wetan">Mejing Wetan</option>
+                                        <option value="Ptukan">Ptukan</option>
+                                        <option value="Tlogo">Tlogo</option>
+                                        <option value="Watulangkah">Watulangkah</option>
+                                    </select>
                                 </div>
 
                                 <div class="form-group row mb-3">

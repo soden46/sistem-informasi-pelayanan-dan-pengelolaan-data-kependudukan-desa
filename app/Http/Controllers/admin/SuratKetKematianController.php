@@ -32,7 +32,8 @@ class SuratKetKematianController extends Controller
             return view('adminDashboard.SuratKetKematian', [
                 'title' => 'Data Surat Keterangan Kematian',
                 'mati' => DataKematian::with('keluarga', 'pendu', 'mom', 'dad', 'saksi1', 'saksi2', 'lapor')->paginate(10),
-                'pendu' => Penduduk::get()
+                'pendu' => Penduduk::get(),
+                'kepala' => Penduduk::where('sts_dalam_kk', 'Kepala Keluarga')->get()
             ]);
         }
     }
@@ -44,19 +45,13 @@ class SuratKetKematianController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = [
+        $data = Penduduk::where('nik', $request->nik_mati)->first();
+        $alamat = json_encode(['Padukuhan: ' . $data->padukuhan, 'RT: ' . $data->rt, 'RW:' . $data->rw]);
+
+        $validatedData = $request->validate([
             'tgl_regis_mati' => 'required',
             'no_kk' => 'required|max:16',
             'nama_kepala_keluarga' => 'required|max:255',
-            'nik_mati' => 'required|max:16',
-            'nama_mati' => 'required|max:255',
-            'jenis_kelamin' => 'required|max:255',
-            'anak_ke' => 'required',
-            'tgl_lahir' => 'required',
-            'tempat_kelahiran' => 'required',
-            'agama_mati' => 'required|max:255',
-            'pekerjaan_mati' => 'required|max:255',
-            'alamat_mati' => 'required|max:255',
             'tgl_mati' => 'required',
             'pukul_mati' => 'required',
             'sebab' => 'required|max:255',
@@ -67,13 +62,33 @@ class SuratKetKematianController extends Controller
             'nik_pelapor' => 'required|max:255',
             'nik_saksisatu' => 'required|max:255',
             'nik_saksidua' => 'required|max:255',
-        ];
+        ]);
 
         Penduduk::where('nik', $request->nik_mati)->update(['sts_penduduk' => 'Meninggal']);
+        DataKematian::create([
+            'tgl_regis_mati' => $request->tgl_regis_mati,
+            'no_kk' => $request->no_kk,
+            'nama_kepala_keluarga' => $request->nama_kepala_keluarga,
+            'nik_mati' => $request->nik_mati,
+            'nama_mati' => $data->nama,
+            'jenis_kelamin' => $data->jk,
+            'tgl_lahir' => $data->tgl_lahir,
+            'tempat_kelahiran' => $data->tempat_lahir,
+            'agama_mati' => $data->agama,
+            'pekerjaan_mati' => $data->pekerjaan,
+            'alamat_mati' => $alamat,
+            'tgl_mati' => $request->tgl_mati,
+            'pukul_mati' => $request->pukul_mati,
+            'sebab' => $request->sebab,
+            'tempat_mati' => $request->tempat_mati,
+            'yang_menerangkan' => $request->yang_menerangkan,
+            'nik_ibu' => $request->nik_ibu,
+            'nik_ayah' => $request->nik_ayah,
+            'nik_pelapor' => $request->nik_pelapor,
+            'nik_saksisatu' => $request->nik_saksisatu,
+            'nik_saksidua' => $request->nik_saksidua,
+        ]);
 
-        $validatedData = $request->validate($rules);
-        // dd($validatedData);
-        DataKematian::create($validatedData);
         return back()->with('successCreatedDataKematian', 'Data Kematian Berhasil Ditambahkan');
     }
 

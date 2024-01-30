@@ -36,22 +36,6 @@
             </div>
         </div>
         <div class="col-md-3 mb-4">
-            <div class="card d-inline-flex mainMenu" style="width: 16rem; padding: 12px;  border-left: 5px solid green">
-                <a href="surat-keterangan-kelahiran" style="text-decoration: none; color: black">
-                    <div class="d-flex">
-                        <div style="width: 12rem">
-                            <h6 style="color: green">Jumlah Kelahiran</h6>
-                            <h4>{{ $jumlahLahir }} Kelahiran</h4>
-                        </div>
-                        <div style="width: 4rem; ">
-                            <h1><span style="color: black; vertical-align: middle" class="mainIcon bi bi-person-badge"></span></h1>
-                        </div>
-                    </div>
-                    <div class="card-footer border bg-transparent" style="width: 100%">View Details</div>
-                </a>
-            </div>
-        </div>
-        <div class="col-md-3 mb-4">
             <div class="card d-inline-flex mainMenu" style="width: 16rem; padding: 12px;  border-left: 5px solid red">
                 <a href="surat-keterangan-kematian" style="text-decoration: none; color: black">
                     <div class="d-flex">

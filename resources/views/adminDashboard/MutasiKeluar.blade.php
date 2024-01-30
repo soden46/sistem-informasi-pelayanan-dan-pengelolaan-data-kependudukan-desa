@@ -86,7 +86,7 @@
 
                                     <select class="form-select" name="nik_pelapor" id="nik_pelapor">
                                         <option name="nik_pelapor" id="nik_pelapor" value="" selected>Silakan Pilih NIK</option>
-                                        @foreach($pendu as $penduduk)
+                                        @foreach($pendudk as $penduduk)
                                         <option name="nik_pelapor" id="nik_pelapor" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
                                         @endforeach
                                     </select>
@@ -97,7 +97,7 @@
 
                                     <select class="form-select" name="nama_pelapor" id="nama_pelapor">
                                         <option name="nama_pelapor" id="nama_pelapor" value="" selected>Silakan Pilih NIK</option>
-                                        @foreach($pendu as $penduduk)
+                                        @foreach($pendudk as $penduduk)
                                         <option name="nama_pelapor" id="nama_pelapor" value="{{$penduduk->nama}}">{{$penduduk->nama}}</option>
                                         @endforeach
                                     </select>
@@ -108,7 +108,7 @@
 
                                     <select class="form-select" name="nik_mk" id="nik_mk">
                                         <option name="nik_mk" id="nik_mk" value="" selected>Silakan Pilih NIK</option>
-                                        @foreach($pendu as $penduduk)
+                                        @foreach($pendudk as $penduduk)
                                         <option name="nik_mk" id="nik_mk" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
                                         @endforeach
                                     </select>

@@ -25,16 +25,16 @@ class MutasiKeluarController extends Controller
         if ($cari != NULL) {
             return view('adminDashboard.MutasiKeluar', [
                 'title' => 'Data Mutasi Keluar',
-                'MutasiKeluar' => MutasiKeluar::with('pend', 'kel1', 'kel2')
+                'MutasiKeluar' => MutasiKeluar::with('pend')
                     ->where('nik', 'like', "%" . $cari . "%")
                     ->orWhere('no_kk', 'like', "%" . $cari . "%")->paginate(10),
-                'pendu' => Penduduk::get()
+                'pendudk' => Penduduk::get()
             ]);
         } else {
             return view('adminDashboard.MutasiKeluar', [
                 'title' => 'Data Mutasi Keluar',
                 'MutasiKeluar' => MutasiKeluar::with('pend', 'kel1', 'kel2')->paginate(10),
-                'pendu' => Penduduk::get()
+                'pendudk' => Penduduk::get()
             ]);
         }
     }
@@ -58,6 +58,7 @@ class MutasiKeluarController extends Controller
     public function store(Request $request)
     {
         $nik = Penduduk::where('nik', $request->nik_mk)->first();
+        $alamat = json_encode(['Padukuhan: ' . $nik->padukuhan, 'RT: ' . $nik->rt, 'RW:' . $nik->rw]);
         $validatedData = $request->validate([
             'tgl_regis_mk' => 'required',
             'nik_pelapor' => 'required|max:16',
@@ -67,8 +68,7 @@ class MutasiKeluarController extends Controller
             'rw_tuju' => 'required|max:255',
         ]);
 
-        $alamat = json_encode(['Padukuhan: ' . $nik->padukuhan, 'RT: ' . $nik->rt, 'RW:' . $nik->rw]);
-        $mutasi = MutasiKeluar::create([
+        MutasiKeluar::create([
             'tgl_regis_mk' => $request->tgl_regis_mk,
             'nik_pelapor' => $request->nik_pelapor,
             'nama_pelapor' => $request->nama_pelapor,
@@ -87,6 +87,7 @@ class MutasiKeluarController extends Controller
             'rw_tuju' => $request->rw_tuju,
         ]);
 
+        Penduduk::where('nik', $request->nik_mk)->update(['sts_penduduk' => 'Pindah Keluar']);
         return back()->with('successUpdatedMasyarakat', 'Data has ben created');
     }
 

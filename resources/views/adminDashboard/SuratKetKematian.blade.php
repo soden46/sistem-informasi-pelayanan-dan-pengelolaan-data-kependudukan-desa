@@ -58,7 +58,7 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="cretaeDataMasyarakatLabel">Tambah Data Surat Keterangan Beda Nama</h1>
+                            <h1 class="modal-title fs-5" id="cretaeDataMasyarakatLabel">Tambah Data Surat Keterangan Kematian</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <form action="/surat-keterangan-kematian/save" method="POST" enctype="multipart/form-data">
@@ -91,13 +91,12 @@
                                 <div class="mb-3">
                                     <label for="nama_kepala_keluarga" class="form-label"><b>Nama Kepala Keluarga</b></label>
 
-                                    <input type="text" name="nama_kepala_keluarga" id="nama_kepala_keluarga" class="form-control @error('nama_kepala_keluarga') is-invalid @enderror" required value="{{ old('nama_kepala_keluarga') }}" autocomplete="off" placeholder="Input Nama Kepala Keluarga">
-
-                                    @error('nama_kepala_keluarga')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
+                                    <select class="form-select" name="nama_kepala_keluarga" id="nama_kepala_keluarga">
+                                        <option name="nama_kepala_keluarga" id="nama_kepala_keluarga" value="" selected>Silakan Pilih Kepala Keluarga</option>
+                                        @foreach($kepala as $kep)
+                                        <option name="nama_kepala_keluarga" id="nama_kepala_keluarga" value="{{$kep->nama}}">{{$kep->nik}} | {{$kep->nama}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
 
                                 <div class="mb-3">
@@ -111,216 +110,123 @@
                                     </select>
                                 </div>
 
-                                <div class="mb-3">
-                                    <label for="nama_mati" class="form-label"><b>Nama Jenazah</b></label>
-
-                                    <select class="form-select" name="nama_mati" id="nama_mati">
-                                        <option name="nama_mati" id="nama_mati" value="" selected>Silakan Pilih Nama Jenazah</option>
-                                        @foreach($pendu as $penduduk)
-                                        <option name="nama_mati" id="nama_mati" value="{{$penduduk->nama}}">{{$penduduk->nama}} | {{$penduduk->nik}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="jenis_kelamin" class="form-label"><b>Jenis Kelamin Jenazah</b></label>
-
-                                    <select class="form-select" name="jenis_kelamin" id="jenis_kelamin">
-                                        <option name="jenis_kelamin" id="jenis_kelamin" value="" selected>Silakan Pilih Jenis Kelamin Jenazah</option>
-                                        <option name="jenis_kelamin" id="jenis_kelamin" value="Laki-Laki">Laki-Laki</option>
-                                        <option name="jenis_kelamin" id="jenis_kelamin" value="Perempuan">Perempuan</option>
-                                    </select>
-                                </div>
-
                                 <div class="form-group row mb-3">
-                                    <div class="col-sm-4">
-                                        <label for="anak_ke" class="form-label"><b>Anak Ke</b></label>
 
-                                        <input type="text" name="anak_ke" id="anak_ke" class="form-control @error('anak_ke') is-invalid @enderror" required value="{{ old('anak_ke') }}" autocomplete="off" placeholder="Input Anak Ke">
 
-                                        @error('anak_ke')
+                                    <div class="mb-3">
+                                        <label for="tgl_mati" class="form-label"><b>Tanggal Kematian</b></label>
+
+                                        <input type="date" name="tgl_mati" id="tgl_mati" class="form-control @error('tgl_mati') is-invalid @enderror" required value="{{ old('tgl_mati') }}" autocomplete="off" placeholder="Input Tanggal Mati">
+
+                                        @error('tgl_mati')
                                         <div class="invalid-feedback">
                                             <p style="text-align: left">{{ $message }}</p>
                                         </div>
                                         @enderror
                                     </div>
-                                    <div class="col-sm-4">
-                                        <label for="tgl_lahir" class="form-label"><b>Tanggal Lahir</b></label>
+                                    <div class="mb-3">
+                                        <label for="pukul_mati" class="form-label"><b>Jam Kematian</b></label>
 
-                                        <input type="date" name="tgl_lahir" id="tgl_lahir" class="form-control @error('tgl_lahir') is-invalid @enderror" required value="{{ old('tgl_lahir') }}" autocomplete="off" placeholder="Input Tanggal lahir">
+                                        <input type="time" name="pukul_mati" id="pukul_mati" class="form-control @error('pukul_mati') is-invalid @enderror" required value="{{ old('pukul_mati') }}" autocomplete="off" placeholder="Input Jam Kematian">
 
-                                        @error('tgl_lahir')
+                                        @error('pukul_mati')
                                         <div class="invalid-feedback">
                                             <p style="text-align: left">{{ $message }}</p>
                                         </div>
                                         @enderror
                                     </div>
-                                    <div class="col-sm-4">
-                                        <label for="tempat_kelahiran" class="form-label"><b>Tempat Lahir</b></label>
 
-                                        <input type="text" name="tempat_kelahiran" id="tempat_kelahiran" class="form-control @error('tempat_kelahiran') is-invalid @enderror" required value="{{ old('tempat_kelahiran') }}" autocomplete="off" placeholder="Input Tempat Lahir">
+                                    <div class="form-group row mb-3">
+                                        <div class="mb-3">
+                                            <label for="sebab" class="form-label"><b>Sebab Kematian</b></label>
 
-                                        @error('tempat_kelahiran')
-                                        <div class="invalid-feedback">
-                                            <p style="text-align: left">{{ $message }}</p>
+                                            <select class="form-select" name="sebab" id="sebab">
+                                                <option name="sebab" id="sebab" value="" selected>Silakan Pilih Sebab Kematian</option>
+                                                <option name="sebab" id="sebab" value="kecelakaan">Kecelakaan</option>
+                                                <option name="sebab" id="sebab" value="Sakit">Sakit</option>
+                                                <option name="sebab" id="sebab" value="Lain-Lain">Lain-Lain</option>
+                                            </select>
                                         </div>
-                                        @enderror
-                                    </div>
-                                </div>
 
-                                <div class="mb-3">
-                                    <label for="agama_mati" class="form-label"><b>Agama Jenazah Jenazah</b></label>
+                                        <div class="mb-3">
+                                            <label for="tempat_mati" class="form-label"><b>Tempat Kematian</b></label>
 
-                                    <select class="form-select" name="agama_mati" id="agama_mati">
-                                        <option value="" selected>Silakan Pilih agama_mati</option>
-                                        <option name="agama_mati" id="agama_mati" value="Islam">Islam</option>
-                                        <option name="agama_mati" id="agama_mati" value="Kristen">Kristen</option>
-                                        <option name="agama_mati" id="agama_mati" value="Katolik">Katolik</option>
-                                        <option name="agama_mati" id="agama_mati" value="Hindu">Hindu</option>
-                                        <option name="agama_mati" id="agama_mati" value="Buddha">Buddha</option>
-                                        <option name="agama_mati" id="agama_mati" value="Konghucu">Konghucu</option>
-                                    </select>
-                                </div>
+                                            <select class="form-select" name="tempat_mati" id="tempat_mati">
+                                                <option name="tempat_mati" id="tempat_mati" value="" selected>Silakan Pilih Tempat Kematian</option>
+                                                <option name="tempat_mati" id="tempat_mati" value="Rumah">Rumah</option>
+                                                <option name="tempat_mati" id="tempat_mati" value="Jalan">Jalan</option>
+                                                <option name="tempat_mati" id="tempat_mati" value="Rumah Sakit">Rumah Sakit</option>
+                                                <option name="tempat_mati" id="tempat_mati" value="Lain-Lain">Lain-Lain</option>
+                                            </select>
+                                        </div>
 
-                                <div class="mb-3">
-                                    <label for="pekerjaan_mati" class="form-label"><b>Pekerjaan Jenazah </b></label>
+                                        <div class="mb-3">
+                                            <label for="yang_menerangkan" class="form-label"><b>Yang Menerangkan</b></label>
 
-                                    <input type="text" name="pekerjaan_mati" id="pekerjaan_mati" class="form-control @error('pekerjaan_mati') is-invalid @enderror" required value="{{ old('pekerjaan_mati') }}" autocomplete="off" placeholder="Input Pekerjaan Jenazah">
-
-                                    @error('pekerjaan_mati')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="alamat_mati" class="form-label"><b>Alamat Jenazah </b></label>
-
-                                    <input type="text" name="alamat_mati" id="alamat_mati" class="form-control @error('alamat_mati') is-invalid @enderror" required value="{{ old('alamat_mati') }}" autocomplete="off" placeholder="Input Alamat Jenazah">
-
-                                    @error('alamat_mati')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-
-
-                                <div class="mb-3">
-                                    <label for="tgl_mati" class="form-label"><b>Tanggal Kematian</b></label>
-
-                                    <input type="date" name="tgl_mati" id="tgl_mati" class="form-control @error('tgl_mati') is-invalid @enderror" required value="{{ old('tgl_mati') }}" autocomplete="off" placeholder="Input Tanggal Mati">
-
-                                    @error('tgl_mati')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label for="pukul_mati" class="form-label"><b>Jam Kematian</b></label>
-
-                                    <input type="time" name="pukul_mati" id="pukul_mati" class="form-control @error('pukul_mati') is-invalid @enderror" required value="{{ old('pukul_mati') }}" autocomplete="off" placeholder="Input Jam Kematian">
-
-                                    @error('pukul_mati')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group row mb-3">
-                                    <div class="mb-3">
-                                        <label for="sebab" class="form-label"><b>Sebab Kematian</b></label>
-
-                                        <select class="form-select" name="sebab" id="sebab">
-                                            <option name="sebab" id="sebab" value="" selected>Silakan Pilih Sebab Kematian</option>
-                                            <option name="sebab" id="sebab" value="kecelakaan">Kecelakaan</option>
-                                            <option name="sebab" id="sebab" value="Sakit">Sakit</option>
-                                            <option name="sebab" id="sebab" value="Lain-Lain">Lain-Lain</option>
-                                        </select>
+                                            <select class="form-select" name="yang_menerangkan" id="yang_menerangkan">
+                                                <option name="yang_menerangkan" id="yang_menerangkan" value="" selected>Silakan Pilih Yang Menerangkan</option>
+                                                <option name="yang_menerangkan" id="yang_menerangkan" value="Keluarga">Keluarga</option>
+                                                <option name="yang_menerangkan" id="yang_menerangkan" value="Teman">Teman</option>
+                                                <option name="yang_menerangkan" id="yang_menerangkan" value="Tetangga">Tetangga</option>
+                                            </select>
+                                        </div>
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="tempat_mati" class="form-label"><b>Tempat Kematian</b></label>
+                                        <label for="nik_ibu" class="form-label"><b>NIK Ibu</b></label>
 
-                                        <select class="form-select" name="tempat_mati" id="tempat_mati">
-                                            <option name="tempat_mati" id="tempat_mati" value="" selected>Silakan Pilih Tempat Kematian</option>
-                                            <option name="tempat_mati" id="tempat_mati" value="Rumah">Rumah</option>
-                                            <option name="tempat_mati" id="tempat_mati" value="Jalan">Jalan</option>
-                                            <option name="tempat_mati" id="tempat_mati" value="Rumah Sakit">Rumah Sakit</option>
-                                            <option name="tempat_mati" id="tempat_mati" value="Lain-Lain">Lain-Lain</option>
+                                        <select class="form-select" name="nik_ibu" id="nik_ibu">
+                                            <option name="nik_ibu" id="nik_ibu" value="" selected>Silakan Pilih NIK Ibu</option>
+                                            @foreach($pendu as $penduduk)
+                                            <option name="nik_ibu" id="nik_ibu" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
-
                                     <div class="mb-3">
-                                        <label for="yang_menerangkan" class="form-label"><b>Yang Menerangkan</b></label>
+                                        <label for="nik_ayah" class="form-label"><b>NIK Ayah</b></label>
 
-                                        <select class="form-select" name="yang_menerangkan" id="yang_menerangkan">
-                                            <option name="yang_menerangkan" id="yang_menerangkan" value="" selected>Silakan Pilih Yang Menerangkan</option>
-                                            <option name="yang_menerangkan" id="yang_menerangkan" value="Keluarga">Keluarga</option>
-                                            <option name="yang_menerangkan" id="yang_menerangkan" value="Teman">Teman</option>
-                                            <option name="yang_menerangkan" id="yang_menerangkan" value="Tetangga">Tetangga</option>
+                                        <select class="form-select" name="nik_ayah" id="nik_ayah">
+                                            <option name="nik_ayah" id="nik_ayah" value="" selected>Silakan Pilih NIK Ayah</option>
+                                            @foreach($pendu as $penduduk)
+                                            <option name="nik_ayah" id="nik_ayah" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
-                                </div>
+                                    <div class="mb-3">
+                                        <label for="nik_pelapor" class="form-label"><b>NIK Pelapor</b></label>
 
-                                <div class="mb-3">
-                                    <label for="nik_ibu" class="form-label"><b>NIK Ibu</b></label>
+                                        <select class="form-select" name="nik_pelapor" id="nik_pelapor">
+                                            <option name="nik_pelapor" id="nik_pelapor" value="" selected>Silakan Pilih NIK Pelapor</option>
+                                            @foreach($pendu as $penduduk)
+                                            <option name="nik_pelapor" id="nik_pelapor" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="nik_saksisatu" class="form-label"><b>NIK Saksi Satu</b></label>
 
-                                    <select class="form-select" name="nik_ibu" id="nik_ibu">
-                                        <option name="nik_ibu" id="nik_ibu" value="" selected>Silakan Pilih NIK Ibu</option>
-                                        @foreach($pendu as $penduduk)
-                                        <option name="nik_ibu" id="nik_ibu" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="nik_ayah" class="form-label"><b>NIK Ayah</b></label>
+                                        <select class="form-select" name="nik_saksisatu" id="nik_saksisatu">
+                                            <option name="nik_saksisatu" id="nik_saksisatu" value="" selected>Silakan Pilih NIK Saksi Satu</option>
+                                            @foreach($pendu as $penduduk)
+                                            <option name="nik_saksisatu" id="nik_saksisatu" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="nik_saksidua" class="form-label"><b>NIK Saksi Dua</b></label>
 
-                                    <select class="form-select" name="nik_ayah" id="nik_ayah">
-                                        <option name="nik_ayah" id="nik_ayah" value="" selected>Silakan Pilih NIK Ayah</option>
-                                        @foreach($pendu as $penduduk)
-                                        <option name="nik_ayah" id="nik_ayah" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="nik_pelapor" class="form-label"><b>NIK Pelapor</b></label>
-
-                                    <select class="form-select" name="nik_pelapor" id="nik_pelapor">
-                                        <option name="nik_pelapor" id="nik_pelapor" value="" selected>Silakan Pilih NIK Pelapor</option>
-                                        @foreach($pendu as $penduduk)
-                                        <option name="nik_pelapor" id="nik_pelapor" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="nik_saksisatu" class="form-label"><b>NIK Saksi Saty</b></label>
-
-                                    <select class="form-select" name="nik_saksisatu" id="nik_saksisatu">
-                                        <option name="nik_saksisatu" id="nik_saksisatu" value="" selected>Silakan Pilih NIK Saksi Satu</option>
-                                        @foreach($pendu as $penduduk)
-                                        <option name="nik_saksisatu" id="nik_saksisatu" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="nik_saksidua" class="form-label"><b>NIK Saksi DUa</b></label>
-
-                                    <select class="form-select" name="nik_saksidua" id="nik_saksidua">
-                                        <option name="nik_saksidua" id="nik_saksidua" value="" selected>Silakan Pilih NIK Saksi Dua</option>
-                                        @foreach($pendu as $penduduk)
-                                        <option name="nik_saksidua" id="nik_saksidua" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
-                                        @endforeach
-                                    </select>
+                                        <select class="form-select" name="nik_saksidua" id="nik_saksidua">
+                                            <option name="nik_saksidua" id="nik_saksidua" value="" selected>Silakan Pilih NIK Saksi Dua</option>
+                                            @foreach($pendu as $penduduk)
+                                            <option name="nik_saksidua" id="nik_saksidua" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
                                     <button type="submit" class="btn btn-primary">Simpan</button>
                                 </div>
-
                         </form>
                     </div>
                 </div>
