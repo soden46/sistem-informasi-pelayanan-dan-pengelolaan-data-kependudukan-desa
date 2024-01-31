@@ -23,6 +23,10 @@ class DataKematian extends Model
     {
         return $this->belongsTo(Penduduk::class, 'nik_mati', 'nik');
     }
+    public function pendu()
+    {
+        return $this->belongsTo(Penduduk::class, 'nik_mati', 'nik');
+    }
     public function mom()
     {
         return $this->belongsTo(Penduduk::class, 'nik_ibu', 'nik');

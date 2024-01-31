@@ -158,7 +158,7 @@ class SuratKetKematianController extends Controller
 
     public function pdf($nik_mati)
     {
-        $surat = DataKematian::with('keluarga', 'pendu', 'mom', 'dad', 'saksi1', 'saksi2', 'lapor')->firstWhere('nik_mati', $nik_mati);
+        $surat = DataKematian::with('keluarga', 'pend', 'mom', 'dad', 'saksi1', 'saksi2', 'lapor')->firstWhere('nik_mati', $nik_mati);
         $ibu = $surat->mom->tgl_lahir;
         $ageMom = \Carbon\Carbon::parse($ibu)->age;
         $ayah = $surat->dad->tgl_lahir;
