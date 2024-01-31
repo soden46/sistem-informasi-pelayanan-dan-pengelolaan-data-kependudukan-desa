@@ -409,13 +409,7 @@
                     <td style="vertical-align: middle;  ">{{ $item->tempat_kelahiran }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->tgl_lahir }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->jenis_kelamin }}</td>
-                    <td style="text-align: center;  ">
-                        @if($item->verifikasi=="Belum Verifikasi")
-                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#verifikasibayi{{ $item->nik_bayi }}">Verifikasi</button>
-                        @else
-                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#batalverifikasi{{ $item->nik_bayi }}">Batal Verifikasi</button>
-                        @endif
-                    </td>
+                    <td style="vertical-align: middle;  ">{{ $item->verifikasi }}</td>
                     <td style="text-align: center;  ">
                         <a href="{{route('surat-keterangan-kelahiran/pdflurah',$item->nik_bayi) }}" class="btn btn-success" target="_blank">Lurah</a>
                         <a href="{{route('surat-keterangan-kelahiran/pdf',$item->nik_bayi) }}" class="btn btn-success" target="_blank">Staff</a>

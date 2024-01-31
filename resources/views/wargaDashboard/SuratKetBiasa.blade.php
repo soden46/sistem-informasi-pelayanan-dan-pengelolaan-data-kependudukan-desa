@@ -70,18 +70,6 @@
                             <div class="modal-body">
 
                                 <div class="mb-3">
-                                    <label for="no_surat_skb" class="form-label"><b>No Surat SKB</b></label>
-
-                                    <input type="text" name="no_surat_skb" id="no_surat_skb" class="form-control @error('no_surat_skb') is-invalid @enderror" required value="{{ old('no_surat_skb') }}" autocomplete="off" placeholder="Input No Surat SKB">
-
-                                    @error('no_surat_skb')
-                                    <div class="invalid-feedback">
-                                        <p style="text-align: left">{{ $message }}</p>
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
                                     <label for="tgl_regis_skb" class="form-label"><b>TGL Regis SKB</b></label>
 
                                     <input type="date" name="tgl_regis_skb" id="tgl_regis_skb" class="form-control @error('tgl_regis_skb') is-invalid @enderror" required value="{{ old('tgl_regis_skb') }}" autocomplete="off" placeholder="Input Tanggal Regis SKB">
@@ -182,6 +170,7 @@
                     <th>NIK</th>
                     <th>Nama</th>
                     <th>Keperluan</th>
+                    <th>Lampiran</th>
                     <th style="text-align: center">Verifikasi</th>
                     <th style="text-align: center">Cetak</th>
                 </tr>
@@ -193,12 +182,11 @@
                     <td style="vertical-align: middle;  ">{{ $item->pend->nama }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->keperluan_skb }}</td>
                     <td style="text-align: center;  ">
-                        @if($item->verifikasi=="Belum Verifikasi")
-                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#verifikasibayi{{ $item->nik }}">Verifikasi</button>
-                        @else
-                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#batalverifikasi{{ $item->nik }}">Batal Verifikasi</button>
-                        @endif
+                        <a href="{{route('warga/surat-keterangan-biasa/lampiran/show',$item->nik)}}"><button class="btn btn-success"><i class="bi bi-eye-fill"></i></button></a>
+                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#cretaeLampiran{{ $item->nik }}"><i class="bi bi-plus-square-fill"></i></button>
+                        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#destroyLampiran{{ $item->nik }}"><i class="bi bi-trash"></i></button>
                     </td>
+                    <td style="vertical-align: middle;  ">{{ $item->verifikasi }}</td>
                     <td style="text-align: center;  ">
                         <a href="{{route('surat-keterangan-biasa/pdflurah',$item->nik) }}" class="btn btn-success" target="_blank">Lurah</a>
                         <a href="{{route('surat-keterangan-biasa/pdf',$item->nik) }}" class="btn btn-success" target="_blank">Staff</a>
@@ -295,6 +283,50 @@
                                         <input type="text" name="keperluan_sks" id="keperluan_sks" class="form-control @error('keperluan_sks') is-invalid @enderror" required value="{{ old('keperluan_sks') }}" autocomplete="off" placeholder="Input Keperluan SKS">
 
                                         @error('keperluan_sks')
+                                        <div class="invalid-feedback">
+                                            <p style="text-align: left">{{ $message }}</p>
+                                        </div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                    </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal Lampiran-->
+                <div class="modal fade" id="cretaeLampiran{{ $item->nik }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="cretaeLampiranLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="cretaeLampiranLabel">Tambah Lampiran Surat Keterangan Biasa</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <span class="modal-title fs-6 text-center" id="cretaeLampiranLabel">Upload dokumen kelengkapan, pastikan file berupa (jpg/pdf) dengan ukuran masksmal 2MB/file</span>
+                            <form id="lampiranForm" action="{{route('surat-keterangan-biasa/lampiran/store',$item->nik)}}" method="POST" enctype="multipart/form-data">
+                                @method('POST')
+                                @csrf
+                                <div class="modal-body">
+
+                                    <div class="mb-3">
+                                        <label for="ktp" class="form-label">KTP Pemohon</label>
+                                        <input class="form-control" type="file" id="ktp" name="ktp">
+                                        @error('ktp')
+                                        <div class="invalid-feedback">
+                                            <p style="text-align: left">{{ $message }}</p>
+                                        </div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="kk" class="form-label">Kartu Keluarga</label>
+                                        <input class="form-control" type="file" id="kk" name="kk">
+                                        @error('kk')
                                         <div class="invalid-feedback">
                                             <p style="text-align: left">{{ $message }}</p>
                                         </div>

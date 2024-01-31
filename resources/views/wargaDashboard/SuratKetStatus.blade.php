@@ -170,9 +170,9 @@
                     <th>NIK</th>
                     <th>Nama</th>
                     <th>Keperluan</th>
-                    <th>Verifikasi</th>
                     <th>Lampiran</th>
-                    <!-- <th style="text-align: center">Cetak Surat</th> -->
+                    <th>Verifikasi</th>
+                    <th style="text-align: center">Cetak Surat</th>
                 </tr>
                 @foreach ($surat as $index => $item)
                 <tr style="width: 100%">
@@ -181,16 +181,15 @@
                     <td style="vertical-align: middle;  ">{{ $item->nik }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->pend->nama }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->keperluan_sks }}</td>
-                    <td style="vertical-align: middle;  ">{{ $item->verifikasi }}</td>
                     <td style="text-align: center;  ">
                         <a href="{{route('surat-keterangan-status/lampiran/show',$item->nik)}}"><button class="btn btn-success"><i class="bi bi-eye-fill"></i></button></a>
                         <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#cretaeLampiran{{ $item->nik }}"><i class="bi bi-plus-square-fill"></i></button>
                         <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#destroyLampiran{{ $item->nik }}"><i class="bi bi-trash"></i></button>
                     </td>
-                    <!-- <td style="text-align: center;  ">
-                        <a href="{{route('surat-keterangan-status/pdflurah',$item->nik) }}" class="btn btn-success" target="_blank">Lurah</a>
-                        <a href="{{route('surat-keterangan-status/pdf',$item->nik) }}" class="btn btn-success" target="_blank">Staff</a>
-                    </td> -->
+                    <td style="vertical-align: middle;  ">{{ $item->verifikasi }}</td>
+                    <td style="text-align: center;  ">
+                        <a href="{{route('warga/surat-keterangan-status/pdflurah',$item->nik) }}" class="btn btn-success" target="_blank" read>Cetak</a>
+                    </td>
                 </tr>
 
                 <!-- Modal verifikasi-->
@@ -249,7 +248,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <span class="modal-title fs-6 text-center" id="cretaeLampiranLabel">Upload dokumen kelengkapan, pastikan file berupa (jpg/pdf) dengan ukuran masksmal 2MB/file</span>
-                            <form id="lampiranForm" action="{{route('surat-keterangan-status/lampiran/store',$item->nik)}}" method="POST" enctype="multipart/form-data">
+                            <form id="lampiranForm" action="{{route('warga/surat-keterangan-status/lampiran/store',$item->nik)}}" method="POST" enctype="multipart/form-data">
                                 @method('POST')
                                 @csrf
                                 <div class="modal-body">
@@ -299,7 +298,7 @@
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="editDataMasyarakatLabel">Edit Data Penduduk</h1>
+                                <h1 class="modal-title fs-5" id="editDataMasyarakatLabel">Edit Data Keterangan Status</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <form action="{{route('surat-keterangan-status',$item->nik)}}" method="post">

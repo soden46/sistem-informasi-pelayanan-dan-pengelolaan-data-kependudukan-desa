@@ -94,6 +94,30 @@
                                     </div>
 
                                     <div class="mb-3">
+                                        <label for="nama" class="form-label"><b>Nama Lama</b></label>
+
+                                        <input type="text" name="nama" id="nama" class="form-control @error('nama') is-invalid @enderror" required value="{{ old('nama') }}" autocomplete="off" placeholder="Input Tertulis Pada">
+
+                                        @error('nama')
+                                        <div class="invalid-feedback">
+                                            <p style="text-align: left">{{ $message }}</p>
+                                        </div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="tertulis_pada" class="form-label"><b>Tertulis Pada</b></label>
+
+                                        <input type="text" name="tertulis_pada" id="tertulis_pada" class="form-control @error('tertulis_pada') is-invalid @enderror" required value="{{ old('tertulis_pada') }}" autocomplete="off" placeholder="Input Tertulis Pada">
+
+                                        @error('tertulis_pada')
+                                        <div class="invalid-feedback">
+                                            <p style="text-align: left">{{ $message }}</p>
+                                        </div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
                                         <label for="nama_baru" class="form-label"><b>Nama Baru</b></label>
 
                                         <input type="text" name="nama_baru" id="nama_baru" class="form-control @error('nama_baru') is-invalid @enderror" required value="{{ old('nama_baru') }}" autocomplete="off" placeholder="Input Nama Baru">
@@ -173,8 +197,9 @@
                     <th>NIK</th>
                     <th>Nama</th>
                     <th>Keperluan</th>
+                    <th>Lampiran</th>
                     <th>Verifikasi</th>
-                    <!-- <th style="text-align: center">Cetak</th> -->
+                    <th style="text-align: center">Cetak</th>
                 </tr>
                 @foreach ($surat as $index => $item)
                 <tr style="width: 100%">
@@ -184,10 +209,13 @@
                     <td style="vertical-align: middle;  ">{{ $item->pend->nama }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->keperluan_skbn }}</td>
                     <td style="vertical-align: middle;  ">{{$item->verifikasi}}</td>
-                    <!-- <td style="text-align: center;  ">
+                    <td style="text-align: center;  ">
                         <a href="{{route('warga/surat-keterangan-beda-nama/pdflurah',$item->nik) }}" class="btn btn-success" target="_blank">Lurah</a>
                         <a href="{{route('warga/surat-keterangan-beda-nama/pdf',$item->nik) }}" class="btn btn-success" target="_blank">Staff</a>
-                    </td> -->
+                    </td>
+                    <td style="text-align: center;  ">
+                        <a href="{{route('warga/surat-keterangan-beda-nama/pd',$item->nik) }}" class="btn btn-success" target="_blank">Lurah</a>
+                    </td>
                 </tr>
 
                 @endforeach

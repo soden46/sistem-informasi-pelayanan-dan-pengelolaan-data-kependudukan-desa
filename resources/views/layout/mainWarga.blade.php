@@ -84,7 +84,36 @@
             @yield('wargaContent')
         </div>
     </div>
-
+    <script>
+        $(document).ready(function() {
+            $('#nik_pelapor').on('change', function() {
+                var pelaporID = $(this).val();
+                if (pelaporID) {
+                    $.ajax({
+                        url: '/getPelapor/' + pelaporID,
+                        type: "GET",
+                        data: {
+                            "_token": "{{ csrf_token() }}"
+                        },
+                        dataType: "json",
+                        success: function(data) {
+                            if (data) {
+                                $('#nama_pelapor').empty();
+                                $('#nama_pelapor').append('<option hidden>Pilih Nama Pelapor</option>');
+                                $.each(data, function(key, nama_pelapor) {
+                                    $('select[name="nama_pelapor"]').append('<option value="' + key + '" selected>' + nama_pelapor.nama + '</option>');
+                                });
+                            } else {
+                                $('#nama_pelapor').empty();
+                            }
+                        }
+                    });
+                } else {
+                    $('#nama_pelapor').empty();
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -49,6 +49,7 @@ class WargaSuratKetBedaNamaController extends Controller
         $validatedData = $request->validate([
             'tgl_regis_skbn' => 'required',
             'nik' => 'required|max:16',
+            'nama' => 'required|max:255',
             'tertulis_pada' => 'required|max:16',
             'nama_baru' => 'required|max:255',
             'tempat_lh_baru' => 'required|max:255',
@@ -60,7 +61,7 @@ class WargaSuratKetBedaNamaController extends Controller
         // dd($validatedData);
         SuratKetBedaNama::create($validatedData);
 
-        return redirect()->back()->with('success', 'Data Anda Berhasil Diajukan. Tunggu Proses Selanjutnya!');
+        return back()->with('successCreatedPenduduk', 'Data has ben created');
     }
 
     /**

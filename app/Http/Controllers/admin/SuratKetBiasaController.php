@@ -128,7 +128,6 @@ class SuratKetBiasaController extends Controller
     {
         $data = [
             'title' => 'Keterangan Biasa',
-            'profil' => ProfilDesa::firstWhere('id', 1),
             'surat' => SuratKetBiasa::with('pend')->where('nik', $nik)->first(),
             'pendu' => Penduduk::get()
         ];
@@ -142,7 +141,6 @@ class SuratKetBiasaController extends Controller
     {
         $data = [
             'title' => 'Keterangan Biasa',
-            'profil' => ProfilDesa::firstWhere('id', 1),
             'surat' => SuratKetBiasa::with('pend')->where('nik', $nik)->first(),
             'pendu' => Penduduk::get()
         ];

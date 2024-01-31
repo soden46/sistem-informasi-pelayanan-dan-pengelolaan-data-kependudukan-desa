@@ -4,8 +4,10 @@ namespace App\Http\Controllers\warga;
 
 use App\Http\Controllers\Controller;
 use App\Models\MutasiKeluar;
+use App\Models\Penduduk;
 use App\Models\ProfilDesa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class WargaMutasiKeluarController extends Controller
 {
@@ -17,17 +19,20 @@ class WargaMutasiKeluarController extends Controller
     {
         $cari = $request->cari;
 
+        $nik = Auth::user()->nik;
         if ($cari != NULL) {
             return view('wargaDashboard.MutasiKeluar', [
                 'title' => 'Data Mutasi Keluar',
-                'MutasiKeluar' => MutasiKeluar::with('pend')
+                'MutasiKeluar' => MutasiKeluar::where('nik_mk', $nik)->with('pend')
                     ->where('nik', 'like', "%" . $cari . "%")
                     ->orWhere('no_kk', 'like', "%" . $cari . "%")->paginate(10),
+                'pendudk' => Penduduk::get()
             ]);
         } else {
             return view('wargaDashboard.MutasiKeluar', [
                 'title' => 'Data Mutasi Keluar',
-                'MutasiKeluar' => MutasiKeluar::with('pend')->paginate(10),
+                'MutasiKeluar' => MutasiKeluar::where('nik_mk', $nik)->with('pend')->paginate(10),
+                'pendudk' => Penduduk::get()
             ]);
         }
     }
@@ -50,17 +55,38 @@ class WargaMutasiKeluarController extends Controller
      */
     public function store(Request $request)
     {
+        $nik = Penduduk::where('nik', $request->nik_mk)->first();
+        $alamat = json_encode(['Padukuhan: ' . $nik->padukuhan, 'RT: ' . $nik->rt, 'RW:' . $nik->rw]);
         $validatedData = $request->validate([
             'tgl_regis_mk' => 'required',
-            'nik_mk' => 'required|max:16',
-            'alamat_tuju_mk' => 'required|max:255',
-            'prov_tuju' => 'required|max:16',
+            'nik_pelapor' => 'required|max:16',
+            'nama_pelapor' => 'required|max:255',
+            'padukuhan_tuju' => 'required|max:255',
+            'rt_tuju' => 'required|max:255',
+            'rw_tuju' => 'required|max:255',
         ]);
 
-        // dd($validatedData);
-        MutasiKeluar::create($validatedData);
+        MutasiKeluar::create([
+            'tgl_regis_mk' => $request->tgl_regis_mk,
+            'nik_pelapor' => $request->nik_pelapor,
+            'nama_pelapor' => $request->nama_pelapor,
+            'nik_mk' => $request->nik_mk,
+            'nama_mk' => $nik->nama,
+            'jk_mk' => $nik->jk,
+            'tempat_lh_mk' => $nik->tempat_lahir,
+            'tgl_lh_mk' => $nik->tgl_lahir,
+            'agama_mk' => $nik->agama,
+            'pekerjaan_mk' => $nik->pekerjaan,
+            'status_kawin_mk' => $nik->sts_kawin,
+            'no_kk' => $nik->no_kk,
+            'alamat_asal_mk' => $alamat,
+            'padukuhan_tuju' => $request->padukuhan_tuju,
+            'rt_tuju' => $request->rt_tuju,
+            'rw_tuju' => $request->rw_tuju,
+        ]);
 
-        return back()->with('successCreatedMutasiKeluar', 'Data has ben created');
+        Penduduk::where('nik', $request->nik_mk)->update(['sts_penduduk' => 'Pindah Keluar']);
+        return back()->with('successUpdatedMasyarakat', 'Data has ben created');
     }
 
     /**
