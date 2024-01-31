@@ -170,7 +170,6 @@ class MutasiMAsukController extends Controller
     {
         $data = [
             'title' => 'Mutasi Masuk',
-            'profil' => ProfilDesa::firstWhere('id', 1),
             'surat' => MutasiMAsuk::with('pend')->where('nik_mm', $nik_mm)->first(),
             'pendu' => Penduduk::get(),
         ];

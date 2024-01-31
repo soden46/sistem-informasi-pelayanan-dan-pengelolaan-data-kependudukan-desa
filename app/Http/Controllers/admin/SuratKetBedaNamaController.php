@@ -136,7 +136,6 @@ class SuratKetBedaNamaController extends Controller
     {
         $data = [
             'title' => 'Keterangan Beda Nama',
-            'profil' => ProfilDesa::firstWhere('id', 1),
             'surat' => SuratKetBedaNama::with('pend')->where('nik', $nik)->first(),
             'pendu' => Penduduk::get()
         ];
@@ -150,7 +149,6 @@ class SuratKetBedaNamaController extends Controller
     {
         $data = [
             'title' => 'Keterangan Beda Nama',
-            'profil' => ProfilDesa::firstWhere('id', 1),
             'surat' => SuratKetBedaNama::with('pend')->where('nik', $nik)->first(),
             'pendu' => Penduduk::get()
         ];
