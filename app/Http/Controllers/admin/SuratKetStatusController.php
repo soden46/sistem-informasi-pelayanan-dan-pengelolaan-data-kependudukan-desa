@@ -22,9 +22,6 @@ class SuratKetStatusController extends Controller
     {
         $cari = $request->cari;
 
-        $surat = SuratKetStatus::with('pend')->paginate(10);
-        dd($surat);
-
         if ($cari != NULL) {
             return view('adminDashboard.SuratKetStatus', [
                 'title' => 'Data Surat Keterangan Status',
