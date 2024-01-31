@@ -237,13 +237,13 @@ class WargaMutasiMasukController extends Controller
 
         $lampiran = [];
         if ($request->hasFile('kk')) {
-            $lampiran['kk'] = $request->file('kk')->store('lampiran-data-mutasi-masuk');
+            $lampiran['kk'] = $request->file('kk')->store('warga/lampiran-data-mutasi-masuk');
         }
         if ($request->hasFile('ktp_mm')) {
-            $lampiran['ktp_mm'] = $request->file('ktp_mm')->store('lampiran-data-mutasi-masuk');
+            $lampiran['ktp_mm'] = $request->file('ktp_mm')->store('warga/lampiran-data-mutasi-masuk');
         }
         if ($request->hasFile('ktp_pelapor')) {
-            $lampiran['ktp_pelapor'] = $request->file('ktp_pelapor')->store('lampiran-data-mutasi-masuk');
+            $lampiran['ktp_pelapor'] = $request->file('ktp_pelapor')->store('warga/lampiran-data-mutasi-masuk');
         }
 
         // Simpan data lampiran ke dalam database

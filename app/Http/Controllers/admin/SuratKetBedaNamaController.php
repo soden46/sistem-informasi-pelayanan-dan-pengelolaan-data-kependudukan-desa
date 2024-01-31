@@ -59,7 +59,6 @@ class SuratKetBedaNamaController extends Controller
         $validatedData = $request->validate([
             'tgl_regis_skbn' => 'required',
             'nik' => 'required|max:16',
-            'nama' => 'required|max:255',
             'tertulis_pada' => 'required|max:16',
             'nama_baru' => 'required|max:255',
             'tempat_lh_baru' => 'required|max:255',
@@ -68,8 +67,18 @@ class SuratKetBedaNamaController extends Controller
             'keperluan_skbn' => 'required|max:255',
         ]);
 
-        // dd($validatedData);
-        SuratKetBedaNama::create($validatedData);
+        $nama = Penduduk::where('nik', $request->nik)->first()->nama;
+        SuratKetBedaNama::create([
+            'tgl_regis_skbn' => $request->tgl_regis_skbn,
+            'nik' => $request->nik,
+            'nama' => $nama,
+            'tertulis_pada' => $request->tertulis_pada,
+            'nama_baru' => $request->nama_baru,
+            'tempat_lh_baru' => $request->tempat_lh_baru,
+            'tgl_lh_baru' => $request->tgl_lh_baru,
+            'alamat_baru' => $request->alamat_baru,
+            'keperluan_skbn' => $request->keperluan_skbn,
+        ]);
 
         return back()->with('successCreatedPenduduk', 'Data has ben created');
     }

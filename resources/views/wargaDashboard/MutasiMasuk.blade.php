@@ -390,7 +390,7 @@
                     <td style="vertical-align: middle;  ">{{ $item->tempat_lh_mm }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->tgl_lh_mm }}</td>
                     <td style="text-align: center;  ">
-                        <a href="{{route('data-mutasi-masuk/lampiran/show',$item->nik_mm)}}"><button class="btn btn-success"><i class="bi bi-eye-fill"></i></button></a>
+                        <a href="{{route('warga/data-mutasi-masuk/lampiran/show',$item->nik_mm)}}"><button class="btn btn-success"><i class="bi bi-eye-fill"></i></button></a>
                         <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#cretaeLampiran{{ $item->nik_mm }}"><i class="bi bi-plus-square-fill"></i></button>
                         <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#destroyLampiran{{ $item->nik_mm }}"><i class="bi bi-trash"></i></button>
                     </td>
@@ -480,7 +480,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
-                                <form action="{{route('data-mutasi-masuk/lampiran/destroy', $item->nik_mm) }}" method="post">
+                                <form action="{{route('warga/data-mutasi-masuk/lampiran/destroy', $item->nik_mm) }}" method="post">
                                     @method('delete')
                                     @csrf
                                     <button type="submit" class="btn btn-danger">Deleted</button>
@@ -499,7 +499,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <span class="modal-title fs-6 text-center" id="cretaeLampiranLabel">Upload dokumen kelengkapan, pastikan file berupa (jpg/pdf) dengan ukuran masksmal 2MB/file</span>
-                            <form id="lampiranForm" action="{{route('data-mutasi-masuk/lampiran/store',$item->nik_mm)}}" method="POST" enctype="multipart/form-data">
+                            <form id="lampiranForm" action="{{route('warga/data-mutasi-masuk/lampiran/store',$item->nik_mm)}}" method="POST" enctype="multipart/form-data">
                                 @method('POST')
                                 @csrf
                                 <div class="modal-body">

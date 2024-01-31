@@ -288,11 +288,11 @@ Route::middleware(['auth', 'role:masyarakat'])->group(function () {
             Route::delete('/warga/data-mutasi-keluar/delete/{nik_mk}', 'destroy')->name('warga/data-mutasi-keluar/delete');
             Route::get('/warga/data-mutasi-keluar/pdf/{nik_mk}', 'pdf')->name('warga/data-mutasi-keluar/pdf');
             Route::get('/warga/data-mutasi-keluar/pdf/lurah/{nik_mk}', 'pdflurah')->name('warga/data-mutasi-keluar/pdflurah');
-            Route::post('/warga/data-mutasi-keluar/lampiran/store/{nik_mk}', 'lampiranStore')->name('/warga/data-mutasi-keluar/lampiran/store')->middleware('auth');
-            Route::get('/warga/data-mutasi-keluar/lampiran/edit/{nik_mk}', 'lampiranEdit')->name('/warga/data-mutasi-keluar/lampiran/edit')->middleware('auth');
-            Route::get('/warga/data-mutasi-keluar/lampiran/update/{nik_mk}', 'lampiranUpdate')->name('/warga/data-mutasi-keluar/lampiran/update')->middleware('auth');
-            Route::get('/warga/data-mutasi-keluar/lampiran/destroy/{nik_mk}', 'lampiranDestroy')->name('/warga/data-mutasi-keluar/lampiran/destroy')->middleware('auth');
-            Route::get('/warga/data-mutasi-keluar/lampiran/show/{nik_mk}', 'showLampiran')->name('/warga/data-mutasi-keluar/lampiran/show')->middleware('auth');
+            Route::post('/warga/data-mutasi-keluar/lampiran/store/{nik_mk}', 'lampiranStore')->name('warga/data-mutasi-keluar/lampiran/store')->middleware('auth');
+            Route::get('/warga/data-mutasi-keluar/lampiran/edit/{nik_mk}', 'lampiranEdit')->name('warga/data-mutasi-keluar/lampiran/edit')->middleware('auth');
+            Route::get('/warga/data-mutasi-keluar/lampiran/update/{nik_mk}', 'lampiranUpdate')->name('warga/data-mutasi-keluar/lampiran/update')->middleware('auth');
+            Route::get('/warga/data-mutasi-keluar/lampiran/destroy/{nik_mk}', 'lampiranDestroy')->name('warga/data-mutasi-keluar/lampiran/destroy')->middleware('auth');
+            Route::get('/warga/data-mutasi-keluar/lampiran/show/{nik_mk}', 'showLampiran')->name('warga/data-mutasi-keluar/lampiran/show')->middleware('auth');
         }
     );
 
@@ -312,11 +312,11 @@ Route::middleware(['auth', 'role:masyarakat'])->group(function () {
                     return response()->json($nama_pelapor);
                 }
             );
-            Route::post('/warga/data-mutasi-masuk/lampiran/store/{nik_mm}', 'lampiranStore')->name('/warga/data-mutasi-masuk/lampiran/store')->middleware('auth');
-            Route::get('/warga/data-mutasi-masuk/lampiran/edit/{nik_mm}', 'lampiranEdit')->name('/warga/data-mutasi-masuk/lampiran/edit')->middleware('auth');
-            Route::get('/warga/data-mutasi-masuk/lampiran/update/{nik_mm}', 'lampiranUpdate')->name('/warga/data-mutasi-masuk/lampiran/update')->middleware('auth');
-            Route::get('/warga/data-mutasi-masuk/lampiran/destroy/{nik_mm}', 'lampiranDestroy')->name('/warga/data-mutasi-masuk/lampiran/destroy')->middleware('auth');
-            Route::get('/warga/data-mutasi-masuk/lampiran/show/{nik_mm}', 'showLampiran')->name('/warga/data-mutasi-masuk/lampiran/show')->middleware('auth');
+            Route::post('/warga/data-mutasi-masuk/lampiran/store/{nik_mm}', 'lampiranStore')->name('warga/data-mutasi-masuk/lampiran/store')->middleware('auth');
+            Route::get('/warga/data-mutasi-masuk/lampiran/edit/{nik_mm}', 'lampiranEdit')->name('warga/data-mutasi-masuk/lampiran/edit')->middleware('auth');
+            Route::get('/warga/data-mutasi-masuk/lampiran/update/{nik_mm}', 'lampiranUpdate')->name('warga/data-mutasi-masuk/lampiran/update')->middleware('auth');
+            Route::get('/warga/data-mutasi-masuk/lampiran/destroy/{nik_mm}', 'lampiranDestroy')->name('warga/data-mutasi-masuk/lampiran/destroy')->middleware('auth');
+            Route::get('/warga/data-mutasi-masuk/lampiran/show/{nik_mm}', 'showLampiran')->name('warga/data-mutasi-masuk/lampiran/show')->middleware('auth');
         }
     );
 });

@@ -101,18 +101,6 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="nama" class="form-label"><b>Nama Lama</b></label>
-
-                                        <input type="text" name="nama" id="nama" class="form-control @error('nama') is-invalid @enderror" required value="{{ old('nama') }}" autocomplete="off" placeholder="Input Tertulis Pada">
-
-                                        @error('nama')
-                                        <div class="invalid-feedback">
-                                            <p style="text-align: left">{{ $message }}</p>
-                                        </div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="mb-3">
                                         <label for="tertulis_pada" class="form-label"><b>Tertulis Pada</b></label>
 
                                         <input type="text" name="tertulis_pada" id="tertulis_pada" class="form-control @error('tertulis_pada') is-invalid @enderror" required value="{{ old('tertulis_pada') }}" autocomplete="off" placeholder="Input Tertulis Pada">

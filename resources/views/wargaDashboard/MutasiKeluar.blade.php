@@ -232,7 +232,7 @@
                     <td style="vertical-align: middle;  ">{{ $item->pend->agama }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->pend->pekerjaan }}</td>
                     <td style="text-align: center;  ">
-                        <a href="{{route('data-mutasi-keluar/lampiran/show',$item->nik_mk)}}"><button class="btn btn-success"><i class="bi bi-eye-fill"></i></button></a>
+                        <a href="{{route('warga/data-mutasi-keluar/lampiran/show',$item->nik_mk)}}"><button class="btn btn-success"><i class="bi bi-eye-fill"></i></button></a>
                         <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#cretaeLampiran{{ $item->nik_mk }}"><i class="bi bi-plus-square-fill"></i></button>
                         <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#destroyLampiran{{ $item->nik_mk }}"><i class="bi bi-trash"></i></button>
                     </td>
@@ -252,57 +252,10 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
-                                <form action="{{route('data-mutasi-keluar/delete', $item->nik_mk) }}" method="post">
+                                <form action="{{route('warga/data-mutasi-keluar/delete', $item->nik_mk) }}" method="post">
                                     @method('delete')
                                     @csrf
                                     <button type="submit" class="btn btn-danger">Deleted</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Modal verifikasi-->
-                <div class="modal fade" id="verifikasibayi{{ $item->nik_mk}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Verifikasi Data Kelahiran</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <p>Apakah anda yakin untuk memverifikasi data <b>{{ $item->nama }}</b></p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
-                                <form action="{{route('data-mutasi-keluar/update', $item->nik_mk) }}" method="post">
-                                    @csrf
-                                    <input type="text" id="verifikasi" name="verifikasi" value="Sudah Verifikasi" hidden>
-                                    <button type="submit" class="btn btn-success">Verifikasi</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Modal batal verifikasi-->
-                <div class="modal fade" id="batalverifikasi{{ $item->nik_mk}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Verifikasi Data Kelahiran</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <p>Apakah anda yakin untuk membatalkan verifikasi data <b>{{ $item->nama }}</b></p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
-                                <form action="{{route('data-mutasi-keluar/update', $item->nik_mk) }}" method="post">
-                                    @method('post')
-                                    @csrf
-                                    <input type="text" name="verifikasi" value="Belum Verifikasi" value="Belum Verifikasi" hidden>
-                                    <button type="submit" class="btn btn-danger">Batalkan Verifikasi</button>
                                 </form>
                             </div>
                         </div>
@@ -322,7 +275,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
-                                <form action="{{route('data-mutasi-masuk/lampiran/destroy', $item->nik_mk) }}" method="post">
+                                <form action="{{route('warga/data-mutasi-masuk/lampiran/destroy', $item->nik_mk) }}" method="post">
                                     @method('delete')
                                     @csrf
                                     <button type="submit" class="btn btn-danger">Deleted</button>
@@ -341,7 +294,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <span class="modal-title fs-6 text-center" id="cretaeLampiranLabel">Upload dokumen kelengkapan, pastikan file berupa (jpg/pdf) dengan ukuran masksmal 2MB/file</span>
-                            <form id="lampiranForm" action="{{route('data-mutasi-keluar/lampiran/store',$item->nik_mk)}}" method="POST" enctype="multipart/form-data">
+                            <form id="lampiranForm" action="{{route('warga/data-mutasi-keluar/lampiran/store',$item->nik_mk)}}" method="POST" enctype="multipart/form-data">
                                 @method('POST')
                                 @csrf
                                 <div class="modal-body">

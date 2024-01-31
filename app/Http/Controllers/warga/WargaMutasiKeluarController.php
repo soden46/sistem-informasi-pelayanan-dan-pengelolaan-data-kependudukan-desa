@@ -147,4 +147,50 @@ class WargaMutasiKeluarController extends Controller
         MutasiKeluar::where('nik_mk', $nik_mk)->delete();
         return back()->with('successDeletedMasyarakat', 'Data has ben deleted');
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showLampiran($nik_mk)
+    {
+        $masuk = MutasiKeluar::where('nik_mk', $nik_mk)->first();
+        $lampiran = json_decode($masuk->lampiran, true);
+        // dd($lampiran);
+        if (isset($lampiran['kk']) && ($lampiran['ktp'])) {
+            // dd($lampiran['pengantar_rt']);
+            return view('wargaDashboard.lampiran.LampiranMutasiKeluar', [
+                'title' => 'Lampiran Keterangan Mutasi Keluar',
+                'kk' => $lampiran['kk'],
+                'ktp' => $lampiran['ktp'],
+            ]);
+        } else {
+            return view('wargaDashboard.lampiran.LampiranKosong', [
+                'title' => 'Lampiran Surat Keterangan Mutasi Keluar',
+            ]);
+        }
+    }
+
+    public function lampiranStore(Request $request, $nik_mk)
+    {
+        $request->validate([
+            'kk' => 'file|mimes:pdf,jpg,jpeg|max:2048',
+            'ktp' => 'file|mimes:pdf,jpg,jpeg|max:2048',
+        ]);
+
+        $lampiran = [];
+        if ($request->hasFile('kk')) {
+            $lampiran['kk'] = $request->file('kk')->store('warga/lampiran-data-mutasi-keluar');
+        }
+        if ($request->hasFile('ktp')) {
+            $lampiran['ktp'] = $request->file('ktp')->store('warga/lampiran-data-mutasi-keluar');
+        }
+
+
+        // Simpan data lampiran ke dalam database
+        MutasiKeluar::where('nik_mk', $nik_mk)->update(['lampiran' => json_encode($lampiran)]);
+
+        return redirect()->back()->with('success', 'Lampiran berhasil disimpan.');
+    }
 }
