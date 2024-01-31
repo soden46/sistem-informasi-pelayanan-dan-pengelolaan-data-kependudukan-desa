@@ -61,7 +61,7 @@
                             <h1 class="modal-title fs-5" id="cretaeDataMasyarakatLabel">Tambah Data Surat Keterangan Beda Nama</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="warga/surat-keterangan-kematian/save" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('warga/surat-keterangan-kematian/save')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="modal-body">
 
@@ -196,34 +196,34 @@
                                         <label for="nik_pelapor" class="form-label"><b>NIK Pelapor</b></label>
 
                                         <select class="form-select" name="nik_pelapor" id="nik_pelapor">
-                                            <option name="nik_pelapor" id="nik_pelapor" value="" selected>Silakan Pilih NIK Pelapor</option>
-                                            @foreach($pendu as $penduduk)
-                                            <option name="nik_pelapor" id="nik_pelapor" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
-                                            @endforeach
+                                            <option name="nik_pelapor" id="nik_pelapor" value="" selected>Silakan Pilih NIK</option>
+                                            <option name="nik_pelapor" id="nik_pelapor" value="{{$user->nik}}" selected>{{$user->nik}} | {{$user->name}}</option>
                                         </select>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="nik_saksisatu" class="form-label"><b>NIK Saksi Satu</b></label>
 
-                                        <select class="form-select" name="nik_saksisatu" id="nik_saksisatu">
-                                            <option name="nik_saksisatu" id="nik_saksisatu" value="" selected>Silakan Pilih NIK Saksi Satu</option>
-                                            @foreach($pendu as $penduduk)
-                                            <option name="nik_saksisatu" id="nik_saksisatu" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
                                     <div class="mb-3">
-                                        <label for="nik_saksidua" class="form-label"><b>NIK Saksi Dua</b></label>
+                                        <div class="mb-3">
+                                            <label for="nik_saksisatu" class="form-label"><b>NIK Saksi Satu</b></label>
 
-                                        <select class="form-select" name="nik_saksidua" id="nik_saksidua">
-                                            <option name="nik_saksidua" id="nik_saksidua" value="" selected>Silakan Pilih NIK Saksi Dua</option>
-                                            @foreach($pendu as $penduduk)
-                                            <option name="nik_saksidua" id="nik_saksidua" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
-                                            @endforeach
-                                        </select>
+                                            <select class="form-select" name="nik_saksisatu" id="nik_saksisatu">
+                                                <option name="nik_saksisatu" id="nik_saksisatu" value="" selected>Silakan Pilih NIK Saksi Satu</option>
+                                                @foreach($pendu as $penduduk)
+                                                <option name="nik_saksisatu" id="nik_saksisatu" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="nik_saksidua" class="form-label"><b>NIK Saksi Dua</b></label>
+
+                                            <select class="form-select" name="nik_saksidua" id="nik_saksidua">
+                                                <option name="nik_saksidua" id="nik_saksidua" value="" selected>Silakan Pilih NIK Saksi Dua</option>
+                                                @foreach($pendu as $penduduk)
+                                                <option name="nik_saksidua" id="nik_saksidua" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
                                     <button type="submit" class="btn btn-primary">Simpan</button>
@@ -286,7 +286,7 @@
         <div class="table-responsive">
             <table class="table" style="text-align: left; color: black">
                 <tr>
-                    <th>No</th>
+                    <th>ID</th>
                     <th>TGL Regis</th>
                     <th>Nama</th>
                     <th>NIK</th>
@@ -294,13 +294,13 @@
                     <th>Alamat</th>
                     <th>Tempat Mati</th>
                     <th>TGL Kematian</th>
+                    <th>NIK Pelapor</th>
                     <th style="text-align: center">Lampiran</th>
                     <th style="text-align: center">Verifikasi</th>
-                    <th style="text-align: center">Cetak</th>
                 </tr>
-                @foreach ($mati as $index => $item)
+                @foreach ($mati as $item)
                 <tr style="width: 100%">
-                    <td style="vertical-align: middle; width: 5%; ">{{ $index + $mati->firstItem() }}</td>
+                    <td style="vertical-align: middle; width: 5%; ">{{ $item->id_kematian }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->tgl_regis_mati }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->nama_mati }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->nik_mati }}</td>
@@ -308,16 +308,13 @@
                     <td style="vertical-align: middle;  ">{{ $item->alamat_mati }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->tempat_mati }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->tgl_mati }}</td>
+                    <td style="vertical-align: middle;  ">{{ $item->nik_pelapor }}</td>
                     <td style="text-align: center;  ">
                         <a href="{{route('warga/surat-keterangan-kematian/lampiran/show',$item->nik_mati)}}"><button class="btn btn-success"><i class="bi bi-eye-fill"></i></button></a>
                         <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#cretaeLampiran{{ $item->nik_mati }}"><i class="bi bi-plus-square-fill"></i></button>
                         <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#destroyLampiran{{ $item->nik_mati }}"><i class="bi bi-trash"></i></button>
                     </td>
                     <td style="vertical-align: middle;  ">{{ $item->verifikasi }}</td>
-                    <td style="text-align: center;  ">
-                        <a href="{{route('warga/surat-keterangan-kematian/pdflurah',$item->nik_mati) }}" class="btn btn-success" target="_blank">Lurah</a>
-                        <a href="{{route('warga/surat-keterangan-kematian/pdf',$item->nik_mati) }}" class="btn btn-success" target="_blank">Staff</a>
-                    </td>
                 </tr>
 
                 <!-- Modal verifikasi-->
@@ -694,7 +691,7 @@
                 @endforeach
             </table>
             <div class="d-flex justify-content-between mb-3">
-                {{ $mati->links('layout.pagination') }}
+
             </div>
         </div>
 

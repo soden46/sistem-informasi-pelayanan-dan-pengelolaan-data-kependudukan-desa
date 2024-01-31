@@ -49,7 +49,7 @@
             <div class="d-flex">
 
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cretaeDataMasyarakat" style="margin-right: 15px">Tambah Data Surat Keterangan Status</button>
-                <form action="/surat-keterangan-status" method="GET" style="margin-left: 40%">
+                <form action="{{route('warga/surat-keterangan-status')}}" method="GET" style="margin-left: 40%">
 
                     <input type="text" id="cari" name="cari" placeholder="Cari NIK/No KK/Nama">
                     <button type="submit" class="btn btn-success">Cari</button>
@@ -65,7 +65,7 @@
                             <h1 class="modal-title fs-5" id="cretaeDataMasyarakatLabel">Tambah Data Surat Keterangan Status</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="/surat-keterangan-status/store" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('warga/surat-keterangan-status/store')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="modal-body">
 
@@ -172,7 +172,6 @@
                     <th>Keperluan</th>
                     <th>Lampiran</th>
                     <th>Verifikasi</th>
-                    <th style="text-align: center">Cetak Surat</th>
                 </tr>
                 @foreach ($surat as $index => $item)
                 <tr style="width: 100%">
@@ -187,9 +186,6 @@
                         <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#destroyLampiran{{ $item->nik }}"><i class="bi bi-trash"></i></button>
                     </td>
                     <td style="vertical-align: middle;  ">{{ $item->verifikasi }}</td>
-                    <td style="text-align: center;  ">
-                        <a href="{{route('warga/surat-keterangan-status/pdflurah',$item->nik) }}" class="btn btn-success" target="_blank" read>Cetak</a>
-                    </td>
                 </tr>
 
                 <!-- Modal verifikasi-->

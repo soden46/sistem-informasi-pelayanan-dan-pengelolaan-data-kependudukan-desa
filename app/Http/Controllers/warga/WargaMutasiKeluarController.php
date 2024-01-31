@@ -20,19 +20,22 @@ class WargaMutasiKeluarController extends Controller
         $cari = $request->cari;
 
         $nik = Auth::user()->nik;
+        $user = Penduduk::where('nik', Auth::user()->nik)->first();
         if ($cari != NULL) {
             return view('wargaDashboard.MutasiKeluar', [
                 'title' => 'Data Mutasi Keluar',
-                'MutasiKeluar' => MutasiKeluar::where('nik_mk', $nik)->with('pend')
+                'MutasiKeluar' => MutasiKeluar::where('nik_pelapor', $nik)->with('pend')
                     ->where('nik', 'like', "%" . $cari . "%")
                     ->orWhere('no_kk', 'like', "%" . $cari . "%")->paginate(10),
-                'pendudk' => Penduduk::get()
+                'pendudk' => Penduduk::get(),
+                'user' => $user
             ]);
         } else {
             return view('wargaDashboard.MutasiKeluar', [
                 'title' => 'Data Mutasi Keluar',
-                'MutasiKeluar' => MutasiKeluar::where('nik_mk', $nik)->with('pend')->paginate(10),
-                'pendudk' => Penduduk::get()
+                'MutasiKeluar' => MutasiKeluar::where('nik_pelapor', $nik)->with('pend')->paginate(10),
+                'pendudk' => Penduduk::get(),
+                'user' => $user
             ]);
         }
     }

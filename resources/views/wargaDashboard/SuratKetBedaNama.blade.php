@@ -65,7 +65,7 @@
                             <h1 class="modal-title fs-5" id="cretaeDataMasyarakatLabel">Tambah Data Surat Keterangan Beda Nama</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="surat-ket-beda-nama/store" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('warga/surat-ket-beda-nama/store')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="modal-body">
 
@@ -86,7 +86,6 @@
                                         <label for="nik" class="form-label"><b>NIK</b></label>
 
                                         <select class="form-select" name="nik" id="nik">
-                                            <option name="nik" id="nik" value="" selected>Silakan Pilih NIK</option>
                                             @foreach($pendu as $penduduk)
                                             <option name="nik" id="nik" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
                                             @endforeach
@@ -94,15 +93,11 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="nama" class="form-label"><b>Nama Lama</b></label>
+                                        <label for="nama" class="form-label"><b>Nama Pelapor</b></label>
 
-                                        <input type="text" name="nama" id="nama" class="form-control @error('nama') is-invalid @enderror" required value="{{ old('nama') }}" autocomplete="off" placeholder="Input Tertulis Pada">
-
-                                        @error('nama')
-                                        <div class="invalid-feedback">
-                                            <p style="text-align: left">{{ $message }}</p>
-                                        </div>
-                                        @enderror
+                                        <select class="form-select" name="nama" id="nama">
+                                            <option name="nama" id="nama" value="{{$user->nama}}" selected>{{$user->nama}}</option>
+                                        </select>
                                     </div>
 
                                     <div class="mb-3">
@@ -199,7 +194,6 @@
                     <th>Keperluan</th>
                     <th>Lampiran</th>
                     <th>Verifikasi</th>
-                    <th style="text-align: center">Cetak</th>
                 </tr>
                 @foreach ($surat as $index => $item)
                 <tr style="width: 100%">
@@ -208,14 +202,12 @@
                     <td style="vertical-align: middle;  ">{{ $item->nik }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->pend->nama }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->keperluan_skbn }}</td>
+                    <td style="text-align: center;  ">
+                        <a href="{{route('warga/surat-ket-beda-nama/lampiran/show',$item->nik)}}"><button class="btn btn-success"><i class="bi bi-eye-fill"></i></button></a>
+                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#cretaeLampiran{{ $item->nik }}"><i class="bi bi-plus-square-fill"></i></button>
+                        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#destroyLampiran{{ $item->nik }}"><i class="bi bi-trash"></i></button>
+                    </td>
                     <td style="vertical-align: middle;  ">{{$item->verifikasi}}</td>
-                    <td style="text-align: center;  ">
-                        <a href="{{route('warga/surat-keterangan-beda-nama/pdflurah',$item->nik) }}" class="btn btn-success" target="_blank">Lurah</a>
-                        <a href="{{route('warga/surat-keterangan-beda-nama/pdf',$item->nik) }}" class="btn btn-success" target="_blank">Staff</a>
-                    </td>
-                    <td style="text-align: center;  ">
-                        <a href="{{route('warga/surat-keterangan-beda-nama/pd',$item->nik) }}" class="btn btn-success" target="_blank">Lurah</a>
-                    </td>
                 </tr>
 
                 @endforeach

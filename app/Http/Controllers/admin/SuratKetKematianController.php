@@ -31,7 +31,7 @@ class SuratKetKematianController extends Controller
         } else {
             return view('adminDashboard.SuratKetKematian', [
                 'title' => 'Data Surat Keterangan Kematian',
-                'mati' => DataKematian::with('keluarga', 'pendu', 'mom', 'dad', 'saksi1', 'saksi2', 'lapor')->paginate(10),
+                'mati' => DataKematian::with('keluarga', 'pend', 'mom', 'dad', 'saksi1', 'saksi2', 'lapor')->paginate(10),
                 'pendu' => Penduduk::get(),
                 'kepala' => Penduduk::where('sts_dalam_kk', 'Kepala Keluarga')->get()
             ]);

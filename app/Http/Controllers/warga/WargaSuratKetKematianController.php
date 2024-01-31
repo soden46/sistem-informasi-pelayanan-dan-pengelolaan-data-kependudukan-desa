@@ -15,11 +15,14 @@ class WargaSuratKetKematianController extends Controller
     public function index(Request $request)
     {
         $nik = Auth::user()->nik;
+        $user = Penduduk::where('nik', Auth::user()->nik)->first();
+
         return view('wargaDashboard.SuratKetKematian', [
             'title' => 'Data Surat Keterangan Kematian',
-            'mati' => DataKematian::where('nik_pelapor', $nik)->with('pend')->paginate(10),
+            'mati' => $mati = DataKematian::where('nik_pelapor', $nik)->with('pend')->get(),
             'pendu' => Penduduk::get(),
-            'kepala' => Penduduk::where('sts_dalam_kk', 'Kepala Keluarga')->get()
+            'kepala' => Penduduk::where('sts_dalam_kk', 'Kepala Keluarga')->get(),
+            'user' => $user
         ]);
     }
 

@@ -49,6 +49,7 @@
             {{-- <div class="form-floating">
                 <input data-toggle="password" type="password" class="form-control" id="password" placeholder="Password">
                 <label for="floatingPassword">Password</label>
+                
             </div> --}}
 
             <div>
@@ -70,6 +71,7 @@
                     }
                 </script>
                 <div class="input-group mb-3">
+                    <p>Akun Warga Password Adalah tanggal lahir: Tanggal/Bulan/Tahun (30/01/2000)</p>
                     <input style="height: 55px" name="password" type="password" class="input form-control" id="password" placeholder="password" required="true" aria-label="password" aria-describedby="basic-addon1" autocomplete="off" />
 
                     <div class="input-group-append" style="height: 55px">

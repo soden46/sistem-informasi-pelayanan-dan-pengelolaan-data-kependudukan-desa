@@ -114,6 +114,37 @@
             });
         });
     </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#nik').on('change', function() {
+                var namaID = $(this).val();
+                if (namaID) {
+                    $.ajax({
+                        url: '/getNama/' + namaID,
+                        type: "GET",
+                        data: {
+                            "_token": "{{ csrf_token() }}"
+                        },
+                        dataType: "json",
+                        success: function(data) {
+                            if (data) {
+                                $('#nama').empty();
+                                $('#nama').append('<option hidden>Pilih Nama</option>');
+                                $.each(data, function(key, nama) {
+                                    $('select[name="nama"]').append('<option value="' + key + '" selected>' + nama.nama + '</option>');
+                                });
+                            } else {
+                                $('#nama').empty();
+                            }
+                        }
+                    });
+                } else {
+                    $('#nama').empty();
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

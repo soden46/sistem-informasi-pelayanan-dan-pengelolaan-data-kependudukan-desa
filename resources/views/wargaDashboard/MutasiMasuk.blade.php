@@ -55,7 +55,7 @@
                             <h1 class="modal-title fs-5" id="cretaeDataMasyarakatLabel">Tambah Data Mutasi Masuk</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{route('data-mutasi-masuk/store')}}" method="post">
+                        <form action="{{route('warga/data-mutasi-masuk/store')}}" method="post">
                             @csrf
                             <div class="modal-body">
 
@@ -75,22 +75,22 @@
                                     <label for="nik_pelapor" class="form-label"><b>NIK Pelapor</b></label>
 
                                     <select class="form-select" name="nik_pelapor" id="nik_pelapor">
-                                        <option name="nik_pelapor" id="nik_pelapor" value="" selected>Silakan Pilih NIK</option>
-                                        @foreach($pendu as $penduduk)
-                                        <option name="nik_pelapor" id="nik_pelapor" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
-                                        @endforeach
+                                        <option name="nik_pelapor" id="nik_pelapor" value="{{$user->nik}}" selected>{{$user->nik}} | {{$user->name}}</option>
                                     </select>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="nama_pelapor" class="form-label"><b>Nama Pelapor</b></label>
-                                    <select class="form-control" name="nama_pelapor" id="nama_pelapor"></select>
+
+                                    <select class="form-select" name="nama_pelapor" id="nama_pelapor">
+                                        <option name="nama_pelapor" id="nama_pelapor" value="{{$user->nama}}" selected>{{$user->nama}}</option>
+                                    </select>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="nik_mm" class="form-label"><b>NIK</b></label>
 
-                                    <input type="text" name="nik_mm" id="nik_mm" class="form-control @error('nik_mm') is-invalid @enderror" required value="{{ old('nik_mm') }}" autocomplete="off" placeholder="Input NIK">
+                                    <input type="text" name="nik_mm" id="nik_mm" class="form-control @error('nik_mm') is-invalid @enderror" required value="{{ old('nik_mm') }}" autocomplete="off" placeholder="Input Nama">
 
                                     @error('nik_mm')
                                     <div class="invalid-feedback">
@@ -378,7 +378,6 @@
                     <th>Tanggal Lahir</th>
                     <th style="text-align: center">Lampiran</th>
                     <th style="text-align: center">Varifikasi</th>
-                    <th style="text-align: center">Cetak</th>
                 </tr>
                 @foreach ($MutasiMasuk as $index => $item)
                 <tr style="width: 100%">
@@ -396,9 +395,6 @@
                         <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#destroyLampiran{{ $item->nik_mm }}"><i class="bi bi-trash"></i></button>
                     </td>
                     <td style="vertical-align: middle;  ">{{ $item->verifikasi }}</td>
-                    <td style="text-align: center;  ">
-                        <a href="{{route('warga/data-mutasi-masuk/pdf',$item->nik_mm) }}" class="btn btn-success" target="_blank">Cetak</a>
-                    </td>
                 </tr>
 
                 <!-- Modal delete-->

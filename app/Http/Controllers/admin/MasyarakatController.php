@@ -5,8 +5,10 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Penduduk;
 use App\Models\ProfilDesa;
+use App\Models\User;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\Hash;
 
 class MasyarakatController extends Controller
 {
@@ -54,6 +56,8 @@ class MasyarakatController extends Controller
      */
     public function store(Request $request)
     {
+        $originalDate = $request->tgl_lahir;
+
         $validatedData = $request->validate([
             'nik' => 'required|max:16',
             'nama' => 'required|max:255',
@@ -76,6 +80,16 @@ class MasyarakatController extends Controller
 
         // dd($validatedData);
         Penduduk::create($validatedData);
+        $originalDate = $request->tgl_lahir;
+        $newDate = date("d/m/Y", strtotime($originalDate));
+        $pass = Hash::make($newDate);
+        User::create([
+            'nik' => $request->nik,
+            'name' => $request->nama,
+            'userName' => $request->nama,
+            'role' => 'masyarakat',
+            'password' => $pass
+        ]);
 
         return redirect('/data-penduduk')->with('successCreatedPenduduk', 'Data has ben created');
     }

@@ -212,14 +212,15 @@ Route::middleware(['auth', 'role:masyarakat'])->group(function () {
     Route::controller(WargaSuratKetKematianController::class)->group(
         function () {
             Route::get('/warga/surat-keterangan-kematian', 'index')->name('warga/surat-keterangan-kematian');
-            Route::post('/warga/surat-keterangan-kematian/store', 'store')->name('warga/surat-keterangan-kematian/store');
+            Route::post('/warga/surat-keterangan-kematian/save', 'store')->name('warga/surat-keterangan-kematian/save');
             Route::post('/warga/surat-keterangan-kematian/{nik_mati}', 'update')->name('warga/surat-keterangan-kematian');
             Route::delete('/warga/surat-keterangan-kematian/{nik_mati}', 'destroy')->name('warga/surat-keterangan-kematian');
-            Route::post('/warga/surat-keterangan-kematian/lampiran/store/{nik_mati}', 'lampiranStore')->name('/warga/surat-keterangan-kematian/lampiran/store')->middleware('auth');
-            Route::get('/warga/surat-keterangan-kematian/lampiran/edit/{nik_mati}', 'lampiranEdit')->name('/warga/surat-keterangan-kematian/lampiran/edit')->middleware('auth');
-            Route::get('/warga/surat-keterangan-kematian/lampiran/update/{nik_mati}', 'lampiranUpdate')->name('/warga/surat-keterangan-kematian/lampiran/update')->middleware('auth');
-            Route::get('/warga/surat-keterangan-kematian/lampiran/destroy/{nik_mati}', 'lampiranDestroy')->name('/warga/surat-keterangan-kematian/lampiran/destroy')->middleware('auth');
-            Route::get('/warga/surat-keterangan-kematian/lampiran/show/{nik_mati}', 'showLampiran')->name('/warga/surat-keterangan-kematian/lampiran/show')->middleware('auth');
+            Route::get('/warga/surat-keterangan-kematian/pdf/lurah/{nik_mati}', 'pdflurah')->name('warga/surat-keterangan-kematian/pdflurah');
+            Route::post('/warga/surat-keterangan-kematian/lampiran/store/{nik_mati}', 'lampiranStore')->name('warga/surat-keterangan-kematian/lampiran/store')->middleware('auth');
+            Route::get('/warga/surat-keterangan-kematian/lampiran/edit/{nik_mati}', 'lampiranEdit')->name('warga/surat-keterangan-kematian/lampiran/edit')->middleware('auth');
+            Route::get('/warga/surat-keterangan-kematian/lampiran/update/{nik_mati}', 'lampiranUpdate')->name('warga/surat-keterangan-kematian/lampiran/update')->middleware('auth');
+            Route::get('/warga/surat-keterangan-kematian/lampiran/destroy/{nik_mati}', 'lampiranDestroy')->name('warga/surat-keterangan-kematian/lampiran/destroy')->middleware('auth');
+            Route::get('/warga/surat-keterangan-kematian/lampiran/show/{nik_mati}', 'showLampiran')->name('warga/surat-keterangan-kematian/lampiran/show')->middleware('auth');
         }
     );
 
@@ -229,13 +230,21 @@ Route::middleware(['auth', 'role:masyarakat'])->group(function () {
             Route::post('/warga/surat-ket-beda-nama/store', 'store')->name('warga/surat-ket-beda-nama/store');
             Route::post('/warga/surat-ket-beda-nama/verif/{nik}', 'update')->name('warga/surat-ket-beda-nama/verif');
             Route::delete('/warga/surat-ket-beda-nama/delete/{nik}', 'destroy')->name('warga/surat-ket-beda-nama/delete');
-            Route::get('/warga/surat-keterangan-beda-nama/pdf/{nik}', 'pdf')->name('warga/surat-keterangan-beda-nama/pdf');
-            Route::get('/warga/surat-keterangan-beda-nama/pdf/lurah/{nik}', 'pdflurah')->name('warga/surat-keterangan-beda-nama/pdflurah');
-            Route::post('/warga/surat-ket-beda-nama/lampiran/store/{nik}', 'lampiranStore')->name('/warga/surat-ket-beda-nama/lampiran/store')->middleware('auth');
-            Route::get('/warga/surat-ket-beda-nama/lampiran/edit/{nik}', 'lampiranEdit')->name('/warga/surat-ket-beda-nama/lampiran/edit')->middleware('auth');
-            Route::get('/warga/surat-ket-beda-nama/lampiran/update/{nik}', 'lampiranUpdate')->name('/warga/surat-ket-beda-nama/lampiran/update')->middleware('auth');
-            Route::get('/warga/surat-ket-beda-nama/lampiran/destroy/{nik}', 'lampiranDestroy')->name('/warga/surat-ket-beda-nama/lampiran/destroy')->middleware('auth');
-            Route::get('/warga/surat-ket-beda-nama/lampiran/show/{nik}', 'showLampiran')->name('/warga/surat-ket-beda-nama/lampiran/show')->middleware('auth');
+            Route::get('/warga/surat-ket-beda-nama/pdf/{nik}', 'pdf')->name('warga/surat-ket-beda-nama/pdf');
+            Route::get('/warga/surat-ket-beda-nama/pdf/lurah/{nik}', 'pdflurah')->name('warga/surat-ket-beda-nama/pdflurah');
+            // Route Depend Penduduk Pada Form Tambah Data
+            Route::get(
+                'getNama/{id}',
+                function ($id) {
+                    $nama = App\Models\Penduduk::where('nik', $id)->get();
+                    return response()->json($nama);
+                }
+            );
+            Route::post('/warga/surat-ket-beda-nama/lampiran/store/{nik}', 'lampiranStore')->name('warga/surat-ket-beda-nama/lampiran/store')->middleware('auth');
+            Route::get('/warga/surat-ket-beda-nama/lampiran/edit/{nik}', 'lampiranEdit')->name('warga/surat-ket-beda-nama/lampiran/edit')->middleware('auth');
+            Route::get('/warga/surat-ket-beda-nama/lampiran/update/{nik}', 'lampiranUpdate')->name('warga/surat-ket-beda-nama/lampiran/update')->middleware('auth');
+            Route::get('/warga/surat-ket-beda-nama/lampiran/destroy/{nik}', 'lampiranDestroy')->name('warga/surat-ket-beda-nama/lampiran/destroy')->middleware('auth');
+            Route::get('/warga/surat-ket-beda-nama/lampiran/show/{nik}', 'showLampiran')->name('warga/surat-ket-beda-nama/lampiran/show')->middleware('auth');
         }
     );
 
@@ -247,11 +256,11 @@ Route::middleware(['auth', 'role:masyarakat'])->group(function () {
             Route::delete('/warga/surat-keterangan-status/delete/{nik}', 'destroy')->name('warga/surat-keterangan-status/delete');
             Route::get('/warga/surat-keterangan-status/pdf/{nik}', 'pdf')->name('warga/surat-keterangan-status/pdf');
             Route::get('/warga/surat-keterangan-status/pdf/lurah/{nik}', 'pdflurah')->name('warga/surat-keterangan-status/pdflurah');
-            Route::post('/warga/surat-keterangan-status/lampiran/store/{nik}', 'lampiranStore')->name('/warga/surat-keterangan-status/lampiran/store')->middleware('auth');
-            Route::get('/warga/surat-keterangan-status/lampiran/edit/{nik}', 'lampiranEdit')->name('/warga/surat-keterangan-status/lampiran/edit')->middleware('auth');
-            Route::get('/warga/surat-keterangan-status/lampiran/update/{nik}', 'lampiranUpdate')->name('/warga/surat-keterangan-status/lampiran/update')->middleware('auth');
-            Route::get('/warga/surat-keterangan-status/lampiran/destroy/{nik}', 'lampiranDestroy')->name('/warga/surat-keterangan-status/lampiran/destroy')->middleware('auth');
-            Route::get('/warga/surat-keterangan-status/lampiran/show/{nik}', 'showLampiran')->name('/warga/surat-keterangan-status/lampiran/show')->middleware('auth');
+            Route::post('/warga/surat-keterangan-status/lampiran/store/{nik}', 'lampiranStore')->name('warga/surat-keterangan-status/lampiran/store')->middleware('auth');
+            Route::get('/warga/surat-keterangan-status/lampiran/edit/{nik}', 'lampiranEdit')->name('warga/surat-keterangan-status/lampiran/edit')->middleware('auth');
+            Route::get('/warga/surat-keterangan-status/lampiran/update/{nik}', 'lampiranUpdate')->name('warga/surat-keterangan-status/lampiran/update')->middleware('auth');
+            Route::get('/warga/surat-keterangan-status/lampiran/destroy/{nik}', 'lampiranDestroy')->name('warga/surat-keterangan-status/lampiran/destroy')->middleware('auth');
+            Route::get('/warga/surat-keterangan-status/lampiran/show/{nik}', 'showLampiran')->name('warga/surat-keterangan-status/lampiran/show')->middleware('auth');
         }
     );
 
@@ -263,11 +272,11 @@ Route::middleware(['auth', 'role:masyarakat'])->group(function () {
             Route::delete('/warga/surat-keterangan-biasa/delete/{nik}', 'destroy')->name('warga/surat-keterangan-status/delete');
             Route::get('/warga/surat-keterangan-biasa/pdf/{nik}', 'pdf')->name('warga/surat-keterangan-biasa/pdf');
             Route::get('/warga/surat-keterangan-biasa/pdf/lurah/{nik}', 'pdflurah')->name('warga/surat-keterangan-biasa/pdflurah');
-            Route::post('/warga/surat-keterangan-biasa/lampiran/store/{nik}', 'lampiranStore')->name('/warga/surat-keterangan-biasa/lampiran/store')->middleware('auth');
-            Route::get('/warga/surat-keterangan-biasa/lampiran/edit/{nik}', 'lampiranEdit')->name('/warga/surat-keterangan-biasa/lampiran/edit')->middleware('auth');
-            Route::get('/warga/surat-keterangan-biasa/lampiran/update/{nik}', 'lampiranUpdate')->name('/warga/surat-keterangan-biasa/lampiran/update')->middleware('auth');
+            Route::post('/warga/surat-keterangan-biasa/lampiran/store/{nik}', 'lampiranStore')->name('warga/surat-keterangan-biasa/lampiran/store')->middleware('auth');
+            Route::get('/warga/surat-keterangan-biasa/lampiran/edit/{nik}', 'lampiranEdit')->name('warga/surat-keterangan-biasa/lampiran/edit')->middleware('auth');
+            Route::get('/warga/surat-keterangan-biasa/lampiran/update/{nik}', 'lampiranUpdate')->name('warga/surat-keterangan-biasa/lampiran/update')->middleware('auth');
             Route::get('/warga/surat-keterangan-biasa/lampiran/destroy/{nik}', 'lampiranDestroy')->name('/warga/surat-keterangan-biasa/lampiran/destroy')->middleware('auth');
-            Route::get('/warga/surat-keterangan-biasa/lampiran/show/{nik}', 'showLampiran')->name('/warga/surat-keterangan-biasa/lampiran/show')->middleware('auth');
+            Route::get('/warga/surat-keterangan-biasa/lampiran/show/{nik}', 'showLampiran')->name('warga/surat-keterangan-biasa/lampiran/show')->middleware('auth');
         }
     );
 
@@ -296,15 +305,18 @@ Route::middleware(['auth', 'role:masyarakat'])->group(function () {
             Route::get('/warga/data-mutasi-masuk/pdf/{nik_mm}', 'pdf')->name('warga/data-mutasi-masuk/pdf');
             Route::get('/warga/data-mutasi-masuk/pdf/lurah/{nik_mm}', 'pdflurah')->name('warga/data-mutasi-masuk/pdflurah');
             // Route Depend Penduduk Pada Form Tambah Data
-            Route::get('getPelapor/{id}', function ($id) {
-                $nama_pelapor = App\Models\Penduduk::where('nik_mm', $id)->get();
-                return response()->json($nama_pelapor);
-                Route::post('/warga/data-mutasi-masuk/lampiran/store/{nik_mm}', 'lampiranStore')->name('/warga/data-mutasi-masuk/lampiran/store')->middleware('auth');
-                Route::get('/warga/data-mutasi-masuk/lampiran/edit/{nik_mm}', 'lampiranEdit')->name('/warga/data-mutasi-masuk/lampiran/edit')->middleware('auth');
-                Route::get('/warga/data-mutasi-masuk/lampiran/update/{nik_mm}', 'lampiranUpdate')->name('/warga/data-mutasi-masuk/lampiran/update')->middleware('auth');
-                Route::get('/warga/data-mutasi-masuk/lampiran/destroy/{nik_mm}', 'lampiranDestroy')->name('/warga/data-mutasi-masuk/lampiran/destroy')->middleware('auth');
-                Route::get('/warga/data-mutasi-masuk/lampiran/show/{nik_mm}', 'showLampiran')->name('/warga/data-mutasi-masuk/lampiran/show')->middleware('auth');
-            });
+            Route::get(
+                'getPelapor/{id}',
+                function ($id) {
+                    $nama_pelapor = App\Models\Penduduk::where('nik', $id)->get();
+                    return response()->json($nama_pelapor);
+                }
+            );
+            Route::post('/warga/data-mutasi-masuk/lampiran/store/{nik_mm}', 'lampiranStore')->name('/warga/data-mutasi-masuk/lampiran/store')->middleware('auth');
+            Route::get('/warga/data-mutasi-masuk/lampiran/edit/{nik_mm}', 'lampiranEdit')->name('/warga/data-mutasi-masuk/lampiran/edit')->middleware('auth');
+            Route::get('/warga/data-mutasi-masuk/lampiran/update/{nik_mm}', 'lampiranUpdate')->name('/warga/data-mutasi-masuk/lampiran/update')->middleware('auth');
+            Route::get('/warga/data-mutasi-masuk/lampiran/destroy/{nik_mm}', 'lampiranDestroy')->name('/warga/data-mutasi-masuk/lampiran/destroy')->middleware('auth');
+            Route::get('/warga/data-mutasi-masuk/lampiran/show/{nik_mm}', 'showLampiran')->name('/warga/data-mutasi-masuk/lampiran/show')->middleware('auth');
         }
     );
 });

@@ -49,7 +49,7 @@
             <div class="d-flex">
 
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cretaeDataMasyarakat" style="margin-right: 15px">Tambah Data Surat Keterangan Biasa</button>
-                <form action="/surat-keterangan-biasa" method="GET" style="margin-left: 40%">
+                <form action="{{route('warga/surat-keterangan-biasa')}}" method="GET" style="margin-left: 40%">
 
                     <input type="text" id="cari" name="cari" placeholder="Cari NIK/No KK/Nama">
                     <button type="submit" class="btn btn-success">Cari</button>
@@ -65,7 +65,7 @@
                             <h1 class="modal-title fs-5" id="cretaeDataMasyarakatLabel">Tambah Data Surat Keterangan Biasa</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="/surat-keterangan-biasa/store" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('warga/surat-keterangan-biasa/store')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="modal-body">
 
@@ -86,10 +86,8 @@
                                         <label for="nik" class="form-label"><b>NIK</b></label>
 
                                         <select class="form-select" name="nik" id="nik">
-                                            <option name="nik" id="nik" value="" selected>Silakan Pilih NIK</option>
-                                            @foreach($pendu as $penduduk)
-                                            <option name="nik" id="nik" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
-                                            @endforeach
+                                            <option name="nik" id="nik" value="{{$user->nik}}">{{$user->nik}} | {{$user->nama}}</option>
+
                                         </select>
                                     </div>
                                 </div>
@@ -165,18 +163,17 @@
         <div class="table-responsive">
             <table class="table" style="text-align: left; color: black">
                 <tr>
-                    <th>No</th>
+                    <th>No Surat</th>
                     <th>TGL Regis</th>
                     <th>NIK</th>
                     <th>Nama</th>
                     <th>Keperluan</th>
                     <th>Lampiran</th>
                     <th style="text-align: center">Verifikasi</th>
-                    <th style="text-align: center">Cetak</th>
                 </tr>
-                @foreach ($surat as $index => $item)
+                @foreach ($surat as $item)
                 <tr style="width: 100%">
-                    <td style="vertical-align: middle; width: 5%; ">{{ $index + $surat->firstItem() }}</td>
+                    <td style="vertical-align: middle; width: 5%; ">{{ $item->no_surat_skb }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->tgl_regis_skb }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->nik }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->pend->nama }}</td>
@@ -187,10 +184,6 @@
                         <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#destroyLampiran{{ $item->nik }}"><i class="bi bi-trash"></i></button>
                     </td>
                     <td style="vertical-align: middle;  ">{{ $item->verifikasi }}</td>
-                    <td style="text-align: center;  ">
-                        <a href="{{route('surat-keterangan-biasa/pdflurah',$item->nik) }}" class="btn btn-success" target="_blank">Lurah</a>
-                        <a href="{{route('surat-keterangan-biasa/pdf',$item->nik) }}" class="btn btn-success" target="_blank">Staff</a>
-                    </td>
                 </tr>
 
                 <!-- Modal verifikasi-->
@@ -346,7 +339,7 @@
                 @endforeach
             </table>
             <div class="d-flex justify-content-between mb-3">
-                {{ $surat->links('layout.pagination') }}
+
             </div>
         </div>
 

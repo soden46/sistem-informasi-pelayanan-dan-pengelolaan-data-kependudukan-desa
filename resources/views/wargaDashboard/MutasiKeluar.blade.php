@@ -65,7 +65,7 @@
                             <h1 class="modal-title fs-5" id="cretaeDataMasyarakatLabel">Tambah Data Mutasi Keluar</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{route('data-mutasi-keluar/store')}}" method="post">
+                        <form action="{{route('warga/data-mutasi-keluar/store')}}" method="post">
                             @csrf
                             <div class="modal-body">
 
@@ -86,9 +86,7 @@
 
                                     <select class="form-select" name="nik_pelapor" id="nik_pelapor">
                                         <option name="nik_pelapor" id="nik_pelapor" value="" selected>Silakan Pilih NIK</option>
-                                        @foreach($pendudk as $penduduk)
-                                        <option name="nik_pelapor" id="nik_pelapor" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
-                                        @endforeach
+                                        <option name="nik_pelapor" id="nik_pelapor" value="{{$user->nik}}" selected>{{$user->nik}} | {{$user->name}}</option>
                                     </select>
                                 </div>
 
@@ -97,9 +95,7 @@
 
                                     <select class="form-select" name="nama_pelapor" id="nama_pelapor">
                                         <option name="nama_pelapor" id="nama_pelapor" value="" selected>Silakan Pilih NIK</option>
-                                        @foreach($pendudk as $penduduk)
-                                        <option name="nama_pelapor" id="nama_pelapor" value="{{$penduduk->nama}}">{{$penduduk->nama}}</option>
-                                        @endforeach
+                                        <option name="nama_pelapor" id="nama_pelapor" value="{{$user->nama}}" selected>{{$user->nama}}</option>
                                     </select>
                                 </div>
 
@@ -224,7 +220,6 @@
                     <th>Pekerjaan</th>
                     <th style="text-align: center">Lampiran</th>
                     <th style="text-align: center">Verifiksi</th>
-                    <th style="text-align: center">Cetak</th>
                 </tr>
                 @foreach ($MutasiKeluar as $index => $item)
                 <tr style="width: 100%">
@@ -242,9 +237,6 @@
                         <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#destroyLampiran{{ $item->nik_mk }}"><i class="bi bi-trash"></i></button>
                     </td>
                     <td style="vertical-align: middle;  ">{{ $item->verifikasi }}</td>
-                    <td style="text-align: center;  ">
-                        <a href="{{route('data-mutasi-keluar/pdf',$item->nik_mk) }}" class="btn btn-success" target="_blank">Lurah</a>
-                    </td>
                 </tr>
 
                 <!-- Modal delete-->

@@ -4,16 +4,6 @@
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">{{ $title }}</h1>
-        {{-- <div class="btn-toolbar mb-2 mb-md-0">
-                <div class="btn-group me-2">
-                <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-                </div>
-                <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                <span data-feather="calendar" class="align-text-bottom"></span>
-                This week
-                </button>
-            </div> --}}
     </div>
     <div class="card" style="width: 100%; height: 100%; background-color: white; padding: 20px">
         @if (session()->has('successUpdatedAcount'))
@@ -153,7 +143,7 @@
 
             <table class="table mb-5" style="text-align: left; color: black">
                 <div style="background-color: #006029; color: whitesmoke; width: 100%">
-                    <h6 class="py-2" style="font-family: 'Raleway', sans-serif; text-align: center;">Acount Admin</h6>
+                    <h6 class="py-2" style="font-family: 'Raleway', sans-serif; text-align: center;">Daftar Akun</h6>
                 </div>
                 <tr>
                     <th>No</th>
@@ -169,7 +159,7 @@
                     <td style="vertical-align: middle; width: 5%; ">{{$i++ }}</td>
                     <td style="vertical-align: middle; width: 30%; text-transform: capitalize">{{ $item->name }}</td>
                     <td style="vertical-align: middle;">{{ $item->userName }}</td>
-                    <td style="vertical-align: middle; text-transform: capitalize ">{{ $item->status }}</td>
+                    <td style="vertical-align: middle; text-transform: capitalize ">{{ $item->role }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->updated_at}}</td>
                     <td style="text-align: center;  ">
                         <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editAcount{{ $item->id }}">Edit</button>

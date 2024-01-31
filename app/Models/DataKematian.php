@@ -19,7 +19,7 @@ class DataKematian extends Model
     {
         return $this->belongsTo(DataKeluarga::class, 'no_kk', 'no_kk');
     }
-    public function pendu()
+    public function pend()
     {
         return $this->belongsTo(Penduduk::class, 'nik_mati', 'nik');
     }

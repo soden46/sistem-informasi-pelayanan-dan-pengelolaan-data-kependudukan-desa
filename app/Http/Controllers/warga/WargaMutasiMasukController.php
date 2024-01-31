@@ -22,18 +22,21 @@ class WargaMutasiMasukController extends Controller
         $cari = $request->cari;
 
         $nik = Auth::user()->nik;
+        $user = Penduduk::where('nik', Auth::user()->nik)->first();
         if ($cari != NULL) {
             return view('wargaDashboard.MutasiMasuk', [
                 'title' => 'Data Mutasi Masuk',
-                'MutasiMasuk' => MutasiMAsuk::where('nik_mm', $nik)->orWhere('nik', 'like', "%" . $cari . "%")
+                'MutasiMasuk' => MutasiMAsuk::where('nik_pelapor', $nik)->orWhere('nik', 'like', "%" . $cari . "%")
                     ->orWhere('no_kk', 'like', "%" . $cari . "%")->paginate(10),
-                'pendu' => Penduduk::get()
+                'pendu' => Penduduk::get(),
+                'user' => $user
             ]);
         } else {
             return view('wargaDashboard.MutasiMasuk', [
                 'title' => 'Data Mutasi Masuk',
-                'MutasiMasuk' => MutasiMAsuk::where('nik_mm', $nik)->paginate(10),
-                'pendu' => Penduduk::get()
+                'MutasiMasuk' => MutasiMAsuk::where('nik_pelapor', $nik)->paginate(10),
+                'pendu' => Penduduk::get(),
+                'user' => $user
             ]);
         }
     }
@@ -56,6 +59,8 @@ class WargaMutasiMasukController extends Controller
      */
     public function store(Request $request)
     {
+        $user = Penduduk::where('nik', $request->nik_pelapor)->first();
+
         $validatedDataMM = $request->validate([
             'tgl_regis_mm' => 'required',
             'nik_pelapor' => 'required|max:16',
@@ -76,7 +81,24 @@ class WargaMutasiMasukController extends Controller
         ]);
 
         // dd($validatedData);
-        $masuk = MutasiMAsuk::create($validatedDataMM);
+        MutasiMAsuk::create([
+            'tgl_regis_mm' => $request->tgl_regis_mm,
+            'nik_pelapor' => $request->nik_pelapor,
+            'nama_pelapor' => $user->nama,
+            'nik_mm' => $request->nik_mm,
+            'nama_mm' => $request->nama_mm,
+            'jk_mm' => $request->jk_mm,
+            'tempat_lh_mm' => $request->tempat_lh_mm,
+            'tgl_lh_mm' => $request->tgl_lh_mm,
+            'agama_mm' => $request->agama_mm,
+            'pekerjaan_mm' => $request->pekerjaan_mm,
+            'status_kawin_mm' => $request->status_kawin_mm,
+            'no_kk' => $request->no_kk,
+            'alamat_asal_mm' => $request->alamat_asal_mm,
+            'padukuhan_tuju' => $request->padukuhan_tuju,
+            'rt_tuju' => $request->rt_tuju,
+            'rw_tuju' => $request->rw_tuju,
+        ]);
 
         Penduduk::create([
             'nik' => $request->nik_mm,
