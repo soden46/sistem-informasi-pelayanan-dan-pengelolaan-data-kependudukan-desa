@@ -114,15 +114,11 @@ class SuratKetBedaNamaController extends Controller
      */
     public function update(Request $request, SuratKetBedaNama $penduduk, $nik)
     {
-        $validatedData = $request->validate([
-            'nik' => 'max:16',
-            'tertulis_pada' => 'max:16',
-            'nama_baru' => 'max:255',
-            'tempat_lh_baru' => 'max:255',
-            'alamat_baru' => 'max:255',
-            'keperluan_skbn' => 'max:255',
-            'verifikasi' => 'required'
-        ]);
+        $rules = [
+            'verifikasi' => 'max:255',
+        ];
+
+        $validatedData = $request->validate($rules);
 
         SuratKetBedaNama::where('nik', $nik)->update($validatedData);
 
@@ -173,7 +169,7 @@ class SuratKetBedaNamaController extends Controller
      */
     public function showLampiran($nik)
     {
-        $kematian = SuratKetBiasa::where('nik', $nik)->with('pend')->first();
+        $kematian = SuratKetBedaNama::where('nik', $nik)->with('pend')->first();
         $lampiran = json_decode($kematian->lampiran, true);
         if (isset($lampiran['ktp']) && ($lampiran['kk'])) {
             // dd($lampiran['pengantar_rt']);
@@ -207,7 +203,7 @@ class SuratKetBedaNamaController extends Controller
         }
 
         // Simpan data lampiran ke dalam database
-        SuratKetBiasa::where('nik', $nik)->update(['lampiran' => json_encode($lampiran)]);
+        SuratKetBedaNama::where('nik', $nik)->update(['lampiran' => json_encode($lampiran)]);
 
         return redirect()->back()->with('success', 'Lampiran berhasil disimpan.');
     }

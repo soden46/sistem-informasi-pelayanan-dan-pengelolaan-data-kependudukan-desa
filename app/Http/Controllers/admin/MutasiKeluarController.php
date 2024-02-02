@@ -3,11 +3,8 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\DataKeluarga;
 use App\Models\MutasiKeluar;
-use App\Models\MutasiMAsuk;
 use App\Models\Penduduk;
-use App\Models\ProfilDesa;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
@@ -87,7 +84,7 @@ class MutasiKeluarController extends Controller
             'rw_tuju' => $request->rw_tuju,
         ]);
 
-        Penduduk::where('nik', $request->nik_mk)->update(['sts_penduduk' => 'Pindah Keluar']);
+        Penduduk::where('nik', $request->nik_mk)->update(['sts_penduduk' => 'Warga Pindah Menunggu Verifikasi']);
         return back()->with('successUpdatedMasyarakat', 'Data has ben created');
     }
 
@@ -122,35 +119,15 @@ class MutasiKeluarController extends Controller
      */
     public function update(Request $request, MutasiKeluar $MutasiKeluar, $nik_mk)
     {
-        $nik = Penduduk::where('nik', $request->nik_mk)->first();
-        $validatedData = $request->validate([
-            'nik_pelapor' => 'max:16',
-            'nama_pelapor' => 'max:255',
-            'padukuhan_tuju' => 'max:255',
-            'rt_tuju' => 'max:255',
-            'rw_tuju' => 'max:255',
-        ]);
+        $rules = [
+            'verifikasi' => 'max:255',
+        ];
 
-        $alamat = json_encode(['Padukuhan: ' . $nik->padukuhan, 'RT: ' . $nik->rt, 'RW:' . $nik->rw]);
-        $mutasi =
-            MutasiKeluar::where('nik_mk', $nik_mk)->update([
-                'tgl_regis_mk' => $request->tgl_regis_mk,
-                'nik_pelapor' => $request->nik_pelapor,
-                'nama_pelapor' => $request->nama_pelapor,
-                'nik_mk' => $request->nik_mk,
-                'nama_mk' => $nik->nama,
-                'jk_mk' => $nik->jk,
-                'tempat_lh_mk' => $nik->tempat_lahir,
-                'tgl_lh_mk' => $nik->tgl_lahir,
-                'agama_mk' => $nik->agama,
-                'pekerjaan_mk' => $nik->pekerjaan,
-                'status_kawin_mk' => $nik->sts_kawin,
-                'no_kk' => $nik->no_kk,
-                'alamat_asal_mk' => $alamat,
-                'padukuhan_tuju' => $request->padukuhan_tuju,
-                'rt_tuju' => $request->rt_tuju,
-                'rw_tuju' => $request->rw_tuju,
-            ]);
+        $validatedData = $request->validate($rules);
+
+        Penduduk::where('nik', $nik_mk)->update(['sts_penduduk' => $request->sts_penduduk]);
+
+        $masuk = MutasiKeluar::where('nik_mk', $nik_mk)->update($validatedData);
 
         return back()->with('successUpdatedMasyarakat', 'Data has ben updated');
     }

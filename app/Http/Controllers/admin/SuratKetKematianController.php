@@ -64,7 +64,7 @@ class SuratKetKematianController extends Controller
             'nik_saksidua' => 'required|max:255',
         ]);
 
-        Penduduk::where('nik', $request->nik_mati)->update(['sts_penduduk' => 'Meninggal']);
+        Penduduk::where('nik', $request->nik_mati)->update(['sts_penduduk' => 'Warga Meninggal Menunggu Verifikasi']);
         DataKematian::create([
             'tgl_regis_mati' => $request->tgl_regis_mati,
             'no_kk' => $request->no_kk,
@@ -134,10 +134,12 @@ class SuratKetKematianController extends Controller
     public function update(Request $request, DataKematian $penduduk, $nik_mati)
     {
         $rules = [
-            'verifikasi' => 'max:255'
+            'verifikasi' => 'max:255',
         ];
 
         $validatedData = $request->validate($rules);
+
+        Penduduk::where('nik', $nik_mati)->update(['sts_penduduk' => $request->sts_penduduk]);
 
         DataKematian::where('nik_mati', $nik_mati)->update($validatedData);
 

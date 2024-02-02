@@ -93,7 +93,7 @@ class MutasiMAsukController extends Controller
             'pekerjaan' => $request->pekerjaan_mm,
             'pendidikan' => $request->pendidikan,
             'sts_kawin' => $request->status_kawin_mm,
-            'sts_penduduk' => $request->sts_penduduk,
+            'sts_penduduk' => 'Warga Baru Menunggu Verifikasi',
             'sts_dalam_kk' => $request->sts_dalam_kk
         ]);
 
@@ -131,23 +131,13 @@ class MutasiMAsukController extends Controller
      */
     public function update(Request $request, MutasiMAsuk $MutasiMAsuk, $nik_mm)
     {
-        $validatedData = $request->validate([
-            'nik_pelapor' => 'max:16',
-            'nama_pelapor' => 'max:255',
-            'nik_mm' => 'max:16',
-            'nama_mm' => 'max:255',
-            'jk_mm' => 'max:255',
-            'tempat_lh_mm' => 'max:255',
-            'agama_mm' => 'max:255',
-            'pekerjaan_mm' => 'max:255',
-            'status_kawin_mm' => 'max:255',
-            'no_kk' => 'max:16',
-            'alamat_asal_mm' => 'max:255',
-            'padukuhan_tuju' => 'max:255',
-            'rt_tuju' => 'max:255',
-            'rw_tuju' => 'max:255',
-        ]);
+        $rules = [
+            'verifikasi' => 'max:255',
+        ];
 
+        $validatedData = $request->validate($rules);
+
+        Penduduk::where('nik', $nik_mm)->update(['sts_penduduk' => $request->sts_penduduk]);
 
         $masuk = MutasiMAsuk::where('nik_mm', $nik_mm)->update($validatedData);
 

@@ -140,4 +140,50 @@ class WargaSuratKetStatusController extends Controller
         $pdf = PDF::loadView('adminDashboard.pdf.SuratKetStatusLurah', $data)->setPaper('customPaper', 'potrait');
         return $pdf->stream('surat-keterangan-status-lurah.pdf');
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showLampiran($nik)
+    {
+        $kematian = SuratKetStatus::where('nik', $nik)->with('pend')->first();
+        $lampiran = json_decode($kematian->lampiran, true);
+        if (isset($lampiran['ktp']) && ($lampiran['kk'])) {
+            // dd($lampiran['pengantar_rt']);
+            return view('wargaDashboard.lampiran.LampiranDataStatus', [
+                'title' => 'Lampiran Keterangan Status',
+                'pendu' => Penduduk::get(),
+                'ktp' => $lampiran['ktp'],
+                'kk' => $lampiran['kk'],
+
+            ]);
+        } else {
+            return view('wargaDashboard.lampiran.LampiranKosong', [
+                'title' => 'Lampiran Surat Keterangan Status',
+            ]);
+        }
+    }
+
+    public function lampiranStore(Request $request, $nik)
+    {
+        $request->validate([
+            'ktp' => 'file|mimes:pdf,jpg,jpeg|max:2048',
+            'kk' => 'file|mimes:pdf,jpg,jpeg|max:2048',
+        ]);
+
+        $lampiran = [];
+        if ($request->hasFile('ktp')) {
+            $lampiran['ktp'] = $request->file('ktp')->store('warga/lampiran-data-status');
+        }
+        if ($request->hasFile('kk')) {
+            $lampiran['kk'] = $request->file('kk')->store('warga/lampiran-data-status');
+        }
+
+        // Simpan data lampiran ke dalam database
+        SuratKetStatus::where('nik', $nik)->update(['lampiran' => json_encode($lampiran)]);
+
+        return redirect()->back()->with('success', 'Lampiran berhasil disimpan.');
+    }
 }

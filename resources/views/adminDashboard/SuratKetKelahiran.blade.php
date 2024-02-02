@@ -432,9 +432,9 @@
                     </td>
                     <td style="text-align: center;  ">
                         @if($item->verifikasi=="Belum Verifikasi")
-                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#verifikasibayi{{ $item->nik_bayi }}">Verifikasi</button>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verifikasibayi{{ $item->nik_bayi }}">Verifikasi</button>
                         @else
-                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#batalverifikasi{{ $item->nik_bayi }}">Batal Verifikasi</button>
+                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#batalverifikasi{{ $item->nik_bayi }}" disabled>Terverifikasi</button>
                         @endif
                     </td>
                     <td style="text-align: center;  ">
@@ -452,6 +452,7 @@
                             </div>
                             <div class="modal-body">
                                 <p>Apakah anda yakin untuk memverifikasi data <b>{{ $item->nama }}</b></p>
+                                <p>Perikas Kembali Data Sebelum Melakukan Verifikasi, Data Yang Sudah Diverifikasi Tidak Bisa Diubah Lagi</p>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>

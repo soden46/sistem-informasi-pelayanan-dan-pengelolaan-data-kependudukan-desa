@@ -269,16 +269,6 @@
                                         @enderror
                                     </div>
 
-                                    <div class="mb-3">
-                                        <label for="dokumen" class="form-label">Dokumen yang terdapat perbedaan nama</label>
-                                        <input class="form-control" type="file" id="dokumen" name="dokumen">
-                                        @error('dokumen')
-                                        <div class="invalid-feedback">
-                                            <p style="text-align: left">{{ $message }}</p>
-                                        </div>
-                                        @enderror
-                                    </div>
-
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
                                         <button type="submit" class="btn btn-primary">Simpan</button>
