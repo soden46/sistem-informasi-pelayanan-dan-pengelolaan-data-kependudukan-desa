@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Surat Keterangan Beda Nama</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <style>
         body {
@@ -108,7 +108,7 @@
                 <img src="{{public_path('storage/asset/sleman.png')}}" id="foto" alt="Logo" height="75px" />
                 <h1 class="text-center">PEMERINTAH KABUPATEN SLEMAN</h1>
                 <p class="text-center">KAPONEWON GAMPING</p>
-                <h1 class="text-center">PEMERINTAH KALURAHAN AMBARKETAWANG</h1>
+                <h1 class="text-center">LURAH AMBARKETAWANG</h1>
                 <h1 class="text-center"><img src="{{public_path('storage/asset/aksara.png')}}" id="foto2" alt="Logo" /></h1>
                 <p class="text-center">Jalan Wates KM 5, Ambarketawang, Gamping, Sleman,55294</p>
                 <p class="text-center">Telepon (0274) 797496</p>
@@ -124,12 +124,12 @@
                 <tr>
                     <td width="200px">A. Nama</td>
                     <td width="10px">:</td>
-                    <td>Erma Heni Surya, S.E.</td>
+                    <td>Sumaryanto</td>
                 </tr>
                 <tr>
                     <td width="200px">B. Jabatan</td>
                     <td width="10px">:</td>
-                    <td>Carik</td>
+                    <td>Lurah</td>
                 </tr>
             </table>
             <p class="mt-2">Berdasarkan data pemohon, dengan ini Pemerintah Kalurahan Ambarketawang menerangkan bahwa:</p>
@@ -195,10 +195,10 @@
 
                 <p style="padding-bottom:100px">
                     Ambarketawang, ......................... {{ date('Y') }}</br>
-                    Pemerintah Kalurahan Ambarketawang</p>
+                    Lurah Ambarketawang</p>
 
 
-                <p>Erma Heni Surya, S.E.</p>
+                <p>Sumaryanto</p>
             </div>
         </div>
     </div>

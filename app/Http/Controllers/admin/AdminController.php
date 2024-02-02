@@ -22,7 +22,7 @@ class AdminController extends Controller
         return view('AdminDashboard.index', [
             'title' => 'Dashboard',
             'jumlahLahir' => SuratKetKelahiran::all()->count(),
-            'jumlahMasyarakat' => Penduduk::where('sts_penduduk', 'Hidup')->count(),
+            'jumlahMasyarakat' => Penduduk::where('sts_penduduk', 'Tinggal')->count(),
             'jumlahMati' => DataKematian::all()->count(),
             'jumlahBN' => SuratKetBedaNama::all()->count(),
             'jumlahS' => SuratKetStatus::all()->count(),

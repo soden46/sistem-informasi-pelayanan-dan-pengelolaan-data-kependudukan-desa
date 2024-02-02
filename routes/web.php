@@ -18,6 +18,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\warga\WargaController;
 use App\Http\Controllers\warga\WargaMutasiKeluarController;
 use App\Http\Controllers\warga\WArgaMutasiMAsukController;
+use App\Http\Controllers\warga\WargaMyAccountController;
 use App\Http\Controllers\warga\WargaSuratKetKelahiranController;
 use App\Http\Controllers\warga\WargaSuratKetKematianController;
 use App\Http\Controllers\warga\WargaSuratKetBedaNamaController;
@@ -192,6 +193,17 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
             Route::get('/surat-keterangan-biasa/lampiran/show/{nik}', 'showLampiran')->name('surat-keterangan-biasa/lampiran/show')->middleware('auth');
         }
     );
+
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/myAcount', 'myAcount')->name('myAcount')->middleware('auth');
+        Route::post('Update/Account/{id}', 'updateMyAcount')->name('Update/Account')->middleware('auth');
+    });
+
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/other-account', 'index')->name('other-account')->middleware('auth');
+        Route::post('/other-account/store', 'store')->name('other-account')->middleware('auth');
+        Route::post('other-account/update/{id}', 'update')->name('other-account/update')->middleware('auth');
+    });
 });
 
 // Route Akun Warga/Penduduk
@@ -319,15 +331,9 @@ Route::middleware(['auth', 'role:masyarakat'])->group(function () {
             Route::get('/warga/data-mutasi-masuk/lampiran/show/{nik_mm}', 'showLampiran')->name('warga/data-mutasi-masuk/lampiran/show')->middleware('auth');
         }
     );
-});
 
-Route::controller(UserController::class)->group(function () {
-    Route::get('/myAcount', 'myAcount')->name('myAcount')->middleware('auth');
-    Route::post('Update/Account/{id}', 'updateMyAcount')->name('Update/Account')->middleware('auth');
-});
-
-Route::controller(UserController::class)->group(function () {
-    Route::get('/other-account', 'index')->name('other-account')->middleware('auth');
-    Route::post('/other-account/store', 'store')->name('other-account')->middleware('auth');
-    Route::post('other-account/update/{id}', 'update')->name('other-account/update')->middleware('auth');
+    Route::controller(WargaMyAccountController::class)->group(function () {
+        Route::get('Warga/myAcount', 'myAcount')->name('Warga/myAcount')->middleware('auth');
+        Route::post('Update/Account/{id}', 'updateMyAcount')->name('Warga/Update/Account')->middleware('auth');
+    });
 });

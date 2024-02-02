@@ -249,7 +249,7 @@
                         @endif
                     </td>
                     <td style="text-align: center;  ">
-                        <a href="{{route('data-mutasi-keluar/pdf',$item->nik_mk) }}" class="btn btn-success" target="_blank">Lurah</a>
+                        <a href="{{route('data-mutasi-keluar/pdf',$item->nik_mk) }}" class="btn btn-success" target="_blank">PDF</a>
                     </td>
                 </tr>
 

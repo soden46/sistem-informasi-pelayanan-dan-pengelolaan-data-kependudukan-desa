@@ -108,7 +108,7 @@
                 <img src="{{public_path('storage/asset/sleman.png')}}" id="foto" alt="Logo" height="75px" />
                 <h1 class="text-center">PEMERINTAH KABUPATEN SLEMAN</h1>
                 <p class="text-center">KAPONEWON GAMPING</p>
-                <h1 class="text-center">PEMERINTAH KALURAHAN AMBARKETAWANG</h1>
+                <h1 class="text-center">LURAH AMBARKETAWANG</h1>
                 <h1 class="text-center"><img src="{{public_path('storage/asset/aksara.png')}}" id="foto2" alt="Logo" /></h1>
                 <p class="text-center">Jalan Wates KM 5, Ambarketawang, Gamping, Sleman,55294</p>
                 <p class="text-center">Telepon (0274) 797496</p>
@@ -367,13 +367,12 @@
             <div class="tandatangan">
 
                 <br>
-
                 <p style="padding-bottom:100px">
                     Ambarketawang, ......................... {{ date('Y') }}</br>
-                    Pemerintah Kalurahan Ambarketawang</p>
+                    Lurah Ambarketawang</p>
 
 
-                <p>Erma Heni Surya, S.E.</p>
+                <p>Sumaryanto</p>
             </div>
         </div>
     </div>

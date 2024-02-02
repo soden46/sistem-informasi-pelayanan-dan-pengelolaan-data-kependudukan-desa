@@ -62,10 +62,16 @@
                 </a>
             </li>
         </ul>
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-uppercase">
-            <span style="text-align: center">LOGOUT</span>
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-2 mb-1 text-uppercase">
+            <span style="text-align: center">Profile</span>
         </h6>
         <ul class="nav flex-column mb-2">
+            <li class="nav-item">
+                <a class="nav-link {{ Request::is('Warga/myAcount*') ? 'active' : '' }}" href="{{route('Warga/myAcount')}}">
+                    <span class="align-text-bottom bi bi-person-badge"></span>
+                    My Account
+                </a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="/logout"><span class="bi bi-box-arrow-right" style="margin-right: 8px"></span>Log Out</a>
             </li>
