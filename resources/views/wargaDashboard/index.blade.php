@@ -17,20 +17,31 @@
                 background-color: gainsboro
             }
         </style>
-        <div class="col-md-3 mb-4">
-            <div class="card d-inline-flex mainMenu" style="width: 50rem; padding: 12px;  border-left: 5px solid #1746a2">
-                <a href="data-mutasi-keluar" style="text-decoration: none; color: black">
-                    <div class="d-flex">
-                        <div style="width: 40rem">
-                            <h6 style="color: #1746a2">SELAMAT DATANG DI:</h6>
-                            <h4>WEBSITE PELAYANAN DAN PENGELOLAAN
-                                DATA KEPENDUDUKAN KALURAHAN AMBARKETAWANG</h4>
-                        </div>
-                        <div style="width: 4rem; ">
-                            <h1><span style="color: black; vertical-align: middle" class="bi bi-file-earmark-text"></span></h1>
-                        </div>
-                    </div>
-                </a>
+        <div class="card w-80 mb-3">
+            <div class="card-body">
+                <h6 style="color: #1746a2">SELAMAT DATANG DI:</h6>
+                <p class="card-text">WEBSITE PELAYANAN DAN PENGELOLAAN
+                    DATA KEPENDUDUKAN KALURAHAN AMBARKETAWANG</p>
+            </div>
+        </div>
+        <div></div>
+        <div class="card w-80">
+            <div class="card-body">
+                <h4 class="card-title" style="color: #ff0000">Informasi Penting!</h4>
+                <p class="card-text"><b>Persyaratan pengajuan surat keterangan :</b></p>
+                <span class="card-text">1. Memilih nik dan mengisi form data diri dengan benar sesuai layanan terpilih. Menggunakan huruf kapital di awal kata.
+                </span>
+                <br>
+                <span class="card-text">2. mengunggah dokumen lampiran berupa pdf yang sesuai. Pastikan dokumen yang Anda unggah berupa scan/foto dokumen ASLI dan dapat TERBACA dengan jelas.
+                </span>
+                <br>
+                <br>
+                <p class="card-text"><b> Pengambilan:</b></p>
+                <span class="card-text">1. Setelah pengguna mengajukan surat keterangan maka perhatikan bagian Verifikasi, jika status verifikasi "Terverifikasi" maka surat sudah selesai di proses dan bisa diambil.
+                </span>
+                <br>
+                <span class="card-text">2. Pengambilan surat keterangan tidak bisa diwakilkan oleh siapapun. Pengguna bisa hadir mengambil surat keterangan dengan pendamping.
+                </span>
             </div>
         </div>
     </div>
