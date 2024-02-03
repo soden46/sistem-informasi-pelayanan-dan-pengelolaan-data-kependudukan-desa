@@ -19,15 +19,17 @@
         </style>
         <div class="card w-80 mb-3">
             <div class="card-body">
-                <h6 style="color: #1746a2">SELAMAT DATANG DI:</h6>
-                <p class="card-text">WEBSITE PELAYANAN DAN PENGELOLAAN
-                    DATA KEPENDUDUKAN KALURAHAN AMBARKETAWANG</p>
+                <h5 style="color: #1746a2">SELAMAT DATANG DI:</h5>
+                <h6>WEBSITE PELAYANAN DAN PENGELOLAAN
+                    DATA KEPENDUDUKAN KALURAHAN AMBARKETAWANG</h6>
             </div>
         </div>
         <div></div>
-        <div class="card w-80">
+        <div class="card w-80 mb-2">
             <div class="card-body">
                 <h4 class="card-title" style="color: #ff0000">Informasi Penting!</h4>
+                <h6 style="color: #ff0000"><b> Akun baru diwajibkan mengganti password, karena password default/bawaan adalah tanggal lahir!!!
+                    </b></h6>
                 <p class="card-text"><b>Persyaratan pengajuan surat keterangan :</b></p>
                 <span class="card-text">1. Memilih nik dan mengisi form data diri dengan benar sesuai layanan terpilih. Menggunakan huruf kapital di awal kata.
                 </span>
