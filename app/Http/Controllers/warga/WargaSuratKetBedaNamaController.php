@@ -169,6 +169,7 @@ class WargaSuratKetBedaNamaController extends Controller
                 'pendu' => Penduduk::get(),
                 'ktp' => $lampiran['ktp'],
                 'kk' => $lampiran['kk'],
+                'dokumen' => $lampiran['dokumen'],
 
             ]);
         } else {
@@ -187,10 +188,13 @@ class WargaSuratKetBedaNamaController extends Controller
 
         $lampiran = [];
         if ($request->hasFile('ktp')) {
-            $lampiran['ktp'] = $request->file('ktp')->store('warga/lampiran-data-status');
+            $lampiran['ktp'] = $request->file('ktp')->store('warga/lampiran-data-beda-nama');
         }
         if ($request->hasFile('kk')) {
-            $lampiran['kk'] = $request->file('kk')->store('warga/lampiran-data-status');
+            $lampiran['kk'] = $request->file('kk')->store('warga/lampiran-data-beda-nama');
+        }
+        if ($request->hasFile('dokumen')) {
+            $lampiran['dokumen'] = $request->file('dokumen')->store('warga/lampiran-data-beda-nama');
         }
 
         // Simpan data lampiran ke dalam database

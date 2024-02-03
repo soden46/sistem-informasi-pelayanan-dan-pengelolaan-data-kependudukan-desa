@@ -19,7 +19,7 @@ class WargaSuratKetBiasaController extends Controller
         return view('wargaDashboard.SuratKetBiasa', [
             'title' => 'Data Surat Keterangan Biasa',
             'surat' => SuratKetBiasa::where('nik', $nik)->with('pend')->paginate(10),
-            'pendu' => Penduduk::get(),
+            'pendu' => Penduduk::where('nik', $nik)->get(),
             'user' => $user
         ]);
     }
@@ -145,7 +145,7 @@ class WargaSuratKetBiasaController extends Controller
         $lampiran = json_decode($kematian->lampiran, true);
         if (isset($lampiran['ktp']) && ($lampiran['kk'])) {
             // dd($lampiran['pengantar_rt']);
-            return view('adminDashboard.lampiran.LampiranDataBiasa', [
+            return view('wargaDashboard.lampiran.LampiranDataBiasa', [
                 'title' => 'Lampiran Keterangan Biasa',
                 'pendu' => Penduduk::get(),
                 'ktp' => $lampiran['ktp'],
@@ -153,7 +153,7 @@ class WargaSuratKetBiasaController extends Controller
 
             ]);
         } else {
-            return view('adminDashboard.lampiran.LampiranKosong', [
+            return view('wargaDashboard.lampiran.LampiranKosong', [
                 'title' => 'Lampiran Surat Keterangan Biasa',
             ]);
         }

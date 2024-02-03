@@ -16,12 +16,15 @@ class WargaSuratKetKematianController extends Controller
     {
         $nik = Auth::user()->nik;
         $user = Penduduk::where('nik', Auth::user()->nik)->first();
+        $alamatWarga = DataKematian::where('nik_pelapor', $nik)->with('pend')->first();
+        $alamat = json_decode($alamatWarga->alamat_mati, true);
 
         return view('wargaDashboard.SuratKetKematian', [
             'title' => 'Data Surat Keterangan Kematian',
-            'mati' => $mati = DataKematian::where('nik_pelapor', $nik)->with('pend')->get(),
+            'mati' => DataKematian::where('nik_pelapor', $nik)->with('pend')->get(),
             'pendu' => Penduduk::get(),
             'kepala' => Penduduk::where('sts_dalam_kk', 'Kepala Keluarga')->get(),
+            'alamat' => $alamat,
             'user' => $user
         ]);
     }
@@ -216,7 +219,7 @@ class WargaSuratKetKematianController extends Controller
         $lampiran = json_decode($kematian->lampiran, true);
         if (isset($lampiran['pengantar_rt']) && ($lampiran['pengantar_dokter'])) {
             // dd($lampiran['pengantar_rt']);
-            return view('adminDashboard.lampiran.LampiranDataKematian', [
+            return view('wargaDashboard.lampiran.LampiranDataKematian', [
                 'title' => 'Lampiran Keterangan Kematian',
                 'pendu' => Penduduk::get(),
                 'rt' => $lampiran['pengantar_rt'],

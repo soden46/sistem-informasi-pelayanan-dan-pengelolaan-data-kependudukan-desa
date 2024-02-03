@@ -305,7 +305,7 @@
                     <td style="vertical-align: middle;  ">{{ $item->nama_mati }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->nik_mati }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->jenis_kelamin }}</td>
-                    <td style="vertical-align: middle;  ">{{ $item->alamat_mati }}</td>
+                    <td style="vertical-align: middle;  ">{{ $alamat[0] }}, {{ $alamat[1]}} / {{ $alamat[2] }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->tempat_mati }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->tgl_mati }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->nik_pelapor }}</td>

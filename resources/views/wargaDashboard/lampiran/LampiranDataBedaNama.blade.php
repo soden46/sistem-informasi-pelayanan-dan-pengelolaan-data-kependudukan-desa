@@ -17,7 +17,10 @@
                 <label for="kk">Kartu Keluarga</label>
                 <a href="{{asset('storage/'.$kk)}}" target="_blank"><button class="btn btn-success"> Lihat</button></a>
             </div>
-
+            <div class="col-sm">
+                <label for="dokumen">Dokumen Yang Terdapat Perbedaan nama</label>
+                <a href="{{asset('storage/'.$dokumen)}}" target="_blank"><button class="btn btn-success"> Lihat</button></a>
+            </div>
         </div>
     </div>
 </main>
