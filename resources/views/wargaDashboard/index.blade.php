@@ -17,7 +17,7 @@
                 background-color: gainsboro
             }
         </style>
-        <div class="card w-80 mb-3">
+        <div class="card w-80 mb-2">
             <div class="card-body">
                 <h5 style="color: #1746a2">SELAMAT DATANG DI:</h5>
                 <h6>WEBSITE PELAYANAN DAN PENGELOLAAN
