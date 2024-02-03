@@ -18,7 +18,7 @@ class WargaSuratKetBiasaController extends Controller
         $user = Penduduk::where('nik', Auth::user()->nik)->first();
         return view('wargaDashboard.SuratKetBiasa', [
             'title' => 'Data Surat Keterangan Biasa',
-            'surat' => SuratKetBiasa::where('nik', $nik)->with('pend')->get(),
+            'surat' => SuratKetBiasa::where('nik', $nik)->with('pend')->paginate(10),
             'pendu' => Penduduk::get(),
             'user' => $user
         ]);

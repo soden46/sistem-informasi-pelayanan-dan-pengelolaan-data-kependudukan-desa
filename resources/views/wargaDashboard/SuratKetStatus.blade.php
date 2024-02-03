@@ -181,7 +181,7 @@
                     <td style="vertical-align: middle;  ">{{ $item->pend->nama }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->keperluan_sks }}</td>
                     <td style="text-align: center;  ">
-                        <a href="{{route('surat-keterangan-status/lampiran/show',$item->nik)}}"><button class="btn btn-success"><i class="bi bi-eye-fill"></i></button></a>
+                        <a href="{{route('warga/surat-keterangan-status/lampiran/show',$item->nik)}}"><button class="btn btn-success"><i class="bi bi-eye-fill"></i></button></a>
                         <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#cretaeLampiran{{ $item->nik }}"><i class="bi bi-plus-square-fill"></i></button>
                         <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#destroyLampiran{{ $item->nik }}"><i class="bi bi-trash"></i></button>
                     </td>

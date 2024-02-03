@@ -209,7 +209,59 @@
                     </td>
                     <td style="vertical-align: middle;  ">{{$item->verifikasi}}</td>
                 </tr>
+                <!-- Modal Lampiran-->
+                <div class="modal fade" id="cretaeLampiran{{ $item->nik }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="cretaeLampiranLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="cretaeLampiranLabel">Tambah Lampiran Surat Keterangan Beda Nama</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <span class="modal-title fs-6 text-center" id="cretaeLampiranLabel">Upload dokumen kelengkapan, pastikan file berupa (jpg/pdf) dengan ukuran masksmal 2MB/file</span>
+                            <form id="lampiranForm" action="{{route('warga/surat-ket-beda-nama/lampiran/store',$item->nik)}}" method="POST" enctype="multipart/form-data">
+                                @method('POST')
+                                @csrf
+                                <div class="modal-body">
 
+                                    <div class="mb-3">
+                                        <label for="ktp" class="form-label">KTP Pemohon</label>
+                                        <input class="form-control" type="file" id="ktp" name="ktp">
+                                        @error('ktp')
+                                        <div class="invalid-feedback">
+                                            <p style="text-align: left">{{ $message }}</p>
+                                        </div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="kk" class="form-label">Kartu Keluarga</label>
+                                        <input class="form-control" type="file" id="kk" name="kk">
+                                        @error('kk')
+                                        <div class="invalid-feedback">
+                                            <p style="text-align: left">{{ $message }}</p>
+                                        </div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="dokumen" class="form-label">Dokumen yang terdapat perbedaan nama</label>
+                                        <input class="form-control" type="file" id="dokumen" name="dokumen">
+                                        @error('dokumen')
+                                        <div class="invalid-feedback">
+                                            <p style="text-align: left">{{ $message }}</p>
+                                        </div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                    </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
                 @endforeach
             </table>
             <div class="d-flex justify-content-between mb-3">
