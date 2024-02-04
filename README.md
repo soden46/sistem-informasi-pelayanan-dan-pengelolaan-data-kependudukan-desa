@@ -8,8 +8,6 @@
 * [Syarif Soden Portofolio Web](https://syarifsoden.my.id/)
 * [![Paypal](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=53YUWXZTAV7C8)
 * [![Trakteer](https://cdn.trakteer.id/images/embed/trbtn-icon.png)](https://trakteer.id/syarifsoden/link)
-* [Syarif Soden Portofolio Web](teer.id/syarifsoden)
-* [Syarif Soden Portofolio Web](https://syarifsoden.my.id/)
 
 ## About
 
