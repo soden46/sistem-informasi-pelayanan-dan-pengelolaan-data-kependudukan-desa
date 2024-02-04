@@ -10,7 +10,7 @@ Andekata merupakan aplikasi untuk mengolah informasi data pada sebuah Desa yang 
 
 * [Laravel v10.43.0](https://laravel.com/)
 * [Composer v2.6.6](https://getcomposer.org/)
-* PHP >= 7.2.12
+* PHP >= 8.2.12
 * OpenSSL PHP Extension
 * PDO PHP Extension
 * Curl PHP Extension
