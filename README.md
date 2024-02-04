@@ -1,4 +1,4 @@
-<h1 align="center">isitem Informasi Pelayanan Dan Pengelolaan Data Kependudukan Desa Laravel 10</h1>
+<h1 align="center">Sistem Informasi Pelayanan Dan Pengelolaan Data Kependudukan Desa Laravel 10</h1>
 <p align="center">* license : MIT</p>
 <p align="center">* [Demo Web](https://desa.syarifsoden.my.id/)</p>
 
