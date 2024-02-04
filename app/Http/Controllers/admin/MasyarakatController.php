@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Imports\ImportPenduduk;
+use App\Imports\ImportUser;
 use App\Models\Penduduk;
 use App\Models\ProfilDesa;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MasyarakatController extends Controller
 {
@@ -162,5 +165,18 @@ class MasyarakatController extends Controller
     {
         Penduduk::where('nik', $nik)->delete();
         return redirect('/data-penduduk')->with('successDeletedMasyarakat', 'Data has ben deleted');
+    }
+
+    public function storeExcel(Request $request)
+    {
+        Excel::import(
+            new ImportPenduduk,
+            $request->file('file')->store('files')
+        );
+        Excel::import(
+            new ImportUser,
+            $request->file('file')->store('files')
+        );
+        return redirect()->back();
     }
 }

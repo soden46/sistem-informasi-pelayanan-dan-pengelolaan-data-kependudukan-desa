@@ -4,16 +4,6 @@
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">{{ $title }}</h1>
-        {{-- <div class="btn-toolbar mb-2 mb-md-0">
-                <div class="btn-group me-2">
-                <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-                </div>
-                <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                <span data-feather="calendar" class="align-text-bottom"></span>
-                This week
-                </button>
-            </div> --}}
     </div>
     <div class="card" style="width: 100%; height: 100%; background-color: white; padding: 20px">
         @if (session()->has('successUpdatedMasyarakat'))
@@ -49,6 +39,7 @@
             <div class="d-flex">
 
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cretaeDataMasyarakat" style="margin-right: 15px">Tambah Penduduk</button>
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#importExcel">Import Excel</button>
                 <form action="/data-penduduk" method="GET" style="margin-left: 40%">
 
                     <input type="text" id="cari" name="cari" placeholder="Cari NIK/No KK/Nama">
@@ -287,395 +278,382 @@
                 </div>
             </div>
 
-            <!-- Modal delete all-->
-            <div class="modal fade" id="deleteAllData" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteAllDataLabel" aria-hidden="true">
+            <!-- Modal Import Excel -->
+            <div class="modal fade" id="importExcel" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="importExcelLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="deleteAllDataLabel">Hapus Seluruh Data Masyarakat</h1>
+                            <h1 class="modal-title fs-5" id="importExcelLabel">Import Data Penduduk</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Import Excel</h5>
+                            <a href="{{asset('file/format-excel-data-penduduk.xlsx')}}"><button class="btn btn-success"> Contoh File Excel</button></a>
+                        </div>
+                        <form action="{{route('data-penduduk/store/excel')}}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            <div class="modal-content">
+                                <div class="modal-body">
 
-                            <div class="mb-3">
-                                <p><b>Apakah anda yakin untuk menghapus seluruh data masyarakat? pastikan anda telah meng-export data untuk menanggulangi kesalahan</b></p>
+                                    {{ csrf_field() }}
+
+                                    <label>Pilih file excel</label>
+                                    <div class="form-group">
+                                        <input type="file" name="file">
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                                    <button type="submit" class="btn btn-primary">Import</button>
+                                </div>
                             </div>
 
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
-                            <a href="deleteAllMasyarakat"><button type="submit" class="btn btn-primary">Delete</button></a>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
 
-            <!-- Modal export excel-->
-            <div class="modal fade" id="exportExcel" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exportExcelLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exportExcelLabel">Export Seluruh Data Masyarakat</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
+            <div class="table-responsive">
+                <table class="table" style="text-align: left; color: black">
+                    <tr>
+                        <th>No</th>
+                        <th>NIK</th>
+                        <th>NAMA</th>
+                        <th>NoKK</th>
+                        <th>Padukuhan</th>
+                        <th>RT</th>
+                        <th>RW</th>
+                        <th>Jenis Kelamin</th>
+                        <th>Tempat Lahir</th>
+                        <th>Status</th>
+                        <th style="text-align: center">Action</th>
+                    </tr>
+                    @foreach ($masyarakat as $index => $item)
+                    <tr style="width: 100%">
+                        <td style="vertical-align: middle; width: 5%; ">{{ $index + $masyarakat->firstItem() }}</td>
+                        <td style="vertical-align: middle;  ">{{ $item->nik }}</td>
+                        <td style="vertical-align: middle;  ">{{ $item->nama }}</td>
+                        <td style="vertical-align: middle;  ">{{ $item->no_kk }}</td>
+                        <td style="vertical-align: middle;  ">{{ $item->padukuhan }}</td>
+                        <td style="vertical-align: middle;  ">{{ $item->rt }}</td>
+                        <td style="vertical-align: middle;  ">{{ $item->rw }}</td>
+                        <td style="vertical-align: middle;  ">{{ $item->jk }}</td>
+                        <td style="vertical-align: middle;  ">{{ $item->tempat_lahir }}</td>
+                        <td style="vertical-align: middle;  ">{{ $item->sts_penduduk }}</td>
+                        <td style="text-align: center;  ">
+                            <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editDataMasyarakat{{ $item->nik }}">Edit</button>
+                        </td>
+                    </tr>
 
-                            <div class="mb-3">
-                                <p><b>Apakah anda yakin untuk meng-export seluruh data masyarakat? pastikan data telah benar untuk menanggulangi kesalahan</b></p>
+                    <!-- Modal delete-->
+                    <div class="modal fade" id="staticBackdrop{{ $item->nik}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Delete Data Penduduk</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Apakah anda yakin untuk menghapus data <b>{{ $item->nama }}</b></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
+                                    <form action="{{route('data-penduduk', $item->nik) }}" method="post">
+                                        @method('delete')
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger">Deleted</button>
+                                    </form>
+                                </div>
                             </div>
-
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
-                            <a href="masyarakatImport"><button class="btn btn-primary">Export</button></a>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="table-responsive">
-            <table class="table" style="text-align: left; color: black">
-                <tr>
-                    <th>No</th>
-                    <th>NIK</th>
-                    <th>NAMA</th>
-                    <th>NoKK</th>
-                    <th>Padukuhan</th>
-                    <th>RT</th>
-                    <th>RW</th>
-                    <th>Jenis Kelamin</th>
-                    <th>Tempat Lahir</th>
-                    <th>Status</th>
-                    <th style="text-align: center">Action</th>
-                </tr>
-                @foreach ($masyarakat as $index => $item)
-                <tr style="width: 100%">
-                    <td style="vertical-align: middle; width: 5%; ">{{ $index + $masyarakat->firstItem() }}</td>
-                    <td style="vertical-align: middle;  ">{{ $item->nik }}</td>
-                    <td style="vertical-align: middle;  ">{{ $item->nama }}</td>
-                    <td style="vertical-align: middle;  ">{{ $item->no_kk }}</td>
-                    <td style="vertical-align: middle;  ">{{ $item->padukuhan }}</td>
-                    <td style="vertical-align: middle;  ">{{ $item->rt }}</td>
-                    <td style="vertical-align: middle;  ">{{ $item->rw }}</td>
-                    <td style="vertical-align: middle;  ">{{ $item->jk }}</td>
-                    <td style="vertical-align: middle;  ">{{ $item->tempat_lahir }}</td>
-                    <td style="vertical-align: middle;  ">{{ $item->sts_penduduk }}</td>
-                    <td style="text-align: center;  ">
-                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editDataMasyarakat{{ $item->nik }}">Edit</button>
-                    </td>
-                </tr>
-
-                <!-- Modal delete-->
-                <div class="modal fade" id="staticBackdrop{{ $item->nik}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Delete Data Penduduk</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <p>Apakah anda yakin untuk menghapus data <b>{{ $item->nama }}</b></p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
-                                <form action="{{route('data-penduduk', $item->nik) }}" method="post">
-                                    @method('delete')
+                    <!-- Modal edit-->
+                    <div class="modal fade" id="editDataMasyarakat{{ $item->nik }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editDataMasyarakatLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="editDataMasyarakatLabel">Edit Data Penduduk</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form action="{{route('data-penduduk',$item->nik)}}" method="post">
                                     @csrf
-                                    <button type="submit" class="btn btn-danger">Deleted</button>
+                                    <div class="modal-body">
+
+                                        <div class="mb-3">
+                                            <label for="nik" class="form-label"><b>NIK</b></label>
+
+                                            <input type="text" name="nik" id="nik" class="form-control @error('nik') is-invalid @enderror" required value="{{ $item->nik }}" autocomplete="off" placeholder="Input NIK Penduduk">
+
+                                            @error('nik')
+                                            <div class="invalid-feedback">
+                                                <p style="text-align: left">{{ $message }}</p>
+                                            </div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="nama" class="form-label"><b>Nama Penduduk</b></label>
+
+                                            <input type="text" name="nama" id="nama" class="form-control @error('nama') is-invalid @enderror" required value="{{ $item->nama }}" autocomplete="off" placeholder="Input Nama Penduduk">
+
+                                            @error('nama')
+                                            <div class="invalid-feedback">
+                                                <p style="text-align: left">{{ $message }}</p>
+                                            </div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="no_kk" class="form-label"><b>No KK</b></label>
+
+                                            <input type="text" name="no_kk" id="no_kk" class="form-control @error('no_kk') is-invalid @enderror" required value="{{ $item->no_kk }}" autocomplete="off" placeholder="Input Nomor KK Penduduk">
+
+                                            @error('no_kk')
+                                            <div class="invalid-feedback">
+                                                <p style="text-align: left">{{ $message }}</p>
+                                            </div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="padukuhan" class="form-label"><b>Padukuhan</b></label>
+                                            <select class="form-select" name="padukuhan" id="padukuhan">
+                                                <option value="" selected>Silakan Pilih Padukuhan</option>
+                                                <option value="Bodeh">Bodeh</option>
+                                                <option value="Depok">Depok</option>
+                                                <option value="Gamping Kidul">Gamping Kidul</option>
+                                                <option value="Gamping Lor">Gamping Lor</option>
+                                                <option value="Gamping Tengah">Gamping Tengah</option>
+                                                <option value="Kalimanjung">Kalimanjung</option>
+                                                <option value="Mancasan">Mancasan</option>
+                                                <option value="Mejing Kidul">Mejing Kidul</option>
+                                                <option value="Mejing Lor">Mejing Lor</option>
+                                                <option value="Mejing Wetan">Mejing Wetan</option>
+                                                <option value="Ptukan">Ptukan</option>
+                                                <option value="Tlogo">Tlogo</option>
+                                                <option value="Watulangkah">Watulangkah</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group row mb-3">
+                                            <div class="col-sm-6">
+                                                <label for="rt" class="form-label"><b>RT</b></label>
+
+                                                <input type="text" name="rt" id="rt" class="form-control @error('rt') is-invalid @enderror" required value="{{ $item->rt }}" autocomplete="off" placeholder="Input rt">
+
+                                                @error('rt')
+                                                <div class="invalid-feedback">
+                                                    <p style="text-align: left">{{ $message }}</p>
+                                                </div>
+                                                @enderror
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="rw" class="form-label"><b>RW</b></label>
+
+                                                <input type="text" name="rw" id="rw" class="form-control @error('rw') is-invalid @enderror" required value="{{ $item->rw }}" autocomplete="off" placeholder="Input rw">
+
+                                                @error('rw')
+                                                <div class="invalid-feedback">
+                                                    <p style="text-align: left">{{ $message }}</p>
+                                                </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="jk" class="form-label"><b>Jenis Kelamin</b></label>
+
+                                            <select class="form-select" name="jk" id="jk">
+                                                <option value="" selected>Silakan Pilih Jenis Kelamin</option>
+                                                <option value="Laki-Laki">Laki-Laki</option>
+                                                <option value="Perempuan">Perempuan</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group row mb-3">
+                                            <div class="col-sm-6">
+                                                <label for="tempat_lahir" class="form-label"><b>Tempat lahir</b></label>
+
+                                                <input type="text" name="tempat_lahir" id="tempat_lahir" class="form-control @error('tempat_lahir') is-invalid @enderror" required value="{{ $item->tempat_lahir }}" autocomplete="off" placeholder="Input Tempat Lahir">
+
+                                                @error('tempat_lahir')
+                                                <div class="invalid-feedback">
+                                                    <p style="text-align: left">{{ $message }}</p>
+                                                </div>
+                                                @enderror
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="tgl_lahir" class="form-label"><b>Tanggal Lahir</b></label>
+
+                                                <input type="date" name="tgl_lahir" id="tgl_lahir" class="form-control @error('tgl_lahir') is-invalid @enderror" required value="{{ $item->tgl_lahir }}" autocomplete="off" placeholder="Input tgl Lahir">
+
+                                                @error('tgl_lahir')
+                                                <div class="invalid-feedback">
+                                                    <p style="text-align: left">{{ $message }}</p>
+                                                </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="wn" class="form-label"><b>Warga Negara</b></label>
+
+                                            <select class="form-select" name="wn" id="wn">
+                                                <option value="">Silakan Pilih Jenis Warga Negara</option>
+                                                @if($item->wn==="WNA")
+                                                <option name="wn" id="wn" value="WNI">WNI</option>
+                                                <option name="wn" id="wn" value="WNA" selected>WNA</option>
+                                                @elseif($item->wn==="WNI")
+                                                <option name="wn" id="wn" value="WNI" selected>WNI</option>
+                                                <option name="wn" id="wn" value="WNA">WNA</option>
+                                                @endif
+                                            </select>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="agama" class="form-label"><b>Agama</b></label>
+
+                                            <input type="text" name="agama" id="agama" class="form-control @error('agama') is-invalid @enderror" required value="{{ $item->agama }}" autocomplete="off" placeholder="Input agama">
+
+                                            @error('agama')
+                                            <div class="invalid-feedback">
+                                                <p style="text-align: left">{{ $message }}</p>
+                                            </div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="pekerjaan" class="form-label"><b>Pekerjaan</b></label>
+
+                                            <input type="text" name="pekerjaan" id="pekerjaan" class="form-control @error('pekerjaan') is-invalid @enderror" required value="{{ $item->pekerjaan }}" autocomplete="off" placeholder="Input pekerjaan">
+
+                                            @error('pekerjaan')
+                                            <div class="invalid-feedback">
+                                                <p style="text-align: left">{{ $message }}</p>
+                                            </div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="pendidikan" class="form-label"><b>Pendidikan</b></label>
+
+                                            <input type="text" name="pendidikan" id="pendidikan" class="form-control @error('pendidikan') is-invalid @enderror" required value="{{ $item->pendidikan }}" autocomplete="off" placeholder="Input pendidikan">
+
+                                            @error('pendidikan')
+                                            <div class="invalid-feedback">
+                                                <p style="text-align: left">{{ $message }}</p>
+                                            </div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="sts_kawin" class="form-label"><b>Status Kawin</b></label>
+
+                                            <select class="form-select" name="sts_kawin" id="sts_kawin">
+                                                <option value="" selected>Silakan Pilih Status Kawin</option>
+                                                <option name="sts_kawin" id="sts_kawin" value="Kawin">Kawin</option>
+                                                <option name="sts_kawin" id="sts_kawin" value="Belum Kawin">Belum Kawin</option>
+                                                <option name="sts_kawin" id="sts_kawin" value="Cerai Hidup">Cerai Hidup</option>
+                                                <option name="sts_kawin" id="sts_kawin" value="Cerai Mati">Cerai Mati</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="sts_penduduk" class="form-label"><b>Status Penduduk</b></label>
+
+                                            <select class="form-select" name="sts_penduduk" id="sts_penduduk">
+                                                <option value="" selected>Silakan Pilih Status Penduduk</option>
+                                                <option name="sts_penduduk" id="sts_penduduk" value="Meninggal">Meninggal</option>
+                                                <option name="sts_penduduk" id="sts_penduduk" value="Pindah Keluar">Pindah Keluar</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="sts_dalam_kk" class="form-label"><b>Status Dalam KK</b></label>
+
+                                            <select class="form-select" name="sts_dalam_kk" id="sts_dalam_kk">
+                                                <option value="" selected>Silakan Pilih Status Penduduk</option>
+                                                <option name="sts_dalam_kk" id="sts_dalam_kk" value="Kepala Keluarga">Kepala Keluarga</option>
+                                                <option name="sts_dalam_kk" id="sts_dalam_kk" value="Istri">Istri</option>
+                                                <option name="sts_dalam_kk" id="sts_dalam_kk" value="Anak">Anak</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                    </div>
+
                                 </form>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Modal edit-->
-                <div class="modal fade" id="editDataMasyarakat{{ $item->nik }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editDataMasyarakatLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="editDataMasyarakatLabel">Edit Data Penduduk</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <!-- Modal tambah keluarga-->
+                    <div class="modal fade" id="tambahKel{{ $item->nik }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tambahKelLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="editDataMasyarakatLabel">Tambah Data Keluarga</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form action="{{route('data-keluarga/store',$item->nik)}}" method="post">
+                                    @csrf
+                                    <div class="modal-body">
+
+                                        <div class="mb-3">
+                                            <label for="nik" class="form-label"><b>NIK</b></label>
+
+                                            <select class="form-select" name="nik" id="nik">
+                                                <option name="nik" id="nik" value="" selected>Silakan Pilih NIK</option>
+                                                @foreach($pendu as $penduduk)
+                                                <option name="nik" id="nik" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="no_kk" class="form-label"><b>No KK</b></label>
+
+                                            <input type="text" name="no_kk" id="no_kk" class="form-control @error('no_kk') is-invalid @enderror" required value="{{ $item->no_kk }}" autocomplete="off" placeholder="Input Nomor KK Penduduk">
+
+                                            @error('no_kk')
+                                            <div class="invalid-feedback">
+                                                <p style="text-align: left">{{ $message }}</p>
+                                            </div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="sts_keluarga" class="form-label"><b>Status Keluarga</b></label>
+
+                                            <input type="text" name="sts_keluarga" id="sts_keluarga" class="form-control @error('sts_keluarga') is-invalid @enderror" required value="{{ $item->sts_keluarga }}" autocomplete="off" placeholder="Input Status Keluarga">
+
+                                            @error('sts_keluarga')
+                                            <div class="invalid-feedback">
+                                                <p style="text-align: left">{{ $message }}</p>
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                    </div>
+
+                                </form>
                             </div>
-                            <form action="{{route('data-penduduk',$item->nik)}}" method="post">
-                                @csrf
-                                <div class="modal-body">
-
-                                    <div class="mb-3">
-                                        <label for="nik" class="form-label"><b>NIK</b></label>
-
-                                        <input type="text" name="nik" id="nik" class="form-control @error('nik') is-invalid @enderror" required value="{{ $item->nik }}" autocomplete="off" placeholder="Input NIK Penduduk">
-
-                                        @error('nik')
-                                        <div class="invalid-feedback">
-                                            <p style="text-align: left">{{ $message }}</p>
-                                        </div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="nama" class="form-label"><b>Nama Penduduk</b></label>
-
-                                        <input type="text" name="nama" id="nama" class="form-control @error('nama') is-invalid @enderror" required value="{{ $item->nama }}" autocomplete="off" placeholder="Input Nama Penduduk">
-
-                                        @error('nama')
-                                        <div class="invalid-feedback">
-                                            <p style="text-align: left">{{ $message }}</p>
-                                        </div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="no_kk" class="form-label"><b>No KK</b></label>
-
-                                        <input type="text" name="no_kk" id="no_kk" class="form-control @error('no_kk') is-invalid @enderror" required value="{{ $item->no_kk }}" autocomplete="off" placeholder="Input Nomor KK Penduduk">
-
-                                        @error('no_kk')
-                                        <div class="invalid-feedback">
-                                            <p style="text-align: left">{{ $message }}</p>
-                                        </div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="padukuhan" class="form-label"><b>Padukuhan</b></label>
-                                        <select class="form-select" name="padukuhan" id="padukuhan">
-                                            <option value="" selected>Silakan Pilih Padukuhan</option>
-                                            <option value="Bodeh">Bodeh</option>
-                                            <option value="Depok">Depok</option>
-                                            <option value="Gamping Kidul">Gamping Kidul</option>
-                                            <option value="Gamping Lor">Gamping Lor</option>
-                                            <option value="Gamping Tengah">Gamping Tengah</option>
-                                            <option value="Kalimanjung">Kalimanjung</option>
-                                            <option value="Mancasan">Mancasan</option>
-                                            <option value="Mejing Kidul">Mejing Kidul</option>
-                                            <option value="Mejing Lor">Mejing Lor</option>
-                                            <option value="Mejing Wetan">Mejing Wetan</option>
-                                            <option value="Ptukan">Ptukan</option>
-                                            <option value="Tlogo">Tlogo</option>
-                                            <option value="Watulangkah">Watulangkah</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group row mb-3">
-                                        <div class="col-sm-6">
-                                            <label for="rt" class="form-label"><b>RT</b></label>
-
-                                            <input type="text" name="rt" id="rt" class="form-control @error('rt') is-invalid @enderror" required value="{{ $item->rt }}" autocomplete="off" placeholder="Input rt">
-
-                                            @error('rt')
-                                            <div class="invalid-feedback">
-                                                <p style="text-align: left">{{ $message }}</p>
-                                            </div>
-                                            @enderror
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="rw" class="form-label"><b>RW</b></label>
-
-                                            <input type="text" name="rw" id="rw" class="form-control @error('rw') is-invalid @enderror" required value="{{ $item->rw }}" autocomplete="off" placeholder="Input rw">
-
-                                            @error('rw')
-                                            <div class="invalid-feedback">
-                                                <p style="text-align: left">{{ $message }}</p>
-                                            </div>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="jk" class="form-label"><b>Jenis Kelamin</b></label>
-
-                                        <select class="form-select" name="jk" id="jk">
-                                            <option value="" selected>Silakan Pilih Jenis Kelamin</option>
-                                            <option value="Laki-Laki">Laki-Laki</option>
-                                            <option value="Perempuan">Perempuan</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group row mb-3">
-                                        <div class="col-sm-6">
-                                            <label for="tempat_lahir" class="form-label"><b>Tempat lahir</b></label>
-
-                                            <input type="text" name="tempat_lahir" id="tempat_lahir" class="form-control @error('tempat_lahir') is-invalid @enderror" required value="{{ $item->tempat_lahir }}" autocomplete="off" placeholder="Input Tempat Lahir">
-
-                                            @error('tempat_lahir')
-                                            <div class="invalid-feedback">
-                                                <p style="text-align: left">{{ $message }}</p>
-                                            </div>
-                                            @enderror
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="tgl_lahir" class="form-label"><b>Tanggal Lahir</b></label>
-
-                                            <input type="date" name="tgl_lahir" id="tgl_lahir" class="form-control @error('tgl_lahir') is-invalid @enderror" required value="{{ $item->tgl_lahir }}" autocomplete="off" placeholder="Input tgl Lahir">
-
-                                            @error('tgl_lahir')
-                                            <div class="invalid-feedback">
-                                                <p style="text-align: left">{{ $message }}</p>
-                                            </div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="wn" class="form-label"><b>Warga Negara</b></label>
-
-                                        <select class="form-select" name="wn" id="wn">
-                                            <option value="">Silakan Pilih Jenis Warga Negara</option>
-                                            @if($item->wn==="WNA")
-                                            <option name="wn" id="wn" value="WNI">WNI</option>
-                                            <option name="wn" id="wn" value="WNA" selected>WNA</option>
-                                            @elseif($item->wn==="WNI")
-                                            <option name="wn" id="wn" value="WNI" selected>WNI</option>
-                                            <option name="wn" id="wn" value="WNA">WNA</option>
-                                            @endif
-                                        </select>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="agama" class="form-label"><b>Agama</b></label>
-
-                                        <input type="text" name="agama" id="agama" class="form-control @error('agama') is-invalid @enderror" required value="{{ $item->agama }}" autocomplete="off" placeholder="Input agama">
-
-                                        @error('agama')
-                                        <div class="invalid-feedback">
-                                            <p style="text-align: left">{{ $message }}</p>
-                                        </div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="pekerjaan" class="form-label"><b>Pekerjaan</b></label>
-
-                                        <input type="text" name="pekerjaan" id="pekerjaan" class="form-control @error('pekerjaan') is-invalid @enderror" required value="{{ $item->pekerjaan }}" autocomplete="off" placeholder="Input pekerjaan">
-
-                                        @error('pekerjaan')
-                                        <div class="invalid-feedback">
-                                            <p style="text-align: left">{{ $message }}</p>
-                                        </div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="pendidikan" class="form-label"><b>Pendidikan</b></label>
-
-                                        <input type="text" name="pendidikan" id="pendidikan" class="form-control @error('pendidikan') is-invalid @enderror" required value="{{ $item->pendidikan }}" autocomplete="off" placeholder="Input pendidikan">
-
-                                        @error('pendidikan')
-                                        <div class="invalid-feedback">
-                                            <p style="text-align: left">{{ $message }}</p>
-                                        </div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="sts_kawin" class="form-label"><b>Status Kawin</b></label>
-
-                                        <select class="form-select" name="sts_kawin" id="sts_kawin">
-                                            <option value="" selected>Silakan Pilih Status Kawin</option>
-                                            <option name="sts_kawin" id="sts_kawin" value="Kawin">Kawin</option>
-                                            <option name="sts_kawin" id="sts_kawin" value="Belum Kawin">Belum Kawin</option>
-                                            <option name="sts_kawin" id="sts_kawin" value="Cerai Hidup">Cerai Hidup</option>
-                                            <option name="sts_kawin" id="sts_kawin" value="Cerai Mati">Cerai Mati</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="sts_penduduk" class="form-label"><b>Status Penduduk</b></label>
-
-                                        <select class="form-select" name="sts_penduduk" id="sts_penduduk">
-                                            <option value="" selected>Silakan Pilih Status Penduduk</option>
-                                            <option name="sts_penduduk" id="sts_penduduk" value="Meninggal">Meninggal</option>
-                                            <option name="sts_penduduk" id="sts_penduduk" value="Pindah Keluar">Pindah Keluar</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="sts_dalam_kk" class="form-label"><b>Status Dalam KK</b></label>
-
-                                        <select class="form-select" name="sts_dalam_kk" id="sts_dalam_kk">
-                                            <option value="" selected>Silakan Pilih Status Penduduk</option>
-                                            <option name="sts_dalam_kk" id="sts_dalam_kk" value="Kepala Keluarga">Kepala Keluarga</option>
-                                            <option name="sts_dalam_kk" id="sts_dalam_kk" value="Istri">Istri</option>
-                                            <option name="sts_dalam_kk" id="sts_dalam_kk" value="Anak">Anak</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
-                                    <button type="submit" class="btn btn-primary">Simpan</button>
-                                </div>
-
-                            </form>
                         </div>
                     </div>
+
+                    @endforeach
+                </table>
+                <div class="d-flex justify-content-between mb-3">
+                    {{ $masyarakat->links('layout.pagination') }}
                 </div>
-
-                <!-- Modal tambah keluarga-->
-                <div class="modal fade" id="tambahKel{{ $item->nik }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tambahKelLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="editDataMasyarakatLabel">Tambah Data Keluarga</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <form action="{{route('data-keluarga/store',$item->nik)}}" method="post">
-                                @csrf
-                                <div class="modal-body">
-
-                                    <div class="mb-3">
-                                        <label for="nik" class="form-label"><b>NIK</b></label>
-
-                                        <select class="form-select" name="nik" id="nik">
-                                            <option name="nik" id="nik" value="" selected>Silakan Pilih NIK</option>
-                                            @foreach($pendu as $penduduk)
-                                            <option name="nik" id="nik" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="no_kk" class="form-label"><b>No KK</b></label>
-
-                                        <input type="text" name="no_kk" id="no_kk" class="form-control @error('no_kk') is-invalid @enderror" required value="{{ $item->no_kk }}" autocomplete="off" placeholder="Input Nomor KK Penduduk">
-
-                                        @error('no_kk')
-                                        <div class="invalid-feedback">
-                                            <p style="text-align: left">{{ $message }}</p>
-                                        </div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="sts_keluarga" class="form-label"><b>Status Keluarga</b></label>
-
-                                        <input type="text" name="sts_keluarga" id="sts_keluarga" class="form-control @error('sts_keluarga') is-invalid @enderror" required value="{{ $item->sts_keluarga }}" autocomplete="off" placeholder="Input Status Keluarga">
-
-                                        @error('sts_keluarga')
-                                        <div class="invalid-feedback">
-                                            <p style="text-align: left">{{ $message }}</p>
-                                        </div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
-                                    <button type="submit" class="btn btn-primary">Simpan</button>
-                                </div>
-
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-                @endforeach
-            </table>
-            <div class="d-flex justify-content-between mb-3">
-                {{ $masyarakat->links('layout.pagination') }}
             </div>
-        </div>
 
-    </div>
+        </div>
 </main>
 @endsection

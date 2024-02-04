@@ -41,8 +41,8 @@ use Illuminate\Support\Facades\Route;
 // Auth::routes();
 // Login
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
-Route::get('/register', [RegisterController::class, 'index'])->name('register')->middleware('guest');
-Route::post('/register', [RegisterController::class, 'store'])->name('register')->middleware('guest');
+Route::get('/register', [LoginController::class, 'index'])->name('register')->middleware('guest');
+Route::post('/register', [LoginController::class, 'store'])->name('register')->middleware('guest');
 Route::get('/', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/authenticate', [LoginController::class, 'authenticate']);
 Route::get('/logout', [LoginController::class, 'logout'])->name('guest');
@@ -59,6 +59,7 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
         Route::post('/data-penduduk/store', 'store')->name('data-penduduk/store')->middleware('auth');
         Route::post('/data-penduduk/{nik}', 'update')->name('data-penduduk/update')->middleware('auth');
         Route::delete('/data-penduduk/{nik}', 'destroy')->name('data-penduduk')->middleware('auth');
+        Route::post('/data-penduduk/store/excel', 'storeExcel')->name('data-penduduk/store/excel')->middleware('auth');
     });
 
     Route::controller(DataKKController::class)->group(function () {
