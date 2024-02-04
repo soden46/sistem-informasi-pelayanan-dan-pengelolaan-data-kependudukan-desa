@@ -75,7 +75,7 @@ The [public/storage] directory has been linked.
 
 ## Database Migration
 ```
-Perintah untuk migration dibedakan menjadi 2 :
+
 ```
 
 ## Menjalankan Server
@@ -86,25 +86,25 @@ Untuk menjalankan server, jalankan perintah `php artisan serve`
 ## How To Use / Testing
 
 ### User Testing
-```
+
 Anda bisa mencoba mengakses sistem dengan menggunakan akun yg sudah tersedia secara default :
 
 - `[petugas/staff]` :  Admin|Admin123 
 - `[warga/penduduk]` :  Warga|Warga123 
-```
+
 
 ## Built With
-```
+
 * [Laravel](https://laravel.com/) - The web framework used
 * [Mysql](https://www.mysql.com//) - Database
 * [laravel-dompdf](https://github.com/barryvdh/laravel-dompdf) - PDF Renderer
 * [maatwebsite-excel](https://github.com/SpartnerNL/Laravel-Excel.git) - Excel Renderer
-```
+
 
 ## Authors
-```
+
 * **Syarif Soden** - *@soden46*
-```
+
 ##
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
