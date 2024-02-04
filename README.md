@@ -7,7 +7,7 @@
 * [Syarif Soden Blog](https://syarifsoden.blogspot.com/)
 * [Syarif Soden Portofolio Web](https://syarifsoden.my.id/)
 * [![Paypal](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=53YUWXZTAV7C8)
-* [![Trakteer](<a href="https://trakteer.id/syarifsoden" target="_blank"><img id="wse-buttons-preview" src="https://cdn.trakteer.id/images/embed/trbtn-red-1.png?date=18-11-2023" height="40" style="border:0px;height:40px;" alt="Trakteer Saya"></a>)]
+* [![Trakteer]]<a href="https://trakteer.id/syarifsoden" target="_blank"><img id="wse-buttons-preview" src="https://cdn.trakteer.id/images/embed/trbtn-red-1.png?date=18-11-2023" height="40" style="border:0px;height:40px;" alt="Trakteer Saya"></a>
 
 ## About
 
