@@ -39,7 +39,7 @@
         <form action="/authenticate" method="POST">
             @csrf
 
-            <div class="d-flex justify-content-center px-2"><img src="{{asset('sip.png')}}" id="foto" alt="Logo" height="192px" /></div>
+            <div class="d-flex justify-content-center px-2"><img src="{{asset('sip-login.png')}}" id="foto" alt="Logo" height="192px" /></div>
             <h1 class="h3 mb-3 fw-normal"><b>Sign in to Your Acount</b></h1>
             <p class="text-muted" style="font-size: 12px; margin-top: -4px;">Silakan masukan Username dan Password anda</p>
 
