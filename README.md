@@ -61,19 +61,6 @@ Setelah itu, install dependensi dengan menjalankan perintah berikut di folder pr
 composer install
 ```
 
-_Catatan:_ Setelah menjalankan `composer setup` anda akan melihat output seperti ini di terminal :
-```
-> @php artisan key:generate
-Application key [base64:] set successfully.
-> Illuminate\Foundation\ComposerScripts::postAutoloadDump
-> @php artisan package:discover
-Discovered Package: barryvdh/laravel-dompdf
-Discovered Package: caffeinated/modules
-Discovered Package: fideloper/proxy
-Discovered Package: laravel/tinker
-Discovered Package: maatwebsite/excel
-Package manifest generated successfully.
-
 > @php artisan storage:link
 The [public/storage] directory has been linked.
 ```
