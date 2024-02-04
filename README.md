@@ -3,7 +3,7 @@
 
 ## About
 
-Andekata merupakan aplikasi untuk mengolah informasi data pada sebuah Desa yang dikembangkan dengan tujuan untuk memenuhi beberapa kebutuhan mulai dari mencatat data kependudukan hingga keperluan administrasi surat menyurat. Untuk kedepannya, aplikasi ini akan terus dikembangkan dengan menyesuaikan kebutuhan yang terus bertambah.
+Sistem Pelayanan dan Pengelolaan Data Kependudukan adalah sistem yang dibuat untuk keperluan pelayanan data kependudukan pada pada desa. sistem ini dibuat menggunakan framework Laravel versi 10.
 
 
 ## Requirements
