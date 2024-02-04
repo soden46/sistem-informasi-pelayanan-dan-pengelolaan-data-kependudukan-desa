@@ -22,13 +22,14 @@ return new class extends Migration
             $table->float('rw');
             $table->enum('jk', ['Laki-Laki', 'Perempuan']);
             $table->string('tempat_lahir');
-            $table->date('tgl_lagr');
+            $table->date('tgl_lahir');
             $table->enum('wn', ['WNI', 'WNA']);
-            $table->string('agama');
+            $table->string('kebangsaan');
+            $table->enum('agama', ['Islam', 'Kristen', 'Katolik', 'Budha', 'Konghucu', 'Hindu']);
             $table->string('pekerjaan');
             $table->string('pendidikan');
             $table->enum('sts_kawin', ['Kawin', 'Belum Kawin', 'Cerai Hidup', 'Cerai Mati']);
-            $table->enum('sts_penduduk', ['Meninggal', 'Hidup', 'Pindah keluar']);
+            $table->enum('sts_penduduk', ['Warga Baru Menunggu Verifikasi', 'Meninggal', 'Tinggal', 'Pindah Keluar', 'Warga Pindah Menunggu Verifikasi', 'Warga Meninggal Menunggu Verifikasi']);
             $table->timestamps();
         });
     }

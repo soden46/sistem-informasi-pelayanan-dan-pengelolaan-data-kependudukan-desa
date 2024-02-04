@@ -6,8 +6,8 @@
 <!-- Sidebar Masyarakat/Warga -->
 <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
     <div class="d-flex">
-        <div class="d-flex justify-content-start px-2"><img src="{{asset('images/logo/sleman.png')}}" id="foto" alt="Logo" height="75px" /></div>
-        <div class="mt-3"><b>Kalurahan Ambarketawang,</b><br>
+        <div class="d-flex justify-content-start px-2"><img src="{{asset('sip.png')}}" id="foto" alt="Logo" height="75px" /></div>
+        <div class="mt-3"><b>SIP Desa,</b><br>
             <b>Warga/Masyarakat</b>
         </div>
     </div>

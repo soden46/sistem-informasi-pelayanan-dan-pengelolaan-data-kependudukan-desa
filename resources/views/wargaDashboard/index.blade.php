@@ -21,7 +21,7 @@
             <div class="card-body">
                 <h5 style="color: #1746a2">SELAMAT DATANG DI:</h5>
                 <h6>WEBSITE PELAYANAN DAN PENGELOLAAN
-                    DATA KEPENDUDUKAN KALURAHAN AMBARKETAWANG</h6>
+                    DATA KEPENDUDUKAN KALURAHAN</h6>
             </div>
         </div>
         <div></div>
