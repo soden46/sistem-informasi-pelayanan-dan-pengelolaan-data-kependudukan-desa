@@ -19,7 +19,7 @@ class AdminController extends Controller
 {
     public function index()
     {
-        return view('AdminDashboard.index', [
+        return view('wdminDashboard.index', [
             'title' => 'Dashboard',
             'jumlahLahir' => SuratKetKelahiran::all()->count(),
             'jumlahMasyarakat' => Penduduk::where('sts_penduduk', 'Tinggal')->count(),

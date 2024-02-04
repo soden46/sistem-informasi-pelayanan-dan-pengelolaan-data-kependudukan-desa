@@ -15,7 +15,7 @@ class WargaController extends Controller
 {
     public function index()
     {
-        return view('WargaDashboard.index', [
+        return view('wargaDashboard.index', [
             'title' => 'Dashboard Warga',
             'jumlahLahir' => SuratKetKelahiran::all()->count(),
             'jumlahMasyarakat' => User::all()->count(),

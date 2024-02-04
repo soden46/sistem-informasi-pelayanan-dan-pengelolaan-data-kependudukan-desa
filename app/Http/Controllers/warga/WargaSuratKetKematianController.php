@@ -17,7 +17,7 @@ class WargaSuratKetKematianController extends Controller
         $nik = Auth::user()->nik;
         $user = Penduduk::where('nik', Auth::user()->nik)->first();
         $alamatWarga = DataKematian::where('nik_pelapor', $nik)->with('pend')->first();
-        $alamat = json_decode($alamatWarga->alamat_mati, true);
+        $alamat = json_decode($alamatWarga->alamat_mati ?? '', true);
 
         return view('wargaDashboard.SuratKetKematian', [
             'title' => 'Data Surat Keterangan Kematian',

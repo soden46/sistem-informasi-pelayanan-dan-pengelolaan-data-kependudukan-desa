@@ -1,5 +1,15 @@
 <h1 align="center">Syarif Soden</h1>
 <p align="center">* license : MIT</p>
+<p align="center">* [Demo Web](https://desa.syarifsoden.my.id/)</p>
+
+## Support / Donate
+
+* [Syarif Soden Blog](https://syarifsoden.blogspot.com/)
+* [Syarif Soden Portofolio Web](https://syarifsoden.my.id/)
+* [![Paypal](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=53YUWXZTAV7C8)
+* [![Trakteer](https://cdn.trakteer.id/images/embed/trbtn-icon.png)](https://trakteer.id/syarifsoden/link)
+* [Syarif Soden Portofolio Web](teer.id/syarifsoden)
+* [Syarif Soden Portofolio Web](https://syarifsoden.my.id/)
 
 ## About
 
@@ -81,8 +91,8 @@ Untuk menjalankan server, jalankan perintah `php artisan serve`
 ### User Testing
 Anda bisa mencoba mengakses sistem dengan menggunakan akun yg sudah tersedia secara default :
 
-- `[petugas/staff]` :  | 
-- `[warga/penduduk]` :  | 
+- `[petugas/staff]` :  Admin|Admin123 
+- `[warga/penduduk]` :  Warga|Warga123 
 
 
 ## Built With

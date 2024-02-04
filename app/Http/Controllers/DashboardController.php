@@ -23,7 +23,6 @@ class DashboardController extends Controller
                 'jumlahLahir' => SuratKetKelahiran::all()->count(),
                 'jumlahMasyarakat' => User::all()->count(),
                 'jumlahMati' => DataKematian::all()->count(),
-                'profil' => ProfilDesa::Where('id', 1)->first(),
             ]);
         }
         if (auth()->user()->role == 'masyarakat') {
@@ -32,7 +31,6 @@ class DashboardController extends Controller
                 'jumlahLahir' => SuratKetKelahiran::all()->count(),
                 'jumlahMasyarakat' => User::all()->count(),
                 'jumlahMati' => DataKematian::all()->count(),
-                'profil' => ProfilDesa::Where('id', 1)->first(),
             ]);
         }
     }

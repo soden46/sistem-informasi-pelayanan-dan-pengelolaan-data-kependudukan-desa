@@ -18,13 +18,23 @@ class UserSeeder extends Seeder
     {
         User::create([
             'nik' => '1234',
-            'name' => 'Soden',
-            'userName' => 'SodenS',
-            'email' => 'soden@masyarakat.com',
+            'name' => 'Admin',
+            'userName' => 'Admin',
+            'email' => 'admin@admin.com',
+            'role' => 'staff',
+            'password' => Hash::make('Admin123'),
+            'created_at' => '2024-02-04 10:30:27',
+            'updated_at' => '2024-02-04 10:30:27'
+        ]);
+        User::create([
+            'nik' => '12345',
+            'name' => 'Warga',
+            'userName' => 'Warga',
+            'email' => 'warga@warga.com',
             'role' => 'masyarakat',
-            'password' => Hash::make('Soden123'),
-            'created_at' => '2024-01-08 10:30:27',
-            'updated_at' => '2024-01-08 10:30:27'
+            'password' => Hash::make('Warga123'),
+            'created_at' => '2024-02-04 10:30:27',
+            'updated_at' => '2024-02-04 10:30:27'
         ]);
     }
 }

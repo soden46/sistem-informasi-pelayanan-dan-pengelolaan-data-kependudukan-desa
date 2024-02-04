@@ -96,7 +96,7 @@
                                         <label for="nama" class="form-label"><b>Nama Pelapor</b></label>
 
                                         <select class="form-select" name="nama" id="nama">
-                                            <option name="nama" id="nama" value="{{$user->nama}}" selected>{{$user->nama}}</option>
+                                            <option name="nama" id="nama" value="{{$user->nama ?? ''}}" selected>{{$user->nama ?? ''}}</option>
                                         </select>
                                     </div>
 

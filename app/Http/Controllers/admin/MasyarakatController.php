@@ -61,6 +61,7 @@ class MasyarakatController extends Controller
     {
         $originalDate = $request->tgl_lahir;
 
+        dd($originalDate);
         $validatedData = $request->validate([
             'nik' => 'required|max:16',
             'nama' => 'required|max:255',

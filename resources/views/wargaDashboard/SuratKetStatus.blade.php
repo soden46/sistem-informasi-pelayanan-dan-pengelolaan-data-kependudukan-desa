@@ -88,7 +88,7 @@
                                         <select class="form-select" name="nik" id="nik">
                                             <option name="nik" id="nik" value="" selected>Silakan Pilih NIK</option>
                                             @foreach($pendu as $penduduk)
-                                            <option name="nik" id="nik" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama}}</option>
+                                            <option name="nik" id="nik" value="{{$penduduk->nik}}">{{$penduduk->nik}} | {{$penduduk->nama ?? ''}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -178,7 +178,7 @@
                     <td style="vertical-align: middle; width: 5%; ">{{ $index + $surat->firstItem() }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->tgl_regis_sks }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->nik }}</td>
-                    <td style="vertical-align: middle;  ">{{ $item->pend->nama }}</td>
+                    <td style="vertical-align: middle;  ">{{ $item->pend->nama ?? '' }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->keperluan_sks }}</td>
                     <td style="text-align: center;  ">
                         <a href="{{route('warga/surat-keterangan-status/lampiran/show',$item->nik)}}"><button class="btn btn-success"><i class="bi bi-eye-fill"></i></button></a>

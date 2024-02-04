@@ -86,7 +86,7 @@
 
                                     <select class="form-select" name="nik_pelapor" id="nik_pelapor">
                                         <option name="nik_pelapor" id="nik_pelapor" value="" selected>Silakan Pilih NIK</option>
-                                        <option name="nik_pelapor" id="nik_pelapor" value="{{$user->nik}}" selected>{{$user->nik}} | {{$user->name}}</option>
+                                        <option name="nik_pelapor" id="nik_pelapor" value="{{$user->nik ?? ''}}" selected>{{$user->nik ?? ''}} | {{$user->name ?? ''}}</option>
                                     </select>
                                 </div>
 
@@ -95,7 +95,7 @@
 
                                     <select class="form-select" name="nama_pelapor" id="nama_pelapor">
                                         <option name="nama_pelapor" id="nama_pelapor" value="" selected>Silakan Pilih NIK</option>
-                                        <option name="nama_pelapor" id="nama_pelapor" value="{{$user->nama}}" selected>{{$user->nama}}</option>
+                                        <option name="nama_pelapor" id="nama_pelapor" value="{{$user->nama ?? ''}}" selected>{{$user->nama ?? ''}}</option>
                                     </select>
                                 </div>
 
