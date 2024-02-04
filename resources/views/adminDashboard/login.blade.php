@@ -23,7 +23,7 @@
     @include('../all/allScript')
 
 
-    <main class="form-signin w-100 m-auto">
+    <main class="form-signin w-65 m-auto">
         @if (session()->has('loginError'))
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <strong>{{ session('loginError') }}</strong>
@@ -41,7 +41,7 @@
 
             <div class="d-flex justify-content-center px-2"><img src="{{asset('sip.png')}}" id="foto" alt="Logo" height="192px" /></div>
             <h1 class="h3 mb-3 fw-normal"><b>Sign in to Your Acount</b></h1>
-            <p class="text-muted" style="font-size: 12px; margin-top: -8px;">Silakan masukan Username dan Password anda</p>
+            <p class="text-muted" style="font-size: 12px; margin-top: -4px;">Silakan masukan Username dan Password anda</p>
 
             <div class="form-group">
                 <input style="height: 55px" type="text" class="form-control" id="userName" name="userName" placeholder="Username" autocomplete="off">
