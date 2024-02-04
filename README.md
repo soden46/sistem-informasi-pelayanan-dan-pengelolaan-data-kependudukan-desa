@@ -61,11 +61,6 @@ Setelah itu, install dependensi dengan menjalankan perintah berikut di folder pr
 composer install
 ```
 
-Setelah itu, jalankan perintah berikut untuk setup konfigurasi :
-```
-composer setup
-```
-
 _Catatan:_ Setelah menjalankan `composer setup` anda akan melihat output seperti ini di terminal :
 ```
 > @php artisan key:generate
