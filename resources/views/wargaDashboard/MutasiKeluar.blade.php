@@ -225,7 +225,7 @@
                 <tr style="width: 100%">
                     <td style="vertical-align: middle; width: 5%; ">{{ $index + $MutasiKeluar->firstItem() }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->pend->nama }}</td>
-                    <td style="vertical-align: middle;  ">{{ $item->nik_mk }}</td>
+                    <td style="vertical-align: middle;  ">{!! substr($item->nik_mk,0,4). str_repeat('*', 16)!!}</td>
                     <td style="vertical-align: middle;  ">{{ $item->pend->jk }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->pend->tempat_lahir }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->pend->tgl_lahir }}</td>

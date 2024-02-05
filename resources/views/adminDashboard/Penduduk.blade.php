@@ -332,9 +332,9 @@
                     @foreach ($masyarakat as $index => $item)
                     <tr style="width: 100%">
                         <td style="vertical-align: middle; width: 5%; ">{{ $index + $masyarakat->firstItem() }}</td>
-                        <td style="vertical-align: middle;  ">{{ $item->nik }}</td>
+                        <td style="vertical-align: middle;  ">{!! substr($item->nik,0,4). str_repeat('*', 16)!!}</td>
                         <td style="vertical-align: middle;  ">{{ $item->nama }}</td>
-                        <td style="vertical-align: middle;  ">{{ $item->no_kk }}</td>
+                        <td style="vertical-align: middle;  ">{!! substr($item->no_kk,0,4). str_repeat('*', 16)!!}</td>
                         <td style="vertical-align: middle;  ">{{ $item->padukuhan }}</td>
                         <td style="vertical-align: middle;  ">{{ $item->rt }}</td>
                         <td style="vertical-align: middle;  ">{{ $item->rw }}</td>

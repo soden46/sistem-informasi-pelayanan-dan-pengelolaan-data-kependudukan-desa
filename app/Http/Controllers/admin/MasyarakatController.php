@@ -24,6 +24,7 @@ class MasyarakatController extends Controller
     {
         $cari = $request->cari;
 
+
         if ($cari != NULL) {
             return view('adminDashboard.Penduduk', [
                 'title' => 'Data Penduduk',

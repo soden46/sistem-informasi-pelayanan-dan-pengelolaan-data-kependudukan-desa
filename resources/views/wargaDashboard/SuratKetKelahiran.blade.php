@@ -402,10 +402,10 @@
                 <tr style="width: 100%">
                     <td style="vertical-align: middle; width: 5%; ">{{ $index + $bayi->firstItem() }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->tgl_regis_lahir }}</td>
-                    <td style="vertical-align: middle;  ">{{ $item->nik_pelapor }}</td>
+                    <td style="vertical-align: middle;  ">{!! substr($item->nik_pelapor,0,4). str_repeat('*', 16)!!}</td>
                     <td style="vertical-align: middle;  ">{{ $item->lapor->nama}}</td>
                     <td style="vertical-align: middle;  ">{{ $item->nama_bayi }}</td>
-                    <td style="vertical-align: middle;  ">{{ $item->nik_bayi }}</td>
+                    <td style="vertical-align: middle;  ">{!! substr($item->nik_bayi,0,4). str_repeat('*', 16)!!}</td>
                     <td style="vertical-align: middle;  ">{{ $item->tempat_kelahiran }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->tgl_lahir }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->jenis_kelamin }}</td>

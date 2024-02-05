@@ -384,7 +384,7 @@
                 <tr style="width: 100%">
                     <td style="vertical-align: middle; width: 5%; ">{{ $index + $MutasiMasuk->firstItem() }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->tgl_regis_mm }}</td>
-                    <td style="vertical-align: middle;  ">{{ $item->nik_pelapor }}</td>
+                    <td style="vertical-align: middle;  ">{!! substr($item->nik_pelapor,0,4). str_repeat('*', 16) !!}</td>
                     <td style="vertical-align: middle;  ">{{ $item->nama_pelapor }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->nik_mm }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->jk_mm }}</td>

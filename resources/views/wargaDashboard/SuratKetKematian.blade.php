@@ -303,12 +303,12 @@
                     <td style="vertical-align: middle; width: 5%; ">{{ $item->id_kematian }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->tgl_regis_mati }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->nama_mati }}</td>
-                    <td style="vertical-align: middle;  ">{{ $item->nik_mati }}</td>
+                    <td style="vertical-align: middle;  ">{!! substr($item->nik_mati,0,4). str_repeat('*', 16)!!}</td>
                     <td style="vertical-align: middle;  ">{{ $item->jenis_kelamin }}</td>
                     <td style="vertical-align: middle;  ">{{ $alamat[0] }}, {{ $alamat[1]}} / {{ $alamat[2] }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->tempat_mati }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->tgl_mati }}</td>
-                    <td style="vertical-align: middle;  ">{{ $item->nik_pelapor }}</td>
+                    <td style="vertical-align: middle;  ">{!! substr($item->nik_pelapor,0,4). str_repeat('*', 16)!!}</td>
                     <td style="text-align: center;  ">
                         <a href="{{route('warga/surat-keterangan-kematian/lampiran/show',$item->nik_mati)}}"><button class="btn btn-success"><i class="bi bi-eye-fill"></i></button></a>
                         <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#cretaeLampiran{{ $item->nik_mati }}"><i class="bi bi-plus-square-fill"></i></button>

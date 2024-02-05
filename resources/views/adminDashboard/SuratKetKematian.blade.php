@@ -301,7 +301,7 @@
                     <td style="vertical-align: middle; width: 5%; ">{{ $index + $mati->firstItem() }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->tgl_regis_mati }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->nama_mati }}</td>
-                    <td style="vertical-align: middle;  ">{{ $item->nik_mati }}</td>
+                    <td style="vertical-align: middle;  ">{!! substr($item->nik_mati,0,4). str_repeat('*', 16)!!}</td>
                     <td style="vertical-align: middle;  ">{{ $item->jenis_kelamin }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->alamat_mati }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->tempat_mati }}</td>

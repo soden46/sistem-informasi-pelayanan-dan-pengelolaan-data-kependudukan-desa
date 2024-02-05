@@ -175,7 +175,7 @@
                 <tr style="width: 100%">
                     <td style="vertical-align: middle; width: 5%; ">{{ $index + $surat->firstItem() }}</td>
                     <td style="vertical-align: middle;  ">{{ $item->tgl_regis_sks }}</td>
-                    <td style="vertical-align: middle;  ">{{ $item->nik }}</td>
+                    <td style="vertical-align: middle;  ">{!! substr($item->nik,0,4). str_repeat('*', 16)!!}</td>
                     <td style="vertical-align: middle;  ">{{ $item->pend->nama ?? ''}}</td>
                     <td style="vertical-align: middle;  ">{{ $item->keperluan_sks }}</td>
                     <td style="text-align: center;  ">
