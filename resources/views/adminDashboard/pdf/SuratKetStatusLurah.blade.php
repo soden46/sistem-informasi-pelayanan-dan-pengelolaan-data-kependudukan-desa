@@ -105,14 +105,13 @@
     <div class="card">
         <div class="card-body">
             <div class="header">
-                <img src="{{public_path('storage/asset/sleman.png')}}" id="foto" alt="Logo" height="75px" />
-                <h1 class="text-center">PEMERINTAH KABUPATEN SLEMAN</h1>
-                <p class="text-center">KAPONEWON GAMPING</p>
-                <h1 class="text-center">LURAH AMBARKETAWANG</h1>
-                <h1 class="text-center"><img src="{{public_path('storage/asset/aksara.png')}}" id="foto2" alt="Logo" /></h1>
-                <p class="text-center">Jalan Wates KM 5, Ambarketawang, Gamping, Sleman,55294</p>
-                <p class="text-center">Telepon (0274) 797496</p>
-                <p class="text-center">Laman: https://ambarketawang.sidesimanis.slemankab.go.id</p>
+                <img src="{{asset('sip.png')}}" id="foto" alt="Logo" height="75px" />
+                <h1 class="text-center">PEMERINTAH KABUPATEN</h1>
+                <p class="text-center">KAPONEWON</p>
+                <h1 class="text-center">LURAH</h1>
+                <p class="text-center">Jalan</p>
+                <p class="text-center">Telepon </p>
+                <p class="text-center">Laman: </p>
             </div>
             <div class="divider py-1 bg-dark mb-3 mt-2"></div>
             <div class="header2">
@@ -132,7 +131,7 @@
                     <td>Lurah</td>
                 </tr>
             </table>
-            <p class="mt-2">Berdasarkan data pemohon, dengan ini Pemerintah Kalurahan Ambarketawang menerangkan bahwa:</p>
+            <p class="mt-2">Berdasarkan data pemohon, dengan ini Pemerintah Kalurahan .... menerangkan bahwa:</p>
             <table class="font-12">
                 <tr>
                     <td width="200px">A. Nama</td>
@@ -176,11 +175,11 @@
                 <br>
 
                 <p style="padding-bottom:100px">
-                    Ambarketawang, ......................... {{ date('Y') }}</br>
-                    Lurah Ambarketawang</p>
+                    Desa, ......................... {{ date('Y') }}</br>
+                    Lurah</p>
 
 
-                <p>Sumaryanto</p>
+                <p>Lurah</p>
             </div>
         </div>
     </div>

@@ -17,7 +17,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\warga\WargaController;
 use App\Http\Controllers\warga\WargaMutasiKeluarController;
-use App\Http\Controllers\warga\WArgaMutasiMAsukController;
+use App\Http\Controllers\warga\WargaMutasiMasukController;
 use App\Http\Controllers\warga\WargaMyAccountController;
 use App\Http\Controllers\warga\WargaSuratKetKelahiranController;
 use App\Http\Controllers\warga\WargaSuratKetKematianController;
@@ -125,8 +125,8 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
             Route::get('/data-mutasi-masuk/lampiran/destroy/{nik_mm}', 'lampiranDestroy')->name('data-mutasi-masuk/lampiran/destroy')->middleware('auth');
             Route::get('/data-mutasi-masuk/lampiran/show/{nik_mm}', 'showLampiran')->name('data-mutasi-masuk/lampiran/show')->middleware('auth');
             // Route Depend Penduduk Pada Form Tambah Data
-            Route::get('getPelapor/{id}', function ($id) {
-                $nama_pelapor = App\Models\Penduduk::where('nik', $id)->get();
+            Route::get('getPelapor/{nik_pelapor}', function ($nik_pelapor) {
+                $nama_pelapor = App\Models\Penduduk::where('nik', $nik_pelapor)->get();
                 return response()->json($nama_pelapor);
             });
         }
@@ -197,7 +197,7 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
 
     Route::controller(UserController::class)->group(function () {
         Route::get('/myAcount', 'myAcount')->name('myAcount')->middleware('auth');
-        Route::post('Update/Account/{id}', 'updateMyAcount')->name('Update/Account')->middleware('auth');
+        Route::post('/Admin/Update/Account/{id}', 'updateMyAcount')->name('Admin/Update/Account')->middleware('auth');
     });
 
     Route::controller(UserController::class)->group(function () {
@@ -318,13 +318,10 @@ Route::middleware(['auth', 'role:masyarakat'])->group(function () {
             Route::get('/warga/data-mutasi-masuk/pdf/{nik_mm}', 'pdf')->name('warga/data-mutasi-masuk/pdf');
             Route::get('/warga/data-mutasi-masuk/pdf/lurah/{nik_mm}', 'pdflurah')->name('warga/data-mutasi-masuk/pdflurah');
             // Route Depend Penduduk Pada Form Tambah Data
-            Route::get(
-                'getPelapor/{id}',
-                function ($id) {
-                    $nama_pelapor = App\Models\Penduduk::where('nik', $id)->get();
-                    return response()->json($nama_pelapor);
-                }
-            );
+            Route::get('getPelapor/{nik_pelpor}', function ($nik_pelpor) {
+                $nama_pelapor = App\Models\Penduduk::where('nik', $nik_pelpor)->get();
+                return response()->json($nama_pelapor);
+            });
             Route::post('/warga/data-mutasi-masuk/lampiran/store/{nik_mm}', 'lampiranStore')->name('warga/data-mutasi-masuk/lampiran/store')->middleware('auth');
             Route::get('/warga/data-mutasi-masuk/lampiran/edit/{nik_mm}', 'lampiranEdit')->name('warga/data-mutasi-masuk/lampiran/edit')->middleware('auth');
             Route::get('/warga/data-mutasi-masuk/lampiran/update/{nik_mm}', 'lampiranUpdate')->name('warga/data-mutasi-masuk/lampiran/update')->middleware('auth');
