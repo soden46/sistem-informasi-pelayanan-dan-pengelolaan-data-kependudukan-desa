@@ -75,7 +75,8 @@ The [public/storage] directory has been linked.
 
 ## Database Migration
 ```
-
+Migartion Database Table: php artisan migrate
+Migration Database Seeder: php artisan db:seed
 ```
 
 ## Menjalankan Server
